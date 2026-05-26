@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "summary_metrics": {
+      "type": "array",
+      "title": "汇总指标",
+      "ui:widget": "summary-grid",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string", "title": "指标名称" },
+          "value": { "type": "string", "title": "指标值" },
+          "color": { "type": "string", "enum": ["blue", "green", "yellow", "red"], "title": "颜色" }
+        }
+      }
+    },
+    "sales_report": {
+      "type": "array",
+      "title": "表1：大类销售额/毛利额预算达成情况",
+      "ui:widget": "table",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rank": { "type": "integer", "title": "排名" },
+          "category": { "type": "string", "title": "大类", "ui:widget": "link" },
+          "sales_actual": { "type": "number", "title": "销售实际", "ui:widget": "currency" },
+          "sales_budget": { "type": "number", "title": "销售预算", "ui:widget": "currency" },
+          "sales_rate": { "type": "number", "title": "销售达成率", "ui:widget": "rate-color" },
+          "profit_actual": { "type": "number", "title": "毛利实际", "ui:widget": "currency" },
+          "profit_budget": { "type": "number", "title": "毛利预算", "ui:widget": "currency" },
+          "profit_rate": { "type": "number", "title": "毛利达成率", "ui:widget": "rate-color" }
+        }
+      }
+    },
+    "weekly_trend": {
+      "type": "array",
+      "title": "表2：大类周环比趋势",
+      "ui:widget": "table",
+      "ui:options": {
+        "spanMethod": "rowspan"
+      },
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "title": "大类", "ui:widget": "row-header" },
+          "period": { "type": "string", "title": "周期", "enum": ["本周", "上周"] },
+          "sales": { "type": "number", "title": "周销售额" },
+          "trend": { "type": "string", "title": "环比", "ui:widget": "trend-arrow" }
+        }
+      }
+    },
+    "insights": {
+      "type": "array",
+      "title": "关键洞察",
+      "ui:widget": "insight-box",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

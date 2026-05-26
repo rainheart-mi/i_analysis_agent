@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "title": "品类",
+      "description": "选择要分析的品类"
+    },
+    "date_range": {
+      "type": "string",
+      "title": "日期范围",
+      "format": "date-range",
+      "ui:widget": "date-range-picker"
+    },
+    "export_format": {
+      "type": "string",
+      "title": "导出格式",
+      "enum": ["xlsx", "pdf", "csv"],
+      "default": "xlsx",
+      "ui:widget": "select"
+    }
+  },
+  "required": ["category", "date_range"]
+}
