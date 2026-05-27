@@ -35,8 +35,10 @@ function IntentFormPreview() {
         await executeNode(task.node_executions[0].node_id, formData, task.id)
       }
 
-      // 执行完成后清空选择的工作流，让界面切换到任务详情
+      // 执行完成后清空所有界面缓存
+      setFormData({})
       setSelectedWorkflow(null)
+      useChatStore.getState().clearMessages()
 
       addMessage({ type: 'ai', content: `工作流 "${currentWorkflow.title}" 执行完成` })
     } catch (e) {
