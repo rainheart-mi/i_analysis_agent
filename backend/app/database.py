@@ -15,6 +15,13 @@ AsyncSessionLocal = async_sessionmaker(
     expire_on_commit=False,
 )
 
+# 用于后台任务的 session maker
+async_session_maker = async_sessionmaker(
+    engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+)
+
 
 class Base(DeclarativeBase):
     pass

@@ -101,6 +101,31 @@ async def create_test_data():
             output_mapping={"report": "report", "chart": "chart"}
         )
         session.add(mapping)
+
+        # 创建陈列复盘报告工作流
+        display_review_workflow = WorkflowRoute(
+            environment_id=env.id,
+            title="陈列复盘报告",
+            description="对比业务周期与复盘周期的陈列效果，生成复盘报告",
+            n8n_workflow_id="display-review-workflow",
+            is_active=True,
+            sort_order=2
+        )
+        session.add(display_review_workflow)
+        await session.flush()
+
+        # 创建陈列复盘节点的映射
+        display_review_mapping = WorkflowNodeMapping(
+            route_id=display_review_workflow.id,
+            node_id="display-review-node",
+            node_name="陈列复盘节点",
+            intent_schema_path="schemas/intent_forms/demo/display_review_intent_schema.json",
+            artifact_schema_path="schemas/artifact_forms/demo/display_review_artifact_schema.json",
+            input_mapping={"business_period": "business_period", "review_period": "review_period"},
+            output_mapping=None
+        )
+        session.add(display_review_mapping)
+
         await session.commit()
         print("测试数据创建完成!")
 

@@ -1,0 +1,238 @@
+{
+  "type": "page",
+  "title": "品类管理复盘报告",
+  "body": [
+    {
+      "type": "tabs",
+      "tabsMode": "chrome",
+      "mountOnEnter": true,
+      "unmountOnExit": true,
+      "tabs": [
+        {
+          "title": "数据总览",
+          "body": [
+            {
+              "type": "card",
+              "header": { "title": "整体销售额" },
+              "body": [
+                {
+                  "type": "text",
+                  "className": "text-2xl text-success",
+                  "text": "${processedData.summary.totalSalesB} 元"
+                },
+                {
+                  "type": "text",
+                  "className": "text-muted",
+                  "text": "上期：${processedData.summary.totalSalesA} 元"
+                }
+              ]
+            },
+            {
+              "type": "card",
+              "header": { "title": "关键指标" },
+              "body": [
+                {
+                  "type": "table",
+                  "affixHeader": false,
+                  "source": "${processedData.keyMetrics}",
+                  "columns": [
+                    { "label": "指标名称", "name": "指标名称" },
+                    { "label": "本期", "name": "本期" },
+                    { "label": "上期", "name": "上期" },
+                    { "label": "变化率", "name": "变化率" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "品类增长排行",
+          "body": {
+            "type": "crud",
+            "syncLocation": false,
+            "affixHeader": false,
+            "source": "${processedData.categorySalesGrowth}",
+            "loadDataOnce": true,
+            "columns": [
+              { "label": "大类", "name": "大类" },
+              { "label": "期初销售额", "name": "期初销售额" },
+              { "label": "期末销售额", "name": "期末销售额" },
+              { "label": "增长率", "name": "销售额增长率" }
+            ],
+            "pagination": {
+              "pageSize": 50
+            },
+            "headerToolbar": [],
+            "footerToolbar": ["statistics", "pagination"]
+          }
+        },
+        {
+          "title": "商品货架异动",
+          "body": {
+            "type": "tabs",
+            "tabsMode": "line",
+            "mountOnEnter": true,
+            "unmountOnExit": true,
+            "tabs": [
+              {
+                "title": "新增商品",
+                "body": {
+                  "type": "crud",
+                  "syncLocation": false,
+                  "affixHeader": false,
+                  "source": "${processedData.newAndLost.newItems}",
+                  "loadDataOnce": true,
+                  "columns": [
+                    { "label": "商品编码", "name": "商品编码" }
+                  ],
+                  "pagination": {
+                    "pageSize": 50
+                  },
+                  "headerToolbar": [],
+                  "footerToolbar": ["statistics", "pagination"],
+                  "tableClassName": "table-sm"
+                }
+              },
+              {
+                "title": "流失商品",
+                "body": {
+                  "type": "crud",
+                  "syncLocation": false,
+                  "affixHeader": false,
+                  "source": "${processedData.newAndLost.lostItems}",
+                  "loadDataOnce": true,
+                  "columns": [
+                    { "label": "商品编码", "name": "商品编码" }
+                  ],
+                  "pagination": {
+                    "pageSize": 50
+                  },
+                  "headerToolbar": [],
+                  "footerToolbar": ["statistics", "pagination"],
+                  "tableClassName": "table-sm"
+                }
+              },
+              {
+                "title": "新增货架",
+                "body": {
+                  "type": "crud",
+                  "syncLocation": false,
+                  "affixHeader": false,
+                  "source": "${processedData.newShelvesDetail}",
+                  "loadDataOnce": true,
+                  "columns": [
+                    { "label": "货架ID", "name": "货架ID" },
+                    { "label": "货架位置", "name": "货架位置" },
+                    { "label": "面积", "name": "面积" }
+                  ],
+                  "pagination": {
+                    "pageSize": 50
+                  },
+                  "headerToolbar": [],
+                  "footerToolbar": ["statistics", "pagination"]
+                }
+              },
+              {
+                "title": "流失货架",
+                "body": {
+                  "type": "crud",
+                  "syncLocation": false,
+                  "affixHeader": false,
+                  "source": "${processedData.lostShelvesDetail}",
+                  "loadDataOnce": true,
+                  "columns": [
+                    { "label": "货架ID", "name": "货架ID" },
+                    { "label": "货架位置", "name": "货架位置" },
+                    { "label": "面积", "name": "面积" }
+                  ],
+                  "pagination": {
+                    "pageSize": 50
+                  },
+                  "headerToolbar": [],
+                  "footerToolbar": ["statistics", "pagination"]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "title": "货架效能",
+          "body": [
+            {
+              "type": "card",
+              "header": { "title": "货架饱和度变化" },
+              "body": [
+                {
+                  "type": "table",
+                  "affixHeader": false,
+                  "source": "${processedData.shelfSaturationChanges}",
+                  "columns": [
+                    { "label": "货架ID", "name": "货架ID" },
+                    { "label": "期初商品数", "name": "期初商品数" },
+                    { "label": "期末商品数", "name": "期末商品数" },
+                    { "label": "期初销售额", "name": "期初销售额" },
+                    { "label": "期末销售额", "name": "期末销售额" },
+                    { "label": "销售额变化率", "name": "销售额变化率" }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "chart",
+              "className": "h-md m-t-lg",
+              "config": {
+                "xAxis": {
+                  "type": "category",
+                  "data": "${processedData.shelfEfficiencyChart.labels}"
+                },
+                "yAxis": { "type": "value" },
+                "series": [
+                  {
+                    "type": "bar",
+                    "name": "坪效",
+                    "data": "${processedData.shelfEfficiencyChart.efficiency}"
+                  },
+                  {
+                    "type": "line",
+                    "name": "趋势",
+                    "data": "${processedData.shelfEfficiencyChart.trend}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "AI复盘",
+          "body": [
+            {
+              "type": "card",
+              "header": { "title": "AI 分析结论" },
+              "body": [
+                {
+                  "type": "markdown",
+                  "value": "${processedData.aiResponse.rawOutput}"
+                }
+              ]
+            },
+            {
+              "type": "card",
+              "header": { "title": "建议事项" },
+              "body": [
+                {
+                  "type": "list",
+                  "list": "${processedData.aiResponse.suggestions}",
+                  "itemSchema": {
+                    "type": "text",
+                    "tpl": "<li>${item}</li>"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

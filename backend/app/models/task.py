@@ -24,6 +24,7 @@ class NodeExecution(BaseModel):
     node_name = Column(String(200))
     intent_schema_path = Column(String(500))
     artifact_schema_path = Column(String(500))
+    n8n_workflow_id = Column(String(200))  # N8N webhook ID for this node
     intent_data = Column(JSON, default={})
     artifact_data = Column(JSON, default=None)
     status = Column(String(20), default="pending")  # pending/running/completed/failed

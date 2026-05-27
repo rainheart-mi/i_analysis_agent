@@ -1,0 +1,35 @@
+{
+  "type": "form",
+  "mode": "horizontal",
+  "wrapWithPanel": false,
+  "body": [
+    {
+      "type": "input-date-range",
+      "name": "business_period",
+      "label": "业务周期",
+      "format": "YYYY-MM-DD",
+      "description": "需要统计销售的业务周期",
+      "ranges": [
+        {"label": "上周", "startDate": "${lastWeekStart}", "endDate": "${lastWeekEnd}"},
+        {"label": "本月", "startDate": "${monthStart}", "endDate": "${monthEnd}"},
+        {"label": "上月", "startDate": "${lastMonthStart}", "endDate": "${lastMonthEnd}"},
+        {"label": "本季度", "startDate": "${quarterStart}", "endDate": "${quarterEnd}"},
+        {"label": "上季度", "startDate": "${lastQuarterStart}", "endDate": "${lastQuarterEnd}"}
+      ],
+      "required": true
+    },
+    {
+      "type": "input-date-range",
+      "name": "review_period",
+      "label": "复盘周期",
+      "format": "YYYY-MM-DD",
+      "description": "与业务周期对比的复盘周期",
+      "ranges": [
+        {"label": "上上周", "startDate": "${last2WeekStart}", "endDate": "${last2WeekEnd}"},
+        {"label": "上上月", "startDate": "${last2MonthStart}", "endDate": "${last2MonthEnd}"},
+        {"label": "上上季度", "startDate": "${last2QuarterStart}", "endDate": "${last2QuarterEnd}"}
+      ],
+      "required": true
+    }
+  ]
+}
