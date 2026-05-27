@@ -9,10 +9,18 @@ function ChatPanel() {
   const [input, setInput] = useState('')
   const messages = useChatStore(s => s.messages)
   const addMessage = useChatStore(s => s.addMessage)
+  const clearMessages = useChatStore(s => s.clearMessages)
   const selectedWorkflow = useChatStore(s => s.selectedWorkflow)
   const setSelectedWorkflow = useChatStore(s => s.setSelectedWorkflow)
   const workflows = useWorkflowStore(s => s.workflows)
   const messagesEndRef = useRef(null)
+
+  // 监听 messages 变化，当被清空时同时清空 input
+  useEffect(() => {
+    if (messages.length === 0) {
+      setInput('')
+    }
+  }, [messages])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
