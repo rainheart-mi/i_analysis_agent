@@ -21,8 +21,14 @@ class Settings(BaseSettings):
     N8N_API_KEY: str = ""
     N8N_DEFAULT_TIMEOUT: int = 120
 
-    # Mock Mode - 当为 True 时，worker 不调用真实的 n8n API
-    MOCKER_MODE: bool = False
+    # Mock Mode - mocker: 不调用n8n | test: 调用test webhook | production: 调用production webhook
+    # mocker: 不调用真实 n8n API，等待界面 mock 完成
+    # test: 调用 n8n test webhook (工作流未发布时)
+    # production: 调用 n8n production webhook (工作流已发布)
+    MOCKER_MODE: str = "mocker"  # mocker / test / production
+
+    # Redis - Celery broker & result backend
+    REDIS_URL: str = "redis://localhost:6379/0"
 
     # Schema Files - 相对于 backend 目录
     SCHEMA_BASE_PATH: str = "."

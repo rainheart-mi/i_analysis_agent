@@ -58,16 +58,11 @@ async def execute_workflow(
     # Generate task id
     task_id = str(uuid.uuid4())
 
-    # Apply input mapping if configured
-    final_inputs = request.inputs
-    if mapping.input_mapping:
-        final_inputs = {k: request.inputs.get(v) for k, v in mapping.input_mapping.items()}
-
     try:
         result_data = await n8n_service.execute_workflow(
             workflow_id=workflow.n8n_workflow_id,
             node_id=mapping.node_id,
-            inputs=final_inputs
+            inputs=request.inputs  # 直接透传，不做映射转换
         )
         return ExecuteResponse(
             task_id=task_id,
@@ -116,14 +111,9 @@ async def preview_workflow(
 
     mapping = workflow.node_mappings[0]
 
-    # Preview the mapped inputs
-    preview_inputs = request.inputs
-    if mapping.input_mapping:
-        preview_inputs = {k: request.inputs.get(v) for k, v in mapping.input_mapping.items()}
-
     return {
         "workflow_id": workflow_id,
         "node_id": mapping.node_id,
-        "mapped_inputs": preview_inputs,
+        "inputs": request.inputs,  # 直接透传
         "message": "预览信息"
     }

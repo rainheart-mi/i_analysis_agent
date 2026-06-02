@@ -12,7 +12,5 @@ class WorkflowNodeMapping(BaseModel):
     intent_schema_path = Column(String(500))
     artifact_schema_path = Column(String(500))
     n8n_workflow_id = Column(String(200))  # N8N webhook ID for this node
-    input_mapping = Column(JSON)
-    output_mapping = Column(JSON)
 
     route = relationship("WorkflowRoute", back_populates="node_mappings")

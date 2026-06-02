@@ -35,10 +35,10 @@ class NodeExecutionResponse(BaseModel):
     node_name: Optional[str]
     intent_schema_path: Optional[str]
     artifact_schema_path: Optional[str]
-    intent_data: Dict[str, Any]
-    artifact_data: Optional[Dict[str, Any]]
+    intent_data: Optional[Any] = {}
+    artifact_data: Optional[Any] = None
     intent_schema: Optional[Dict[str, Any]] = None
-    artifact_schema: Optional[Dict[str, Any]] = None
+    artifact_schema: Optional[Any] = None
     status: str
     error_message: Optional[str]
     started_at: Optional[datetime]
@@ -50,7 +50,7 @@ class NodeExecutionResponse(BaseModel):
 
 class NodeUpdateRequest(BaseModel):
     intent_data: Optional[Dict[str, Any]] = None
-    artifact_data: Optional[Dict[str, Any]] = None
+    artifact_data: Optional[Any] = None
     status: Optional[str] = None
     error_message: Optional[str] = None
     completed_at: Optional[datetime] = None
