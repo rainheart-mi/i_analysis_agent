@@ -8,6 +8,13 @@ export const useTaskStore = create((set, get) => ({
   currentNodeId: null,
   isExecuting: false,
   pollingTimer: null,
+  mockerMode: 'mocker',
+
+  fetchAppConfig: async () => {
+    const { workflowApi } = await import('@/api/workflow')
+    const config = await workflowApi.getAppConfig()
+    set({ mockerMode: config.mocker_mode })
+  },
 
   fetchTasks: async () => {
     const { taskApi } = await import('@/api/workflow')

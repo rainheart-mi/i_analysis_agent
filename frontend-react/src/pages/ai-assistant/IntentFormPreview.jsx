@@ -29,7 +29,6 @@ function IntentFormPreview() {
 
     try {
       const task = await createTask(currentWorkflow.id, currentWorkflow.title)
-      addMessage({ type: 'user', content: `执行工作流: ${currentWorkflow.title}` })
 
       if (task.node_executions?.length > 0) {
         await executeNode(task.node_executions[0].node_id, formData, task.id)
@@ -39,8 +38,6 @@ function IntentFormPreview() {
       setFormData({})
       setSelectedWorkflow(null)
       useChatStore.getState().clearMessages()
-
-      addMessage({ type: 'ai', content: `工作流 "${currentWorkflow.title}" 执行完成` })
     } catch (e) {
       addMessage({ type: 'ai', content: `执行失败: ${e.message}` })
     }

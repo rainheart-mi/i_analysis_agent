@@ -9,6 +9,8 @@ function NodeContent() {
   const isExecuting = useTaskStore(s => s.isExecuting)
   const executeNode = useTaskStore(s => s.executeNode)
   const mockCompleteNode = useTaskStore(s => s.mockCompleteNode)
+  const mockerMode = useTaskStore(s => s.mockerMode)
+  const fetchAppConfig = useTaskStore(s => s.fetchAppConfig)
 
   const [intentData, setIntentData] = useState({})
   const [artifactData, setArtifactData] = useState({})
@@ -28,6 +30,10 @@ function NodeContent() {
       setArtifactData(currentNode.artifact_data)
     }
   }, [currentNode?.artifact_data])
+
+  useEffect(() => {
+    fetchAppConfig()
+  }, [fetchAppConfig])
 
   const statusMap = {
     pending: { text: '待执行', color: '#86909C', bg: '#F5F7FA' },
@@ -161,7 +167,7 @@ function NodeContent() {
             </Button>
           </div>
         )}
-        {(isExecuting || isRunning) && (
+        {(isExecuting || isRunning) && mockerMode === 'mocker' && (
           <div style={{
             padding: '16px 20px',
             background: '#FAFAFA',

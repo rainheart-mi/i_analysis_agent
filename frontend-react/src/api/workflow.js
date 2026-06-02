@@ -16,6 +16,7 @@ export const taskApi = {
 }
 
 export const workflowApi = {
+  getAppConfig: () => apiClient.get('/config'),
   getEnvironments: () => apiClient.get('/n8n-environments'),
   createEnvironment: (data) => apiClient.post('/n8n-environments', data),
   updateEnvironment: (id, data) => apiClient.put(`/n8n-environments/${id}`, data),
