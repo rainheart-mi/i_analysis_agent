@@ -1,0 +1,146 @@
+{
+  "type": "page",
+  "title": "品类管理复盘报告（2026.04.01-2026.05.01）",
+  "body": [
+    {
+      "type": "tabs",
+      "tabsMode": "chrome",
+      "className": "m-t-md",
+      "tabs": [
+        // 1. 数据总览标签
+        {
+          "title": "📊 数据总览",
+          "body": [
+            {
+              "type": "hbox",
+              "className": "p-lg",
+              "cols": [
+                {
+                  "type": "card",
+                  "header": { "title": "整体销售额" },
+                  "body": [
+                    { "type": "text", "className": "text-2xl text-success", "text": "${processedData.summary.totalSalesB} 元" },
+                    { "type": "text", "className": "text-muted", "text": "上期：${processedData.summary.totalSalesA} 元 | 增长率：${processedData.summary.overallGrowthRate}" }
+                  ],
+                  "className": "w-full bg-light"
+                },
+                {
+                  "type": "card",
+                  "header": { "title": "商品规模" },
+                  "body": [
+                    { "type": "text", "className": "text-2xl", "text": "${processedData.summary.totalItemsInB} 款" },
+                    { "type": "text", "className": "text-muted", "text": "上期：${processedData.summary.totalItemsInA} 款 | 净增：${processedData.summary.totalItemsInB - processedData.summary.totalItemsInA} 款" }
+                  ],
+                  "className": "w-full bg-light"
+                },
+                {
+                  "type": "card",
+                  "header": { "title": "货架数量" },
+                  "body": [
+                    { "type": "text", "className": "text-2xl text-info", "text": "${processedData.summary.totalShelvesInB} 个" },
+                    { "type": "text", "className": "text-muted", "text": "上期：${processedData.summary.totalShelvesInA} 个 | 净增：${processedData.summary.totalShelvesInB - processedData.summary.totalShelvesInA} 个" }
+                  ],
+                  "className": "w-full bg-light"
+                }
+              ]
+            },
+            {
+              "type": "chart",
+              "className": "h-md m-t-lg",
+              "config": {
+                "xAxis": { "type": "category", "data": ["水果","冷冻品","肉禽蛋","蔬菜","烘焙","粮油调味","烟酒饮料","休闲食品","水产","冷藏日配","家清个护","生活百货","收银区","3R熟食","婴保宠物"] },
+                "yAxis": { "type": "value" },
+                "series": [{
+                  "type": "bar",
+                  "data": "${processedData.categorySalesGrowth.map(item => item.销售额增长率.replace('%',''))}",
+                  "itemStyle": {
+                    "color": function(params) { return params.data >= 0 ? '#28a745' : '#dc3545'; }
+                  }
+                }],
+                "title": { "text": "大类销售额增长率（%）", "left": "center" }
+              }
+            }
+          ]
+        },
+        // 2. 品类增长排行标签
+        {
+          "title": "📈 品类增长排行",
+          "body": {
+            "type": "table",
+            "data": "${processedData.categorySalesGrowth}",
+            "columns": [
+              { "label": "大类", "name": "大类", "fixed": "left" },
+              { "label": "期初销售额", "name": "期初销售额", "type": "number", "format": "0,0.00" },
+              { "label": "期末销售额", "name": "期末销售额", "type": "number", "format": "0,0.00" },
+              {
+                "label": "销售额增长率",
+                "name": "销售额增长率",
+                "className": "${item.销售额增长率.includes('-') ? 'text-danger' : 'text-success'}"
+              }
+            ],
+            "sortable": true,
+            "className": "table-hover"
+          }
+        },
+        // 3. 商品&货架异动标签
+        {
+          "title": "🔄 商品货架异动",
+          "body": {
+            "type": "tabs",
+            "tabs": [
+              {
+                "title": "新增商品（${processedData.newAndLost.newItems.length}款）",
+                "body": { "type": "list", "data": "${processedData.newAndLost.newItems}", "itemTitle": "商品编码：${item}" }
+              },
+              {
+                "title": "流失商品（${processedData.newAndLost.lostItems.length}款）",
+                "body": { "type": "list", "data": "${processedData.newAndLost.lostItems}", "itemTitle": "商品编码：${item}", "className": "text-danger" }
+              },
+              {
+                "title": "新增货架",
+                "body": { "type": "list", "data": "${processedData.newAndLost.newShelves}", "itemTitle": "货架ID：${item}" }
+              },
+              {
+                "title": "流失货架",
+                "body": { "type": "list", "data": "${processedData.newAndLost.lostShelves}", "itemTitle": "货架ID：${item}", "className": "text-danger" }
+              }
+            ]
+          }
+        },
+        // 4. 货架效能分析标签
+        {
+          "title": "📦 货架效能分析",
+          "body": {
+            "type": "crud",
+            "data": "${processedData.shelfSaturationChanges}",
+            "columns": [
+              { "label": "货架ID", "name": "货架ID", "fixed": "left" },
+              { "label": "期初商品数", "name": "期初商品数" },
+              { "label": "期末商品数", "name": "期末商品数" },
+              { "label": "期初销售额", "name": "期初销售额", "type": "number", "format": "0,0.00" },
+              { "label": "期末销售额", "name": "期末销售额", "type": "number", "format": "0,0.00" },
+              {
+                "label": "销售额变化率",
+                "name": "销售额变化率",
+                "className": "${item.销售额变化率 >= 0 ? 'text-success' : 'text-danger'}",
+                "type": "number",
+                "format": "0.00%"
+              }
+            ],
+            "sortable": true,
+            "defaultSort": { "prop": "销售额变化率", "order": "desc" }
+          }
+        },
+        // 5. AI复盘报告标签
+        {
+          "title": "📄 AI复盘报告",
+          "body": {
+            "type": "markdown",
+            "value": "${aiResponse.rawOutput}",
+            "className": "p-lg bg-white rounded"
+          }
+        }
+      ]
+    }
+  ]
+}
