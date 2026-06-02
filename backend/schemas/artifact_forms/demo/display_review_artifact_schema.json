@@ -32,15 +32,16 @@
               "header": { "title": "关键指标" },
               "body": [
                 {
-                  "type": "table",
-                  "affixHeader": false,
-                  "source": "${processedData.keyMetrics}",
-                  "columns": [
-                    { "label": "指标名称", "name": "指标名称" },
-                    { "label": "本期", "name": "本期" },
-                    { "label": "上期", "name": "上期" },
-                    { "label": "变化率", "name": "变化率" }
-                  ]
+                  "type": "text",
+                  "text": "商品数：${processedData.summary.totalItemsInB} / ${processedData.summary.totalItemsInA}"
+                },
+                {
+                  "type": "text",
+                  "text": "货架数：${processedData.summary.totalShelvesInB} / ${processedData.summary.totalShelvesInA}"
+                },
+                {
+                  "type": "text",
+                  "text": "整体增长率：${processedData.summary.overallGrowthRate}"
                 }
               ]
             }
@@ -78,79 +79,45 @@
               {
                 "title": "新增商品",
                 "body": {
-                  "type": "crud",
-                  "syncLocation": false,
-                  "affixHeader": false,
-                  "source": "${processedData.newAndLost.newItems}",
-                  "loadDataOnce": true,
-                  "columns": [
-                    { "label": "商品编码", "name": "商品编码" }
-                  ],
-                  "pagination": {
-                    "pageSize": 50
-                  },
-                  "headerToolbar": [],
-                  "footerToolbar": ["statistics", "pagination"],
-                  "tableClassName": "table-sm"
+                  "type": "list",
+                  "list": "${processedData.newAndLost.newItems}",
+                  "itemSchema": {
+                    "type": "text",
+                    "tpl": "<li>${item}</li>"
+                  }
                 }
               },
               {
                 "title": "流失商品",
                 "body": {
-                  "type": "crud",
-                  "syncLocation": false,
-                  "affixHeader": false,
-                  "source": "${processedData.newAndLost.lostItems}",
-                  "loadDataOnce": true,
-                  "columns": [
-                    { "label": "商品编码", "name": "商品编码" }
-                  ],
-                  "pagination": {
-                    "pageSize": 50
-                  },
-                  "headerToolbar": [],
-                  "footerToolbar": ["statistics", "pagination"],
-                  "tableClassName": "table-sm"
+                  "type": "list",
+                  "list": "${processedData.newAndLost.lostItems}",
+                  "itemSchema": {
+                    "type": "text",
+                    "tpl": "<li>${item}</li>"
+                  }
                 }
               },
               {
                 "title": "新增货架",
                 "body": {
-                  "type": "crud",
-                  "syncLocation": false,
-                  "affixHeader": false,
-                  "source": "${processedData.newShelvesDetail}",
-                  "loadDataOnce": true,
-                  "columns": [
-                    { "label": "货架ID", "name": "货架ID" },
-                    { "label": "货架位置", "name": "货架位置" },
-                    { "label": "面积", "name": "面积" }
-                  ],
-                  "pagination": {
-                    "pageSize": 50
-                  },
-                  "headerToolbar": [],
-                  "footerToolbar": ["statistics", "pagination"]
+                  "type": "list",
+                  "list": "${processedData.newAndLost.newShelves}",
+                  "itemSchema": {
+                    "type": "text",
+                    "tpl": "<li>${item}</li>"
+                  }
                 }
               },
               {
                 "title": "流失货架",
                 "body": {
-                  "type": "crud",
-                  "syncLocation": false,
-                  "affixHeader": false,
-                  "source": "${processedData.lostShelvesDetail}",
-                  "loadDataOnce": true,
-                  "columns": [
-                    { "label": "货架ID", "name": "货架ID" },
-                    { "label": "货架位置", "name": "货架位置" },
-                    { "label": "面积", "name": "面积" }
-                  ],
-                  "pagination": {
-                    "pageSize": 50
-                  },
-                  "headerToolbar": [],
-                  "footerToolbar": ["statistics", "pagination"]
+                  "type": "list",
+                  "list": "${processedData.newAndLost.lostShelves}",
+                  "itemSchema": {
+                    "type": "text",
+                    "tpl": "<li>${item}</li>"
+                  }
                 }
               }
             ]

@@ -1,25 +1,47 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "properties": {
-    "category": {
-      "type": "string",
-      "title": "品类",
-      "description": "选择要分析的品类"
+  "type": "form",
+  "mode": "horizontal",
+  "wrapWithPanel": false,
+  "body": [
+    {
+      "type": "select",
+      "name": "category",
+      "label": "品类",
+      "placeholder": "选择要分析的品类",
+      "options": [
+        { "label": "生鲜食品", "value": "fresh" },
+        { "label": "烘焙", "value": "baking" },
+        { "label": "蔬菜", "value": "vegetable" },
+        { "label": "3R熟食", "value": "3r_food" },
+        { "label": "水果", "value": "fruit" }
+      ],
+      "required": true
     },
-    "date_range": {
-      "type": "string",
-      "title": "日期范围",
-      "format": "date-range",
-      "ui:widget": "date-range-picker"
+    {
+      "type": "input-date-range",
+      "name": "date_range",
+      "label": "日期范围",
+      "format": "YYYY-MM-DD",
+      "ranges": [
+        {"label": "昨天", "startDate": "${yesterday}", "endDate": "${yesterday}"},
+        {"label": "最近7天", "startDate": "${last7days}", "endDate": "${today}"},
+        {"label": "上周", "startDate": "${lastWeekStart}", "endDate": "${lastWeekEnd}"},
+        {"label": "本月", "startDate": "${monthStart}", "endDate": "${monthEnd}"},
+        {"label": "上月", "startDate": "${lastMonthStart}", "endDate": "${lastMonthEnd}"},
+        {"label": "本季度", "startDate": "${quarterStart}", "endDate": "${quarterEnd}"}
+      ],
+      "required": true
     },
-    "export_format": {
-      "type": "string",
-      "title": "导出格式",
-      "enum": ["xlsx", "pdf", "csv"],
-      "default": "xlsx",
-      "ui:widget": "select"
+    {
+      "type": "select",
+      "name": "export_format",
+      "label": "导出格式",
+      "options": [
+        { "label": "Excel (.xlsx)", "value": "xlsx" },
+        { "label": "PDF (.pdf)", "value": "pdf" },
+        { "label": "CSV (.csv)", "value": "csv" }
+      ],
+      "value": "xlsx"
     }
-  },
-  "required": ["category", "date_range"]
+  ]
 }
