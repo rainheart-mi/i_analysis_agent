@@ -1,0 +1,83 @@
+<h2>Ant Design X 整体布局方案</h2>
+<p class="subtitle">现有页面是 3 栏：左=任务实例 / 中=节点画布 / 右=ChatPanel（360px）。下面对比 3 种集成方式。</p>
+
+<div class="options">
+
+  <div class="option" data-choice="A" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>右栏原地升级（最小侵入）</h3>
+      <p>保持 3 栏结构，仅把 ChatPanel 内部组件换成 Bubble / Sender / 预设 Prompts。其它面板零改动。</p>
+      <div class="mockup" style="margin-top:12px">
+        <div style="display:flex;height:180px;gap:8px">
+          <div class="mock-sidebar" style="width:90px;font-size:10px;display:flex;align-items:center;justify-content:center">任务实例</div>
+          <div class="mock-content" style="flex:1;display:flex;align-items:center;justify-content:center;color:#999;font-size:11px">节点画布（不变）</div>
+          <div class="mock-sidebar" style="width:120px;display:flex;flex-direction:column;gap:4px;padding:6px">
+            <div style="font-size:10px;color:#666">AI 对话 ⬅</div>
+            <div class="mock-content" style="flex:1;background:#f0f4ff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#5C7CFF">Bubble</div>
+            <div class="mock-input" style="font-size:9px;height:24px">Sender</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#5C7CFF;margin-top:8px">✅ 改动小 ❌ 360px 宽度对长 Markdown/代码块不友好</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="B" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>新独立全屏对话页（新路由 /chat）</h3>
+      <p>在 React Router 加 `/chat` 路由，AI 助手页加按钮跳转。独立布局：左 Conversations + 中 Bubble + 底 Sender。沉浸感最强。</p>
+      <div class="mockup" style="margin-top:12px">
+        <div style="display:flex;height:180px;gap:6px">
+          <div class="mock-sidebar" style="width:70px;display:flex;flex-direction:column;gap:3px;padding:6px;font-size:10px">
+            <div style="font-weight:600">会话</div>
+            <div class="mock-content" style="height:18px;font-size:9px;display:flex;align-items:center;padding:0 4px">陈列复盘-1</div>
+            <div class="mock-content" style="height:18px;font-size:9px;display:flex;align-items:center;padding:0 4px">品类分析-2</div>
+            <div class="mock-content" style="height:18px;font-size:9px;display:flex;align-items:center;padding:0 4px">新对话</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div class="mock-content" style="flex:1;background:#fafbff;display:flex;align-items:center;justify-content:center;color:#999;font-size:11px">Bubble 流式渲染区</div>
+            <div class="mock-input" style="height:28px;font-size:10px">Sender + 快捷键</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#5C7CFF;margin-top:8px">✅ 沉浸、宽屏、虚拟列表 ❌ 跳出当前上下文；与 NodeExecution 绑定变隐式</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="C" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>右栏 + 抽屉展开双形态（推荐）</h3>
+      <p>默认 360px 紧凑右栏（用 Bubble / Sender），右上角"展开"按钮 → 抽屉式全屏对话（带 Conversations 多会话切换）。一个组件代码，两个模式。</p>
+      <div class="mockup" style="margin-top:12px">
+        <div style="display:flex;height:180px;gap:8px">
+          <div class="mock-sidebar" style="width:70px;font-size:10px;display:flex;align-items:center;justify-content:center">任务</div>
+          <div class="mock-content" style="flex:1;display:flex;align-items:center;justify-content:center;color:#999;font-size:10px">画布</div>
+          <div class="mock-sidebar" style="width:110px;display:flex;flex-direction:column;gap:3px;padding:4px;position:relative">
+            <div style="font-size:9px;color:#5C7CFF;text-align:right">⤢ 展开</div>
+            <div class="mock-content" style="flex:1;background:#f0f4ff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#5C7CFF">Bubble</div>
+            <div class="mock-input" style="font-size:8px;height:20px">Sender</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:6px;font-size:10px;color:#5C7CFF">↓ 点击展开后 ↓</div>
+        <div style="display:flex;height:120px;margin-top:6px;border:2px dashed #5C7CFF;border-radius:8px;overflow:hidden">
+          <div class="mock-sidebar" style="width:120px;padding:6px;font-size:9px;display:flex;flex-direction:column;gap:3px">
+            <div style="font-weight:600;color:#5C7CFF">Conversations</div>
+            <div class="mock-content" style="height:16px;font-size:8px;display:flex;align-items:center;padding:0 4px">当前节点会话</div>
+            <div class="mock-content" style="height:16px;font-size:8px;display:flex;align-items:center;padding:0 4px">追问分支</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;padding:6px;gap:4px">
+            <div class="mock-content" style="flex:1;display:flex;align-items:center;justify-content:center;color:#999;font-size:9px">Bubble 全宽</div>
+            <div class="mock-input" style="height:22px;font-size:9px">Sender</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#5C7CFF;margin-top:8px">✅ 兼顾紧凑与沉浸 / 复用同一份 store ✅ 与 NodeExecution 绑定保留</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:24px">👉 选完后在终端告诉我 A / B / C（或自由描述）。</p>

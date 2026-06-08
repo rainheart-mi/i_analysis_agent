@@ -1,0 +1,93 @@
+<h2>C 优化版：AI 对话成为画布 Tab</h2>
+<p class="subtitle">展开后右栏收起，AI 对话作为中栏 tab 之一与节点 tab 并列。</p>
+
+<div class="options">
+
+  <div class="option" data-choice="C1" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>展开后：右栏完全隐藏，AI 对话接管中栏</h3>
+      <div class="mockup" style="margin-top:10px">
+        <div style="font-size:10px;color:#5C7CFF;margin-bottom:4px">▸ 展开后（expanded 状态）</div>
+        <div style="display:flex;height:200px;gap:8px;border:1px solid #E5E6EB;border-radius:8px;overflow:hidden">
+          <div class="mock-sidebar" style="width:90px;font-size:10px;display:flex;align-items:center;justify-content:center">任务实例</div>
+          <div style="flex:1;display:flex;flex-direction:column;background:#fff">
+            <div style="display:flex;background:#fafbfc;border-bottom:1px solid #e5e6eb;padding:0 16px;gap:0;align-items:center;height:36px">
+              <div style="padding:0 14px;height:100%;display:flex;align-items:center;font-size:12px;color:#5C7CFF;border-bottom:2px solid #5C7CFF">陈列复盘节点</div>
+              <div style="padding:0 14px;height:100%;display:flex;align-items:center;font-size:12px;color:#86909C">品类分析节点</div>
+              <div style="padding:0 14px;height:100%;display:flex;align-items:center;font-size:12px;color:#86909C;margin-left:auto">💬 AI 对话</div>
+              <div style="padding:0 8px;height:100%;display:flex;align-items:center;font-size:10px;color:#86909C;cursor:pointer">⤢ 收起</div>
+            </div>
+            <div style="flex:1;padding:12px;display:flex;flex-direction:column;gap:8px">
+              <div style="background:#f0f4ff;border-radius:8px;padding:8px;font-size:10px;color:#1D2129;align-self:flex-start;max-width:60%">基于工作流结果总结一下</div>
+              <div style="background:#5C7CFF;color:#fff;border-radius:8px;padding:8px;font-size:10px;align-self:flex-end;max-width:60%">本期销售 ¥135,231.96 → ¥143,811.48，<b>整体增长 +6.34%</b>...</div>
+              <div style="background:#f0f4ff;border-radius:8px;padding:8px;font-size:10px;color:#1D2129;align-self:flex-start;max-width:60%">3R熟食下滑 -21.89% 原因？</div>
+            </div>
+            <div class="mock-input" style="height:36px;margin:8px 12px;border-radius:8px;font-size:11px">Sender 输入框（Ant Design X）</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#999;margin-top:6px">特点：沉浸式、右栏让出空间、Bubble 全宽</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="C2" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>展开后：右栏保留为「折叠条」图标，仅显示展开按钮</h3>
+      <div class="mockup" style="margin-top:10px">
+        <div style="font-size:10px;color:#5C7CFF;margin-bottom:4px">▸ 展开后（expanded 状态）</div>
+        <div style="display:flex;height:200px;gap:6px;border:1px solid #E5E6EB;border-radius:8px;overflow:hidden">
+          <div class="mock-sidebar" style="width:90px;font-size:10px;display:flex;align-items:center;justify-content:center">任务实例</div>
+          <div style="flex:1;display:flex;flex-direction:column;background:#fff">
+            <div style="display:flex;background:#fafbfc;border-bottom:1px solid #e5e6eb;padding:0 16px;align-items:center;height:36px">
+              <div style="padding:0 14px;height:100%;display:flex;align-items:center;font-size:12px;color:#5C7CFF;border-bottom:2px solid #5C7CFF">陈列复盘节点</div>
+              <div style="padding:0 14px;height:100%;display:flex;align-items:center;font-size:12px;color:#86909C">品类分析节点</div>
+              <div style="padding:0 14px;height:100%;display:flex;align-items:center;font-size:12px;color:#86909C;margin-left:auto">💬 AI 对话</div>
+            </div>
+            <div style="flex:1;padding:12px;font-size:10px;color:#999;display:flex;align-items:center;justify-content:center">[Bubble + Sender 渲染区]</div>
+            <div class="mock-input" style="height:32px;margin:8px 12px;border-radius:8px;font-size:11px">Sender</div>
+          </div>
+          <div style="width:36px;background:#fafbfc;display:flex;flex-direction:column;align-items:center;padding-top:14px;border-left:1px solid #e5e6eb">
+            <div style="font-size:14px;cursor:pointer" title="收起">⤡</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#999;margin-top:6px">特点：随时一键快速收回右栏；过渡更平滑</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="C3" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>展开后：右栏保留迷你版（仍可看到对话），中栏增大</h3>
+      <div class="mockup" style="margin-top:10px">
+        <div style="font-size:10px;color:#5C7CFF;margin-bottom:4px">▸ 展开后（expanded 状态）</div>
+        <div style="display:flex;height:200px;gap:6px;border:1px solid #E5E6EB;border-radius:8px;overflow:hidden">
+          <div class="mock-sidebar" style="width:90px;font-size:10px;display:flex;align-items:center;justify-content:center">任务</div>
+          <div style="flex:1;display:flex;flex-direction:column;background:#fff">
+            <div style="display:flex;background:#fafbfc;border-bottom:1px solid #e5e6eb;padding:0 12px;align-items:center;height:32px">
+              <div style="padding:0 10px;height:100%;display:flex;align-items:center;font-size:11px;color:#5C7CFF;border-bottom:2px solid #5C7CFF">陈列复盘节点</div>
+              <div style="padding:0 10px;height:100%;display:flex;align-items:center;font-size:11px;color:#86909C">💬 AI 对话</div>
+            </div>
+            <div style="flex:1;padding:8px;font-size:10px;color:#999;display:flex;align-items:center;justify-content:center">[Bubble 全宽区]</div>
+            <div class="mock-input" style="height:28px;margin:6px 8px;border-radius:6px;font-size:10px">Sender</div>
+          </div>
+          <div style="width:200px;display:flex;flex-direction:column;background:#fafbfc;border-left:1px solid #e5e6eb">
+            <div style="padding:6px 10px;font-size:10px;color:#86909C;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e6eb">
+              <span>💬 同步</span><span style="cursor:pointer">⤡</span>
+            </div>
+            <div style="flex:1;padding:6px;font-size:9px;display:flex;flex-direction:column;gap:4px;overflow:hidden">
+              <div style="background:#fff;border-radius:4px;padding:4px;align-self:flex-end;max-width:90%">问了什么？</div>
+              <div style="background:#5C7CFF;color:#fff;border-radius:4px;padding:4px;align-self:flex-start;max-width:90%">回复预览…</div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#999;margin-top:6px">特点：同屏对比、但仍是双视图；右边其实是只读镜像</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:24px">👉 选 1 / 2 / 3。1 是最干净的二态切换，2 是带快速回弹，3 是同屏双视图。</p>

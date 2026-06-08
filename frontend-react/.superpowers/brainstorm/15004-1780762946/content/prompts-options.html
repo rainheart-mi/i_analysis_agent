@@ -1,0 +1,62 @@
+<h2>Prompts 预设提示词面板：要不要？放哪里？</h2>
+<p class="subtitle">Prompts 是 @ant-design/x 的招牌组件，常用于对话空状态。点击预设词直接发起对话。</p>
+
+<div class="options">
+
+  <div class="option" data-choice="P1" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>不引入 Prompts（极简）</h3>
+      <p>空状态只放欢迎语 + 提示「请输入问题」。最简单，符合 YAGNI。</p>
+      <div class="mockup" style="margin-top:8px;padding:20px;text-align:center;background:#fafbfc;border-radius:8px">
+        <div style="font-size:24px">💬</div>
+        <div style="font-size:13px;color:#86909C;margin-top:8px">等待节点执行完成…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="P2" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>引入 Prompts 放消息区上方（推荐）</h3>
+      <p>空状态展示 4 个工作流场景化预设词；对话开始后 Prompts 自动隐藏（用 Ant Design X 的 Prompts 组件）。</p>
+      <div class="mockup" style="margin-top:8px;padding:12px;background:#fafbfc;border-radius:8px">
+        <div style="font-size:11px;color:#86909C;margin-bottom:8px">✨ 试试这样问</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px;font-size:11px;color:#1D2129;cursor:pointer">
+            📊 <b>总结本节点结果</b><br/><span style="color:#86909C">输出关键指标摘要</span>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px;font-size:11px;color:#1D2129;cursor:pointer">
+            ⚠️ <b>指出异常数据</b><br/><span style="color:#86909C">下滑品类/失能货架</span>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px;font-size:11px;color:#1D2129;cursor:pointer">
+            💡 <b>给 3 条优化建议</b><br/><span style="color:#86909C">基于品类结构</span>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px;font-size:11px;color:#1D2129;cursor:pointer">
+            🔍 <b>对比 TOP5 货架</b><br/><span style="color:#86909C">坪效/饱和度分析</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="P3" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>Prompts 放 Sender 输入框上方（始终可见）</h3>
+      <p>Sender 上方放一行横向滚动的预设词 chip，用户可随时点选。空状态/对话中均可触发，但占用纵向空间。</p>
+      <div class="mockup" style="margin-top:8px;padding:8px;background:#fafbfc;border-radius:8px;display:flex;flex-direction:column;gap:6px">
+        <div style="background:#fafbfc;display:flex;gap:6px;overflow:hidden">
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:14px;padding:4px 10px;font-size:10px;white-space:nowrap">总结结果</div>
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:14px;padding:4px 10px;font-size:10px;white-space:nowrap">异常数据</div>
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:14px;padding:4px 10px;font-size:10px;white-space:nowrap">3 条建议</div>
+          <div style="background:#fff;border:1px solid #e5e6eb;border-radius:14px;padding:4px 10px;font-size:10px;white-space:nowrap">TOP5 对比</div>
+        </div>
+        <div class="mock-input" style="height:30px;font-size:11px;border-radius:8px">Sender</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:24px">👉 选 1 / 2 / 3。2 是钉钉/语雀 AI 主流形态，3 占用纵向空间但发现性好。</p>

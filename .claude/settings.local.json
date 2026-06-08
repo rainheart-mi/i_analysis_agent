@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "mcp__MiniMax__understand_image",
-      "Skill(zcf:git-commit)"
+      "mcp__MiniMax__web_search",
+      "Skill(update-config)"
     ]
   }
 }
