@@ -11,6 +11,7 @@ class TaskInstance(BaseModel):
     name = Column(String(200))
     status = Column(String(20), default="pending")  # pending/running/completed/failed
     current_node_id = Column(String(100))
+    tenant_id = Column(String(36), nullable=False, index=True)
 
     workflow = relationship("WorkflowRoute")
     node_executions = relationship("NodeExecution", back_populates="task_instance", cascade="all, delete-orphan")
@@ -31,5 +32,6 @@ class NodeExecution(BaseModel):
     error_message = Column(Text)
     started_at = Column(DateTime)
     completed_at = Column(DateTime)
+    tenant_id = Column(String(36), nullable=False, index=True)
 
     task_instance = relationship("TaskInstance", back_populates="node_executions")

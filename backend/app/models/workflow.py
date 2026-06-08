@@ -12,6 +12,7 @@ class WorkflowRoute(BaseModel):
     n8n_workflow_id = Column(String(100))
     is_active = Column(Boolean, default=True)
     sort_order = Column(Integer, default=0)
+    tenant_id = Column(String(36), nullable=False, index=True)
 
     environment = relationship("N8NEnvironment")
     node_mappings = relationship("WorkflowNodeMapping", back_populates="route", cascade="all, delete-orphan")

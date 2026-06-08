@@ -22,6 +22,7 @@ class UserResponse(BaseModel):
     username: str
     email: Optional[str]
     is_active: bool
+    tenant_id: str
 
     class Config:
         from_attributes = True

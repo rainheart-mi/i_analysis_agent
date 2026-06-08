@@ -9,3 +9,4 @@ class N8NEnvironment(BaseModel):
     base_url = Column(String(500), nullable=False)
     api_key = Column(String(255))
     is_active = Column(Boolean, default=True)
+    tenant_id = Column(String(36), nullable=False, index=True)

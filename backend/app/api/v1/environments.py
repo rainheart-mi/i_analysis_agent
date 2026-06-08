@@ -8,23 +8,34 @@ from app.schemas.environment import (
     N8NEnvironmentCreate, N8NEnvironmentUpdate,
     N8NEnvironmentResponse, N8NEnvironmentTestResponse
 )
+from app.api.deps import get_current_user_tenant
+from app.services.tenant_query import scoped_query, scoped_query_by_id, apply_tenant
 
 
 router = APIRouter()
 
 
 @router.get("", response_model=List[N8NEnvironmentResponse])
-async def list_environments(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(N8NEnvironment).order_by(N8NEnvironment.created_at.desc()))
+async def list_environments(
+    db: AsyncSession = Depends(get_db),
+    ctx: tuple = Depends(get_current_user_tenant),
+):
+    _, tid = ctx
+    result = await db.execute(
+        scoped_query(db, N8NEnvironment, tid)
+        .order_by(N8NEnvironment.created_at.desc())
+    )
     return result.scalars().all()
 
 
 @router.post("", response_model=N8NEnvironmentResponse, status_code=status.HTTP_201_CREATED)
 async def create_environment(
     env: N8NEnvironmentCreate,
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    ctx: tuple = Depends(get_current_user_tenant),
 ):
-    db_env = N8NEnvironment(**env.model_dump())
+    _, tid = ctx
+    db_env = apply_tenant(N8NEnvironment(**env.model_dump()), tid)
     db.add(db_env)
     await db.flush()
     await db.refresh(db_env)
@@ -32,8 +43,13 @@ async def create_environment(
 
 
 @router.get("/{env_id}", response_model=N8NEnvironmentResponse)
-async def get_environment(env_id: str, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(N8NEnvironment).where(N8NEnvironment.id == env_id))
+async def get_environment(
+    env_id: str,
+    db: AsyncSession = Depends(get_db),
+    ctx: tuple = Depends(get_current_user_tenant),
+):
+    _, tid = ctx
+    result = await db.execute(scoped_query_by_id(db, N8NEnvironment, env_id, tid))
     env = result.scalar_one_or_none()
     if not env:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="环境不存在")
@@ -44,14 +60,18 @@ async def get_environment(env_id: str, db: AsyncSession = Depends(get_db)):
 async def update_environment(
     env_id: str,
     env_update: N8NEnvironmentUpdate,
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    ctx: tuple = Depends(get_current_user_tenant),
 ):
-    result = await db.execute(select(N8NEnvironment).where(N8NEnvironment.id == env_id))
+    _, tid = ctx
+    result = await db.execute(scoped_query_by_id(db, N8NEnvironment, env_id, tid))
     env = result.scalar_one_or_none()
     if not env:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="环境不存在")
 
     update_data = env_update.model_dump(exclude_unset=True)
+    # 禁止跨字段篡改 tenant_id
+    update_data.pop("tenant_id", None)
     for key, value in update_data.items():
         setattr(env, key, value)
 
@@ -61,8 +81,13 @@ async def update_environment(
 
 
 @router.delete("/{env_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_environment(env_id: str, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(N8NEnvironment).where(N8NEnvironment.id == env_id))
+async def delete_environment(
+    env_id: str,
+    db: AsyncSession = Depends(get_db),
+    ctx: tuple = Depends(get_current_user_tenant),
+):
+    _, tid = ctx
+    result = await db.execute(scoped_query_by_id(db, N8NEnvironment, env_id, tid))
     env = result.scalar_one_or_none()
     if not env:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="环境不存在")
@@ -72,8 +97,13 @@ async def delete_environment(env_id: str, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/{env_id}/test", response_model=N8NEnvironmentTestResponse)
-async def test_environment(env_id: str, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(N8NEnvironment).where(N8NEnvironment.id == env_id))
+async def test_environment(
+    env_id: str,
+    db: AsyncSession = Depends(get_db),
+    ctx: tuple = Depends(get_current_user_tenant),
+):
+    _, tid = ctx
+    result = await db.execute(scoped_query_by_id(db, N8NEnvironment, env_id, tid))
     env = result.scalar_one_or_none()
     if not env:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="环境不存在")

@@ -16,6 +16,11 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
+    # Token 传输方式（对齐 Java 项目的 TokenProperties）
+    # 读取顺序：JWT_HEADER_NAME header → JWT_COOKIE_NAME cookie → Authorization: Bearer
+    JWT_HEADER_NAME: str = "jwt"
+    JWT_COOKIE_NAME: str = "jwt"
+
     # N8N
     N8N_BASE_URL: str = "http://localhost:5678"
     N8N_API_KEY: str = ""
@@ -32,6 +37,13 @@ class Settings(BaseSettings):
 
     # Schema Files - 相对于 backend 目录
     SCHEMA_BASE_PATH: str = "."
+
+    # AgentScope Java 后端 - OpenAI Chat Completions 兼容端点
+    # 启动 Spring Boot 应用后默认监听 8080；内部共享 token 与 application.yml 一致
+    AGENTSCOPE_URL: str = "http://localhost:8080"
+    AGENTSCOPE_INTERNAL_TOKEN: str = "changeme"
+    AGENTSCOPE_MODEL: str = "note-taker"
+    AGENTSCOPE_TIMEOUT: int = 120  # 单次 chat 请求超时（秒）；流式按 chunk 计算
 
     class Config:
         env_file = ".env"

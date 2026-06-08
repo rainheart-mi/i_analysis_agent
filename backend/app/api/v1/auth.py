@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.database import get_db
@@ -9,10 +8,10 @@ from app.services.auth_service import (
     verify_password, create_access_token,
     create_refresh_token, decode_token, get_password_hash
 )
+from app.api.deps import get_current_user_tenant
 
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
 
 @router.post("/login", response_model=TokenResponse)
@@ -32,8 +31,15 @@ async def login(request: LoginRequest, db: AsyncSession = Depends(get_db)):
             detail="用户已被禁用"
         )
 
-    access_token = create_access_token(data={"sub": user.id, "username": user.username})
-    refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={
+        "sub": user.id,
+        "username": user.username,
+        "tenant_id": user.tenant_id,
+    })
+    refresh_token = create_refresh_token(data={
+        "sub": user.id,
+        "tenant_id": user.tenant_id,
+    })
 
     return TokenResponse(access_token=access_token, refresh_token=refresh_token)
 
@@ -44,29 +50,34 @@ async def refresh_token(request: TokenRefreshRequest, db: AsyncSession = Depends
     if not payload or payload.get("type") != "refresh":
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="无效的刷新令牌")
 
-    result = await db.execute(select(User).where(User.id == payload["sub"]))
+    tid = payload.get("tenant_id")
+    if not tid:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="刷新令牌缺少 tenant_id")
+
+    result = await db.execute(
+        select(User).where(User.id == payload["sub"], User.tenant_id == tid)
+    )
     user = result.scalar_one_or_none()
     if not user or not user.is_active:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="用户不存在或已禁用")
 
-    access_token = create_access_token(data={"sub": user.id, "username": user.username})
-    new_refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={
+        "sub": user.id,
+        "username": user.username,
+        "tenant_id": user.tenant_id,
+    })
+    new_refresh_token = create_refresh_token(data={
+        "sub": user.id,
+        "tenant_id": user.tenant_id,
+    })
 
     return TokenResponse(access_token=access_token, refresh_token=new_refresh_token)
 
 
 @router.get("/me", response_model=UserResponse)
 async def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    db: AsyncSession = Depends(get_db)
+    ctx: tuple = Depends(get_current_user_tenant),
 ):
-    payload = decode_token(token)
-    if not payload:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="无效的令牌")
-
-    result = await db.execute(select(User).where(User.id == payload["sub"]))
-    user = result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="用户不存在")
-
+    """返回当前登录用户信息（包含 tenant_id）"""
+    user, _ = ctx
     return user

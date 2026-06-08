@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1 import auth, environments, workflows, mappings, execute, tasks, config
+from app.api.v1 import auth, environments, workflows, mappings, execute, tasks, config, chat
 
 
 api_router = APIRouter()
@@ -11,3 +11,4 @@ api_router.include_router(mappings.router, prefix="/mappings", tags=["节点映�
 api_router.include_router(execute.router, prefix="/execute", tags=["工作流执行"])
 api_router.include_router(tasks.router, prefix="/tasks", tags=["任务管理"])
 api_router.include_router(config.router, prefix="/config", tags=["应用配置"])
+api_router.include_router(chat.router, prefix="/chat", tags=["AI智能体对话"])

@@ -47,7 +47,9 @@ def execute_n8n_node(self, task_id: str, node_id: str, n8n_workflow_id: str, int
             if not task:
                 return {"error": "Task not found"}
 
-            node = next((n for n in task.node_executions if n.node_id == node_id), None)
+            # 多租户：节点必须属于当前任务的租户
+            node = next((n for n in task.node_executions
+                         if n.node_id == node_id and n.tenant_id == task.tenant_id), None)
             if not node:
                 return {"error": "Node not found"}
 
@@ -71,6 +73,9 @@ def execute_n8n_node(self, task_id: str, node_id: str, n8n_workflow_id: str, int
                     environment.api_key,
                     settings.MOCKER_MODE
                 )
+                # 多租户校验：environment 必须属于当前任务的租户
+                if environment.tenant_id != task.tenant_id:
+                    return {"status": "failed", "error": "environment tenant mismatch"}
                 result_data = await n8n_service.execute_workflow(n8n_workflow_id, node_id, intent_data)
                 print(f"[execute_n8n_node] N8N response: {result_data}")
 
