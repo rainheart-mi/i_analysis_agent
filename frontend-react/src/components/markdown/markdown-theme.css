@@ -1,0 +1,112 @@
+/* 流式动画：气泡内容更新时底部出现渐变光带 */
+.ant-bubble-content-updating {
+  background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+/* Markdown 主题 - 亮色（默认） */
+.x-markdown-light {
+  color: #1D2129;
+  line-height: 1.7;
+  font-size: 14px;
+}
+.x-markdown-light h1, .x-markdown-light h2, .x-markdown-light h3, .x-markdown-light h4 {
+  color: #1D2129;
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+.x-markdown-light h1 { font-size: 22px; }
+.x-markdown-light h2 { font-size: 18px; }
+.x-markdown-light h3 { font-size: 16px; }
+.x-markdown-light p { margin: 8px 0; }
+.x-markdown-light a { color: #5C7CFF; text-decoration: none; }
+.x-markdown-light a:hover { text-decoration: underline; }
+.x-markdown-light ul, .x-markdown-light ol { padding-left: 24px; margin: 8px 0; }
+.x-markdown-light li { margin: 4px 0; }
+.x-markdown-light blockquote {
+  border-left: 3px solid #5C7CFF;
+  padding: 4px 12px;
+  margin: 8px 0;
+  color: #4E5969;
+  background: #F5F7FA;
+  border-radius: 0 4px 4px 0;
+}
+.x-markdown-light code:not(pre code) {
+  background: #F0F1F5;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #5C7CFF;
+}
+.x-markdown-light pre {
+  background: #1E1E1E;
+  color: #D4D4D4;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 100%;
+}
+.x-markdown-light pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+.x-markdown-light table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8px 0;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+.x-markdown-light th {
+  border: 1px solid #E5E6EB;
+  padding: 6px 10px;
+  background: #F5F7FA;
+  font-weight: 600;
+}
+.x-markdown-light td {
+  border: 1px solid #E5E6EB;
+  padding: 6px 10px;
+}
+.x-markdown-light hr {
+  border: none;
+  border-top: 1px solid #E5E6EB;
+  margin: 16px 0;
+}
+
+/* Markdown 主题 - 暗色（预留） */
+.x-markdown-dark {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  font-size: 14px;
+}
+.x-markdown-dark h1, .x-markdown-dark h2, .x-markdown-dark h3, .x-markdown-dark h4 {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+.x-markdown-dark a { color: #7B91FF; }
+.x-markdown-dark code:not(pre code) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FF85C0;
+}
+.x-markdown-dark pre {
+  background: #1A1A1A;
+  color: #D4D4D4;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+.x-markdown-dark table th {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.x-markdown-dark table td {
+  border-color: rgba(255, 255, 255, 0.12);
+}

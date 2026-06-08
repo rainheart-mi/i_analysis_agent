@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Tabs } from 'antd'
 import { useWorkflowStore } from '@/store/workflow'
 import { useTaskStore } from '@/store/task'
 import { useChatStore } from '@/store/chat'
@@ -8,18 +9,61 @@ import NodeContent from './NodeContent'
 import CanvasArea from './CanvasArea'
 import IntentFormPreview from './IntentFormPreview'
 import ChatPanel from './ChatPanel'
+import ChatContent from './ChatContent'
 
 function AIAssistant() {
   const fetchWorkflows = useWorkflowStore(s => s.fetchWorkflows)
   const fetchTasks = useTaskStore(s => s.fetchTasks)
   const currentTask = useTaskStore(s => s.currentTask)
+  const currentNodeId = useTaskStore(s => s.currentNodeId)
   const selectedWorkflow = useChatStore(s => s.selectedWorkflow)
   const currentIntentSchema = useWorkflowStore(s => s.currentIntentSchema)
+  const setCurrentNode = useTaskStore(s => s.setCurrentNode)
+
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     fetchWorkflows()
     fetchTasks()
   }, [])
+
+  // 计算 tab items：节点 tab + AI 对话 tab
+  const nodeTabItems = (currentTask?.node_executions || []).map((node, index) => ({
+    key: node.node_id,
+    label: node.node_name || `节点 ${index + 1}`,
+    children: null, // 实际渲染由下方 switch 控制
+  }))
+
+  const chatTabKey = '__chat__'
+  const allTabs = [
+    ...nodeTabItems,
+    { key: chatTabKey, label: '💬 AI 对话', children: null },
+  ]
+
+  // 决定中栏渲染什么
+  let centerContent
+  if (expanded) {
+    // 展开态：tabs 选中 AI 对话 → 渲染 ChatContent
+    centerContent = <ChatContent onCollapse={() => setExpanded(false)} />
+  } else if (currentTask) {
+    centerContent = (
+      <>
+        <NodeTabs />
+        <NodeContent />
+      </>
+    )
+  } else if (selectedWorkflow) {
+    centerContent = <IntentFormPreview />
+  } else {
+    centerContent = (
+      <CanvasArea
+        workflow={null}
+        intentSchema={null}
+        artifactSchema={null}
+        executionResult={null}
+      />
+    )
+  }
 
   return (
     <div style={{
@@ -33,7 +77,7 @@ function AIAssistant() {
         <WorkflowSidebar />
       </div>
 
-      {/* Center - Canvas */}
+      {/* Center - Canvas / Chat */}
       <div style={{
         flex: 1,
         background: '#FFFFFF',
@@ -43,27 +87,15 @@ function AIAssistant() {
         display: 'flex',
         flexDirection: 'column'
       }}>
-        {currentTask ? (
-          <>
-            <NodeTabs />
-            <NodeContent />
-          </>
-        ) : selectedWorkflow ? (
-          <IntentFormPreview />
-        ) : (
-          <CanvasArea
-            workflow={null}
-            intentSchema={null}
-            artifactSchema={null}
-            executionResult={null}
-          />
-        )}
+        {centerContent}
       </div>
 
-      {/* Right - Chat Panel */}
-      <div style={{ width: 360, flexShrink: 0 }}>
-        <ChatPanel />
-      </div>
+      {/* Right - Chat Panel (默认态) */}
+      {!expanded && (
+        <div style={{ width: 360, flexShrink: 0 }}>
+          <ChatPanel onExpand={() => setExpanded(true)} />
+        </div>
+      )}
     </div>
   )
 }

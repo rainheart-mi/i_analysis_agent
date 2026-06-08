@@ -8,8 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/x": "^2.7.0",
+    "@ant-design/x-markdown": "^2.7.0",
     "amis": "^6.13.0",
     "antd": "^5.15.0",
+    "antd-style": "^3.7.1",
     "axios": "^1.6.7",
     "dayjs": "^1.11.10",
     "mobx-react-lite": "^4.1.1",

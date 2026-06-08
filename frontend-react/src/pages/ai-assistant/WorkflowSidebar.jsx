@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { Checkbox, Button, Popconfirm } from 'antd'
-import { DeleteOutlined, PlusOutlined, ClockCircleOutlined } from '@ant-design/icons'
+import { useState, useEffect } from 'react'
+import { Checkbox, Button, Popconfirm, Divider } from 'antd'
+import { DeleteOutlined, PlusOutlined, ClockCircleOutlined, MessageOutlined } from '@ant-design/icons'
 import { useTaskStore } from '@/store/task'
 import { useChatStore } from '@/store/chat'
+import { chatSessions } from '@/api/chat'
 
 const statusMap = {
   pending: { text: '待执行', color: '#86909C', bg: '#F5F7FA' },
@@ -44,6 +45,25 @@ function WorkflowSidebar() {
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [isSelectMode, setIsSelectMode] = useState(false)
+  const [sessions, setSessions] = useState([])
+  const activeNodeExecutionId = useChatStore(s => s.activeNodeExecutionId)
+
+  // 拉取当前用户在 AgentScope 端的 session 列表（侧边栏历史会话）
+  useEffect(() => {
+    let cancelled = false
+    chatSessions()
+      .then(d => { if (!cancelled) setSessions(d?.sessions || []) })
+      .catch(() => { if (!cancelled) setSessions([]) })
+    return () => { cancelled = true }
+  }, [])
+
+  const handleSelectSession = (sessionId) => {
+    if (isSelectMode) return
+    // sessionId === node_execution_id（同一 UUID），
+    // 复用 setActiveNodeExecution 触发 useChatHistory 拉历史
+    setSelectedWorkflow(null)
+    useChatStore.getState().setActiveNodeExecution(sessionId)
+  }
 
   const handleSelectTask = async (task) => {
     if (isSelectMode) return
@@ -345,6 +365,51 @@ function WorkflowSidebar() {
           <div style={{ textAlign: 'center', padding: '32px 16px', color: '#9ca3af', fontSize: '13px' }}>
             暂无任务实例
           </div>
+        )}
+
+        {/* 历史会话分组（来自 AgentScope） */}
+        {sessions.length > 0 && (
+          <>
+            <Divider style={{ margin: '16px 0 8px', fontSize: '12px', color: '#9ca3af' }}>
+              历史会话
+            </Divider>
+            {sessions.map(s => {
+              const isActive = activeNodeExecutionId === s.sessionId
+              return (
+                <div
+                  key={s.sessionId}
+                  onClick={() => handleSelectSession(s.sessionId)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '10px 12px',
+                    borderRadius: 8,
+                    marginBottom: 4,
+                    cursor: 'pointer',
+                    background: isActive ? '#F0F1FF' : 'transparent',
+                    border: isActive ? '1px solid #7B91FF' : '1px solid transparent',
+                  }}
+                >
+                  <MessageOutlined style={{ color: isActive ? '#5C7CFF' : '#94a3b8', fontSize: 14 }} />
+                  <span style={{
+                    fontFamily: 'monospace',
+                    fontSize: '12px',
+                    color: isActive ? '#5C7CFF' : '#374151',
+                    flex: 1,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }} title={s.sessionId}>
+                    {s.sessionId.slice(0, 8)}…{s.sessionId.slice(-4)}
+                  </span>
+                  {s.exists
+                    ? <span style={{ fontSize: '10px', color: '#52C41A' }}>✓</span>
+                    : <span style={{ fontSize: '10px', color: '#9ca3af' }}>○</span>}
+                </div>
+              )
+            })}
+          </>
         )}
       </div>
       <style>{`

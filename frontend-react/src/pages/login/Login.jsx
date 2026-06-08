@@ -14,13 +14,21 @@ function Login() {
   const onFinish = async (values) => {
     setLoading(true)
     try {
-      const res = await authApi.login(values.username, values.password)
-      setUser(res.data.user)
-      setToken(res.data.token)
+      const loginRes = await authApi.login(values.username, values.password)
+      const { access_token } = loginRes
+      if (!access_token) {
+        throw new Error('登录响应缺少 access_token')
+      }
+      setToken(access_token)
+
+      // 登录成功后立即拉取当前用户信息（含 tenant_id），写 store
+      const meRes = await authApi.getCurrentUser()
+      setUser(meRes)
+
       message.success('登录成功')
       navigate('/dashboard')
     } catch (e) {
-      message.error('登录失败：' + e.message)
+      message.error('登录失败：' + (e.message || '未知错误'))
     } finally {
       setLoading(false)
     }
