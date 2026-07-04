@@ -306,9 +306,6 @@ async function runOne({ url, onEvent, externalSignal, totalTimeoutMs, pingTimeou
           if (ev.type === 'final' && ev.ok) {
             return { ok: true, snapshot: ev }
           }
-          if (ev.type === 'error' && ev.fatal) {
-            return { ok: false, error: ev.error || ev.message }
-          }
         }
       }
     }

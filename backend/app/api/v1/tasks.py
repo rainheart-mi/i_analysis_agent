@@ -583,7 +583,7 @@ async def trigger_post_action(
             )
 
         # ★ 内存累积器：stage / schema-fragment / midcat 事件仅更新此 dict，
-        # 不触发 DB commit；final / fatal-error 时一次性 commit 完整数据。
+        # 不触发 DB commit；final 时一次性 commit 完整数据。
         accumulated: dict = dict(node_exec.artifact_data or {})
         # ★ 后台 DB 写入函数（不阻塞 SSE 转发）
         #   使用独立 session（AsyncSessionLocal），不复用依赖注入的 db——
@@ -619,29 +619,13 @@ async def trigger_post_action(
             except Exception:
                 logger.exception("[trigger_post_action:on_event] final commit failed")
 
-        async def _commit_failed(node_exec_id, task_id, accumulated, message):
-            try:
-                async with AsyncSessionLocal() as session:
-                    ne = await session.get(NodeExecution, node_exec_id)
-                    if ne is None:
-                        logger.warning("[trigger_post_action:on_event] FATAL node_exec not found id=%s", node_exec_id)
-                        return
-                    ne.artifact_data = dict(accumulated)
-                    ne.status = "failed"
-                    ne.error_message = message or "agentscope_error"
-                    ne.completed_at = datetime.utcnow()
-                    await session.commit()
-                    logger.error("[trigger_post_action:on_event] FATAL committed: task_id=%s node_id=%s err=%s",
-                        task_id, node_exec_id, message)
-            except Exception:
-                logger.exception("[trigger_post_action:on_event] failed commit failed")
         logger.debug(
             "[trigger_post_action:stream] accumulator initialized: keys=%s",
             list(accumulated.keys()),
         )
         # ★ 所有 DB 写入改为后台任务（asyncio.create_task），不阻塞 SSE 转发
         # ★ 注意：start 事件不写 DB——status=pending 在 trigger_post_action 入口已设置
-        #   final 时才更新为 completed，error 时才更新为 failed
+        #   final 时才更新为 completed
 
         async def on_event(ev: dict) -> None:
             """流式事件回调：仅记录日志，不阻塞 SSE 转发。
@@ -694,15 +678,6 @@ async def trigger_post_action(
                     asyncio.create_task(
                         _commit_final(node_exec.id, task_id, accumulated, artifact_schema)
                     )
-                elif ev_type == "error" and ev.get("fatal"):
-                    # ★ fatal error：DB 写入交给后台任务
-                    accumulated["_stream_state"] = "failed"
-                    accumulated["error"] = ev.get("message")
-                    asyncio.create_task(
-                        _commit_failed(node_exec.id, task_id, accumulated, ev.get("message"))
-                    )
-                # ping 已被 stream_price_band_analyze 内部过滤，不到 on_event
-                # 非 fatal error 忽略：流继续推进，最终以 final 事件为准
             except Exception:
                 logger.exception(
                     "[trigger_post_action:on_event] write failed for event=%s "
