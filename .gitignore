@@ -62,3 +62,19 @@ logs/
 
 # Uploads
 uploads/
+
+# Personal / local-only artifacts (not for the server)
+# Skill state files
+.superpowers/
+# Backup archives
+*.7z
+*.zip
+# Dev utility scripts
+start-*.bat
+start-*.sh
+# Debug pages
+frontend-react/src/pages/debug/
+# Personal docs
+*.docx
+doc/品类界定和视觉-图片知识.docx
+doc/final_response_schema.json
