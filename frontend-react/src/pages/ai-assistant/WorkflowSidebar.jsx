@@ -68,13 +68,32 @@ function WorkflowSidebar() {
   const handleSelectTask = async (task) => {
     if (isSelectMode) return
     setSelectedWorkflow(null)
+    // 切换实例前：清理前一个实例的执行态与轮询，
+    // 避免 isExecuting=true 泄漏到新实例的 NodeContent 渲染（"执行中..." 误显示）。
+    useTaskStore.getState().stopPolling()
+    useTaskStore.setState({ isExecuting: false })
+
     const detail = await useTaskStore.getState().fetchTask(task.id)
 
     let targetNodeId = null
     if (task.status === 'running' && task.current_node_id) {
-      // 执行中状态 → 跳转到正在执行的节点，并启动轮询
+      // 执行中状态 — 不区分节点类型，统一走 pendingAutoStream：
+      // - agent 节点：SSE 流接管（currentNodeId 已在 agent tab，SSE 自动 start）
+      // - n8n 节点：polling 检测到完成会再设 pendingAutoStream（带下有 agent 时）
+      // ★ 关键：避免任何 startPolling 误启 — 已被 streamingNodeIds 防御；
+      //   即便走到 else 分支，streamingNodeIds.has 也会 no-op
       targetNodeId = task.current_node_id
-      useTaskStore.getState().startPolling(task.id, targetNodeId)
+      const current = useTaskStore.getState()
+      // ★ 目标节点已在流式接收中 → 不重设 pendingAutoStream
+      if (current.streamingNodeIds?.has(task.current_node_id)) {
+        useTaskStore.getState().setCurrentNode(task.current_node_id)
+        return
+      }
+      if (!current.pendingAutoStream || current.pendingAutoStream.taskId !== task.id) {
+        useTaskStore.setState({
+          pendingAutoStream: { taskId: task.id, nodeId: task.current_node_id },
+        })
+      }
     } else if (detail.nodes?.length > 0) {
       // 其他状态 → 跳转到第一个节点
       targetNodeId = detail.nodes[0].node_id
