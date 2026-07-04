@@ -10,10 +10,7 @@ function NodeContent() {
   const currentNodeId = useTaskStore(s => s.currentNodeId)
   const isExecuting = useTaskStore(s => s.isExecuting)
   const executeNode = useTaskStore(s => s.executeNode)
-  const mockCompleteNode = useTaskStore(s => s.mockCompleteNode)
   const triggerPostAction = useTaskStore(s => s.triggerPostAction)
-  const mockerMode = useTaskStore(s => s.mockerMode)
-  const fetchAppConfig = useTaskStore(s => s.fetchAppConfig)
   const pendingAutoStream = useTaskStore(s => s.pendingAutoStream)
   const clearAutoStream = useTaskStore(s => s.clearAutoStream)
 
@@ -38,10 +35,6 @@ function NodeContent() {
   useEffect(() => {
     setArtifactData(currentNode?.artifact_data || {})
   }, [currentNode?.artifact_data, currentNodeId])
-
-  useEffect(() => {
-    fetchAppConfig()
-  }, [fetchAppConfig])
 
   // ★ 自动触发去重锁：pendingAutoStream 竞态可能导致 effect 重复执行，
   //   用 ref 记录已自动启动的节点，防止同一个节点二次触发 startStream
@@ -106,10 +99,6 @@ function NodeContent() {
 
   const handleExecute = async () => {
     await executeNode(currentNodeId, intentData)
-  }
-
-  const handleMockComplete = async () => {
-    await mockCompleteNode(currentNodeId)
   }
 
   const handleTriggerPostAction = async () => {
@@ -303,23 +292,6 @@ function NodeContent() {
               }}
             >
               执行工作流
-            </Button>
-          </div>
-        )}
-        {(isExecuting || isRunning) && mockerMode === 'mocker' && (
-          <div style={{
-            padding: '16px 20px',
-            background: '#FAFAFA',
-            borderTop: '1px solid #E5E6EB',
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }}>
-            <Button
-              type="primary"
-              onClick={handleMockComplete}
-              style={{ borderRadius: 8, background: '#5C7CFF', border: 'none' }}
-            >
-              Mock 完成
             </Button>
           </div>
         )}

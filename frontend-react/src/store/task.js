@@ -36,16 +36,9 @@ export const useTaskStore = create((set, get) => ({
   //   agent NodeContent mount 时检查匹配则自动 startStream（无需用户点按钮）。
   //   触发成功后由 NodeContent 调 clearAutoStream 清空（避免重复触发）。
   pendingAutoStream: null,  // { taskId, nodeId } | null
-  mockerMode: 'mocker',
 
   /** 清除 pendingAutoStream（流式已开始 / 用户主动放弃时调用，避免重复触发） */
   clearAutoStream: () => set({ pendingAutoStream: null }),
-
-  fetchAppConfig: async () => {
-    const { workflowApi } = await import('@/api/workflow')
-    const config = await workflowApi.getAppConfig()
-    set({ mockerMode: config.mocker_mode })
-  },
 
   fetchTasks: async () => {
     const { taskApi } = await import('@/api/workflow')
@@ -106,38 +99,6 @@ export const useTaskStore = create((set, get) => ({
     } catch (e) {
       set({ isExecuting: false })
       throw e
-    }
-  },
-
-  mockCompleteNode: async (nodeId) => {
-    const taskId = get().currentTask?.id
-    if (!taskId) return
-    const { taskApi } = await import('@/api/workflow')
-
-    set({ isExecuting: true })
-
-    try {
-      const result = await taskApi.mockCompleteNode(taskId, nodeId)
-      // 重新获取任务详情
-      const detail = await taskApi.getDetail(taskId)
-      const updatedTask = {
-        ...detail.task,
-        node_executions: detail.nodes
-      }
-      set(state => ({
-        currentTask: updatedTask,
-        // 更新 tasks 列表中的任务状态
-        tasks: state.tasks.map(t =>
-          t.id === taskId ? updatedTask : t
-        )
-      }))
-      // 如果有下一个节点，切换到它
-      if (result.next_node_id) {
-        set({ currentNodeId: result.next_node_id })
-      }
-      return result
-    } finally {
-      set({ isExecuting: false })
     }
   },
 

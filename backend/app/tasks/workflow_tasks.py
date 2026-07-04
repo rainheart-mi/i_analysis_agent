@@ -83,11 +83,6 @@ def execute_n8n_node(self, task_id: str, node_id: str, n8n_workflow_id: str, int
             await db.commit()
 
             try:
-                # Mocker 模式：不调用真实 n8n API，等待界面 mock 完成
-                if settings.MOCKER_MODE == "mocker":
-                    print(f"[execute_n8n_node] Mocker mode - skipping n8n call for task_id={task_id}")
-                    return {"status": "waiting_mock"}
-
                 # Basic Auth 凭据：username 明文，password 需从 password_enc 解密
                 # 延迟导入：避免在文件顶层引入 settings 时循环依赖
                 from app.services.crypto import decrypt_password
@@ -99,7 +94,6 @@ def execute_n8n_node(self, task_id: str, node_id: str, n8n_workflow_id: str, int
                 n8n_service = get_n8n_service(
                     environment.base_url,
                     environment.api_key,
-                    settings.MOCKER_MODE,
                     environment.username,
                     basic_password,
                 )

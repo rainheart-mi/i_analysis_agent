@@ -21,7 +21,7 @@ class N8NService:
         password: Optional[str] = None,
     ):
         self.base_url = base_url.rstrip("/")
-        self.mode = mode  # mocker / test / production
+        self.mode = mode  # test / production
         self.headers = {}
         if api_key:
             self.headers["X-N8N-API-Key"] = api_key

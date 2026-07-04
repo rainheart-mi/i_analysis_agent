@@ -9,8 +9,6 @@ export const taskApi = {
     apiClient.patch(`/tasks/${taskId}/nodes/${nodeId}/execute`, { intent_data: intentData }),
   updateNode: (taskId, nodeId, data) =>
     apiClient.patch(`/tasks/${taskId}/nodes/${nodeId}`, data),
-  mockCompleteNode: (taskId, nodeId) =>
-    apiClient.post(`/tasks/${taskId}/nodes/${nodeId}/mock-complete`),
   // 手动触发 post-action（mapping.trigger_mode = "manual"/"both" 时由前端按钮调用）
   triggerPostAction: (taskId, nodeId) =>
     apiClient.post(`/tasks/${taskId}/nodes/${nodeId}/post-action/trigger`),
@@ -19,7 +17,6 @@ export const taskApi = {
 }
 
 export const workflowApi = {
-  getAppConfig: () => apiClient.get('/config'),
   getEnvironments: () => apiClient.get('/n8n-environments'),
   createEnvironment: (data) => apiClient.post('/n8n-environments', data),
   updateEnvironment: (id, data) => apiClient.put(`/n8n-environments/${id}`, data),
