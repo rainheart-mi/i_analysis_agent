@@ -5,5 +5,12 @@ from app.models.environment import N8NEnvironment
 from app.models.workflow import WorkflowRoute
 from app.models.mapping import WorkflowNodeMapping
 from app.models.task import TaskInstance, NodeExecution
+from app.models.file import UploadedFile, FileAttachment
 
-__all__ = ["BaseModel", "Tenant", "User", "N8NEnvironment", "WorkflowRoute", "WorkflowNodeMapping", "TaskInstance", "NodeExecution"]
+__all__ = [
+    "BaseModel",
+    "Tenant", "User",
+    "N8NEnvironment", "WorkflowRoute", "WorkflowNodeMapping",
+    "TaskInstance", "NodeExecution",
+    "UploadedFile", "FileAttachment",
+]

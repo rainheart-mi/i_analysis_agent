@@ -1,26 +1,8 @@
-import { Layout, Dropdown, Avatar } from 'antd'
-import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
-import { useUserStore } from '@/store/user'
+import { Layout } from 'antd'
 
 const { Header: AntHeader } = Layout
 
 function Header() {
-  const navigate = useNavigate()
-  const logout = useUserStore(state => state.logout)
-
-  const items = [
-    {
-      key: 'logout',
-      icon: <LogoutOutlined />,
-      label: '退出登录',
-      onClick: () => {
-        logout()
-        navigate('/login')
-      }
-    }
-  ]
-
   return (
     <AntHeader
       className="app-header"
@@ -31,19 +13,7 @@ function Header() {
         alignItems: 'center',
         justifyContent: 'flex-end'
       }}
-    >
-      <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
-        <Avatar
-          icon={<UserOutlined />}
-          style={{
-            cursor: 'pointer',
-            background: 'var(--accent-gradient)',
-            boxShadow: '0 2px 8px rgba(59, 130, 246, 0.2)',
-            transition: 'all 0.15s ease'
-          }}
-        />
-      </Dropdown>
-    </AntHeader>
+    />
   )
 }
 

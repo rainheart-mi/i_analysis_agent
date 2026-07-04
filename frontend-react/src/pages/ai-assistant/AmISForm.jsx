@@ -1,4 +1,30 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
+
+/**
+ * amis 6.x 钩子：每次请求前 mutate 配置。
+ *
+ * 本项目已配置 TOKEN_VALIDATION_ENABLED=false，后端不读 jwt header，
+ * 这里不再注入 token（与 axios 拦截器 src/api/index.js 对齐）。
+ *
+ * ★ 关键：amis 6.x 的 embed(element, schema, props, envOptions) 签名中，
+ *   requestAdaptor 必须放在 **第 4 个参数（envOptions）**，而不是 props。
+ *   SDK 内部 O = __assign({...defaults}, envOptions) 构 env，props 不参与。
+ *   SDK 源码 sdk.js:2741 的 k 函数读 r.requestAdaptor（r = envOptions）。
+ */
+const requestAdaptor = (api) => {
+  // 临时诊断日志：确认 requestAdaptor 真的被调用，并打印注入前的 headers
+  console.log('[AmISForm] requestAdaptor invoked', {
+    url: api?.url,
+    method: api?.method,
+    inHeaders: api?.headers,
+    tokenLen: token.length,
+  })
+  if (!token) return api
+  return {
+    ...api,
+    headers: { ...(api.headers || {}), jwt: token },
+  }
+}
 
 // 递归为 schema 中的所有字段设置 readOnly
 function setFieldsReadOnly(schema, readOnly) {
@@ -138,7 +164,7 @@ function formatDateRange(dateRange) {
   return String(dateRange)
 }
 
-function AmISForm({ schema, value, onChange, readonly }) {
+const AmISForm = forwardRef(function AmISForm({ schema, value, onChange, readonly }, ref) {
   const containerRef = useRef(null)
   const amisScopedRef = useRef(null)
   const prevSchemaRef = useRef(null)
@@ -213,8 +239,13 @@ function AmISForm({ schema, value, onChange, readonly }) {
     }
   }
 
-  const initAmis = async () => {
-    if (!schema || !containerRef.current || !isMountedRef.current) return
+  // ★ pending schema：setSchema 调 initAmis 时用此变量传递 schema，
+//   避免 initAmis 从 props 读 schema（流式渲染时 props.schema 为 null）
+  const pendingSchemaRef = useRef(null)
+
+  const initAmis = async (schemaOverride) => {
+    const s = schemaOverride || schema
+    if (!s || !containerRef.current || !isMountedRef.current) return
     const currentVersion = ++initVersionRef.current
 
     const waitForAmis = () => {
@@ -246,7 +277,7 @@ function AmISForm({ schema, value, onChange, readonly }) {
     destroyAmis()
     if (currentVersion !== initVersionRef.current || !containerRef.current) return
 
-    let amisSchema = setFieldsReadOnly(schema, readonly)
+    let amisSchema = setFieldsReadOnly(s, readonly)
     amisSchema = setTableSafeProps(amisSchema)
 
     await new Promise(resolve => requestAnimationFrame(resolve))
@@ -257,10 +288,11 @@ function AmISForm({ schema, value, onChange, readonly }) {
     try {
       // ★★★ 核心修复：两步渲染法 ★★★
       // 第一步：先传空数据 embed，让表格骨架（thead/refs）安全挂载，不触发100+行的耗时渲染
+      const initialData = (value && Object.keys(value).length > 0) ? value : {}
       amisScopedRef.current = embed(containerRef.current, amisSchema, {
         locale: 'zh-CN',
         theme: 'cxd',
-        data: {},  // 传空对象！
+        data: initialData,
         readOnly: readonly,
         onChange: (val) => {
           if (!readonly && onChange) {
@@ -268,6 +300,9 @@ function AmISForm({ schema, value, onChange, readonly }) {
             onChange(val)
           }
         }
+      }, {
+        // ★ 第 4 个参数 = env options：必须放这里才能被 amis 注入到 O.fetcher
+        requestAdaptor,
       })
     } catch (e) {
       console.error('[AmISForm] embed failed:', e)
@@ -275,13 +310,18 @@ function AmISForm({ schema, value, onChange, readonly }) {
     }
 
     // 第二步：等骨架稳定后（300ms），再注入100+行的真实数据
-    await new Promise(resolve => setTimeout(resolve, 300))
+    // ★ 对 page 类型 schema（agent 自带 data 字段）跳过等待 —— 模板变量在 embed 时已就位，无需再 update
+    const hasInitialData = value && Object.keys(value).length > 0
+    if (!hasInitialData) {
+      await new Promise(resolve => setTimeout(resolve, 300))
+    }
 
     if (currentVersion !== initVersionRef.current) return
     if (!isMountedRef.current || !amisScopedRef.current) return
 
     try {
-      if (value && Object.keys(value).length > 0) {
+      if (hasInitialData) {
+        // 幂等：与 embed 时传入的 data 相同，updateProps 不触发额外重渲染
         amisScopedRef.current.updateProps({ data: value || {} })
       }
       prevValueRef.current = JSON.stringify(value || {})
@@ -289,6 +329,77 @@ function AmISForm({ schema, value, onChange, readonly }) {
       console.warn('[AmISForm] initial data injection failed:', e)
     }
   }
+
+  // ★ 暴露 imperative API 给外部（如 SSE 流 Hook）做增量更新
+  // 必须在 initAmis 定义之后，因为 setData/setSchema/reload 都要调用它
+  useImperativeHandle(ref, () => ({
+    /**
+     * 增量更新 page.data。优先用 amis 6.x 原生 setData，
+     * 降级用 updateProps({ data })。
+     *
+     * ★ 调用后必须同步 prevValueRef，否则 useEffect(value) 的 300ms debounce
+     *   会再调一次 updateProps，导致双触发。
+     */
+    setData(patch) {
+      const inst = amisScopedRef.current
+      if (!inst) return false
+      try {
+        const baseData = inst.props?.data || {}
+        if (typeof inst.setData === 'function') {
+          inst.setData(patch)
+        } else {
+          // 降级：用 updateProps 合并现有 data
+          inst.updateProps({ data: { ...baseData, ...patch } })
+        }
+        // 同步 prevValueRef 防 useEffect(value) 双触发
+        prevValueRef.current = JSON.stringify({ ...baseData, ...patch })
+        return true
+      } catch (e) {
+        console.warn('[AmISForm] setData failed:', e)
+        return false
+      }
+    },
+
+    /**
+     * 整体替换 schema。强制 destroy + re-embed。
+     * 仅在 artifact 事件触发完整 schema 切换时调用。
+     *
+     * ★ setSchema 是 async 操作（initAmis 内部有 2 个 RAF + 300ms 等待），
+     *   与同一帧的 setData 可能竞态。调用方需自行处理顺序。
+     */
+    setSchema(newSchema) {
+      // 流式渲染时 useAgentStream 传入的是数组 [schema1, schema2, ...]，
+      // 需转换为 amis 能识别的单 schema 对象：
+      //   - 1 个 schema → 直接使用
+      //   - 多个 schema → 包装为 tabs 容器
+      let schemaToUse = newSchema
+      if (Array.isArray(newSchema)) {
+        if (newSchema.length === 1) {
+          schemaToUse = newSchema[0]
+        } else {
+          schemaToUse = {
+            type: 'tabs',
+            tabsMode: 'chrome',
+            className: 'artifact-tabs',
+            contentClassName: 'artifact-tabs-content',
+            tabs: newSchema.map((s, i) => ({
+              title: s.title || `报告 ${i + 1}`,
+              body: s.type ? s : (s.body || s),
+            })),
+          }
+        }
+      }
+      prevSchemaRef.current = null  // 强制 initAmis 跳过 prevSchemaRef 短路
+      prevReadonlyRef.current = null
+      pendingSchemaRef.current = schemaToUse
+      initAmis(schemaToUse)
+    },
+
+    /** 强制重新嵌入（极少用） */
+    reload() {
+      initAmis()
+    },
+  }), [])
 
   useEffect(() => {
     isMountedRef.current = true
@@ -341,17 +452,9 @@ function AmISForm({ schema, value, onChange, readonly }) {
     }
   }, [value])
 
-  if (!schema) {
-    return (
-      <div style={{ width: '100%', minHeight: 100, padding: 20, color: '#86909C' }}>
-        暂无表单数据
-      </div>
-    )
-  }
-
   return (
-    <div ref={containerRef} style={{ width: '100%', minHeight: 100 }} />
+    <div ref={containerRef} style={{ width: '100%', minHeight: 100, overflowX: 'auto' }} />
   )
-}
+})
 
 export default AmISForm

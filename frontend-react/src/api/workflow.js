@@ -11,6 +11,9 @@ export const taskApi = {
     apiClient.patch(`/tasks/${taskId}/nodes/${nodeId}`, data),
   mockCompleteNode: (taskId, nodeId) =>
     apiClient.post(`/tasks/${taskId}/nodes/${nodeId}/mock-complete`),
+  // 手动触发 post-action（mapping.trigger_mode = "manual"/"both" 时由前端按钮调用）
+  triggerPostAction: (taskId, nodeId) =>
+    apiClient.post(`/tasks/${taskId}/nodes/${nodeId}/post-action/trigger`),
   deleteTask: (taskId) => apiClient.delete(`/tasks/${taskId}`),
   deleteTasks: (taskIds) => apiClient.delete('/tasks', { data: taskIds })
 }

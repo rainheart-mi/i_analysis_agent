@@ -1,15 +1,37 @@
 import httpx
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple
 from app.config import settings
 
 
 class N8NService:
-    def __init__(self, base_url: str, api_key: Optional[str] = None, mode: str = "production"):
+    """N8N 调用封装。
+
+    支持两种鉴权（可同时启用，互不冲突）：
+    - api_key  → `X-N8N-API-Key` header（N8N 内部 API 用）
+    - username + password → HTTP Basic Auth（webhook 触发节点用，
+      对应 N8N 凭据类型 "Generic Auth > Basic Auth"）
+    """
+
+    def __init__(
+        self,
+        base_url: str,
+        api_key: Optional[str] = None,
+        mode: str = "production",
+        username: Optional[str] = None,
+        password: Optional[str] = None,
+    ):
         self.base_url = base_url.rstrip("/")
         self.mode = mode  # mocker / test / production
         self.headers = {}
         if api_key:
             self.headers["X-N8N-API-Key"] = api_key
+        # 只有 username + password 都给的时候才走 Basic Auth；
+        # 只给 username 不合法（httpx.BasicAuth 要求 user+pass），所以条件是 and
+        self.auth = (
+            httpx.BasicAuth(username, password)
+            if (username and password)
+            else None
+        )
 
     def _get_webhook_url(self, workflow_id: str) -> str:
         """根据模式组装不同的 webhook URL"""
@@ -40,7 +62,8 @@ class N8NService:
                 response = await client.post(
                     url,
                     json=payload,
-                    headers=self.headers
+                    headers=self.headers,
+                    auth=self.auth,
                 )
                 response.raise_for_status()
                 return response.json()
@@ -51,16 +74,24 @@ class N8NService:
             except Exception as e:
                 raise Exception(f"N8N 调用失败: {type(e).__name__} - {str(e)}")
 
-    async def test_connection(self) -> bool:
-        """测试 N8N 连接"""
+    async def test_connection(self) -> Tuple[bool, str]:
+        """测试 N8N 连接。返回 (success, message) 供 API 层直接透传。"""
         url = f"{self.base_url}/rest"
         async with httpx.AsyncClient(timeout=10) as client:
             try:
-                response = await client.get(url, headers=self.headers)
-                return response.status_code == 200
-            except Exception:
-                return False
+                response = await client.get(url, headers=self.headers, auth=self.auth)
+                if response.status_code == 200:
+                    return True, "连接成功"
+                return False, f"HTTP {response.status_code}: {response.text[:200]}"
+            except Exception as e:
+                return False, f"{type(e).__name__}: {e}"
 
 
-def get_n8n_service(base_url: str, api_key: Optional[str] = None, mode: str = "production") -> N8NService:
-    return N8NService(base_url, api_key, mode)
+def get_n8n_service(
+    base_url: str,
+    api_key: Optional[str] = None,
+    mode: str = "production",
+    username: Optional[str] = None,
+    password: Optional[str] = None,
+) -> N8NService:
+    return N8NService(base_url, api_key, mode, username, password)

@@ -46,7 +46,7 @@ class ChatHistoryResponse(BaseModel):
 async def chat_stream(
     body: ChatStreamRequest,
     db: AsyncSession = Depends(get_db),
-    ctx: tuple = Depends(get_current_user_tenant),
+    ctx = Depends(get_current_user_tenant),
 ):
     """前端 ChatPanel 调用的流式端点。
 
@@ -55,9 +55,8 @@ async def chat_stream(
     2. 从 artifact_data 注入 system context
     3. 转发到 AgentScope Java，透传 SSE
     """
-    user, tid = ctx
     try:
-        node = await agentscope_proxy.load_node_execution(db, body.node_execution_id, tid)
+        node = await agentscope_proxy.load_node_execution(db, body.node_execution_id, ctx.tenant_id)
     except NodeExecutionNotFound:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -70,7 +69,7 @@ async def chat_stream(
             detail=f"节点状态为 {node.status}，需等待执行完成",
         )
 
-    generator = agentscope_proxy.stream_chat_completion(node, user.id, body.messages)
+    generator = agentscope_proxy.stream_chat_completion(node, ctx.user_id, body.messages)
     return StreamingResponse(
         generator,
         media_type="text/event-stream",
@@ -85,16 +84,15 @@ async def chat_stream(
 async def chat_history(
     node_execution_id: str,
     db: AsyncSession = Depends(get_db),
-    ctx: tuple = Depends(get_current_user_tenant),
+    ctx = Depends(get_current_user_tenant),
 ):
     """拉取指定节点执行的历史 AI 对话。
 
     数据源是 AgentScope 服务端（按 X-Session-Id = node_execution.id 落库）。
     本接口只做 tenant 隔离 + 代理，不在本服务持久化。
     """
-    user, tid = ctx
     try:
-        node = await agentscope_proxy.load_node_execution(db, node_execution_id, tid)
+        node = await agentscope_proxy.load_node_execution(db, node_execution_id, ctx.tenant_id)
     except NodeExecutionNotFound:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -107,7 +105,7 @@ async def chat_history(
             detail=f"节点状态为 {node.status}，需等待执行完成",
         )
 
-    messages, source_or_error = await agentscope_proxy.fetch_session_history(user.id, node)
+    messages, source_or_error = await agentscope_proxy.fetch_session_history(ctx.user_id, node)
     # fetch_session_history 在失败时把错误信息放在第二个返回值（不是真正的 source）
     # AgentScope SessionController.loadMessages 合法 source 值：
     #   "agent-factory-cache"        — 进程内 AgentFactory 缓存命中
@@ -130,24 +128,23 @@ async def chat_history(
 
 @router.get("/sessions")
 async def chat_sessions(
-    ctx: tuple = Depends(get_current_user_tenant),
+    ctx = Depends(get_current_user_tenant),
 ):
     """列出当前用户的所有 AgentScope session（侧边栏历史入口）。
 
     代理到 AgentScope GET /v1/sessions?userId={user.id}，透传响应；
     上游不可达 / 鉴权失败时降级返空 + error 标记。
     """
-    user, _tid = ctx
     url = f"{settings.AGENTSCOPE_URL.rstrip('/')}/v1/sessions"
     headers = {"X-Internal-Token": settings.AGENTSCOPE_INTERNAL_TOKEN}
     try:
         async with httpx.AsyncClient(timeout=settings.AGENTSCOPE_TIMEOUT) as client:
-            resp = await client.get(url, params={"userId": user.id}, headers=headers)
+            resp = await client.get(url, params={"userId": ctx.user_id}, headers=headers)
             if resp.status_code != 200:
                 body = await resp.aread()
                 logger.error("agentscope list sessions %d: %s", resp.status_code, body[:200])
                 return {
-                    "userId": user.id,
+                    "userId": ctx.user_id,
                     "count": 0,
                     "sessions": [],
                     "error": f"upstream_{resp.status_code}",
@@ -156,7 +153,7 @@ async def chat_sessions(
     except (httpx.ConnectError, httpx.TimeoutException) as e:
         logger.error("agentscope list sessions fetch failed: %s", e)
         return {
-            "userId": user.id,
+            "userId": ctx.user_id,
             "count": 0,
             "sessions": [],
             "error": e.__class__.__name__,
@@ -164,7 +161,7 @@ async def chat_sessions(
     except Exception as e:
         logger.exception("agentscope list sessions unexpected error: %s", e)
         return {
-            "userId": user.id,
+            "userId": ctx.user_id,
             "count": 0,
             "sessions": [],
             "error": f"{e.__class__.__name__}: {e}",

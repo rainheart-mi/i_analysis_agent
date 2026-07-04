@@ -1,20 +1,22 @@
-import { useRef, useEffect, useMemo, useState } from 'react'
-import { Select, Button, Tooltip, Space, theme, Tag } from 'antd'
+import { useRef, useEffect, useMemo, useState, useCallback } from 'react'
+import { Button, Tooltip, Space, theme, Tag } from 'antd'
 import {
-  CompressOutlined, LockOutlined, ExclamationCircleOutlined,
+  ExclamationCircleOutlined,
   ShareAltOutlined, MoreOutlined, HeartOutlined, SmileOutlined,
-  ScheduleOutlined, ProductOutlined, FileSearchOutlined, AppstoreAddOutlined,
-  BulbOutlined, LoadingOutlined, ToolOutlined,
+  BulbOutlined, LoadingOutlined, ToolOutlined, ArrowDownOutlined, ArrowUpOutlined,
 } from '@ant-design/icons'
 import { Bubble, Sender, Welcome, Prompts, Think } from '@ant-design/x'
 import { createStyles } from 'antd-style'
 import { useChatStore } from '@/store/chat'
-import { useWorkflowStore } from '@/store/workflow'
 import { useChatBinding } from './hooks/useChatBinding'
 import { useChatHistory } from './hooks/useChatHistory'
-import { useStreamContent } from './hooks/useStreamContent'
 import Markdown from '@/components/markdown/Markdown'
 import MessageActions from './components/bubbleActions'
+import './aiAgentScroll.css'
+
+// 发送按钮主题色（与项目主色一致）
+const SEND_BTN_GREEN = '#12b329'
+const SEND_BTN_GREEN_HOVER = '#0fa824'
 
 // 空状态下的快捷提示词
 const HOT_TOPICS = [
@@ -29,41 +31,80 @@ const DESIGN_GUIDE = [
   { key: '2', icon: <SmileOutlined />, label: 'AI 角色', description: '请以资深品类分析师的身份回答后续问题' },
 ]
 
-// Sender 上方的快捷 chip（始终显示）
-const SENDER_PROMPTS = [
-  { key: '1', icon: <ScheduleOutlined />, label: '动态' },
-  { key: '2', icon: <ProductOutlined />, label: '组件' },
-  { key: '3', icon: <FileSearchOutlined />, label: '指南' },
-  { key: '4', icon: <AppstoreAddOutlined />, label: '教程' },
-]
-
-// 对照 Ant Design X 百宝箱 demo 的样式系统
-const useStyle = createStyles(({ token, css }) => ({
-  sender: css`
+// 对照 Ant Design X 百宝箱 demo 的样式系统（标准 ant- 前缀）
+const useStyle = createStyles(({ token, css }) => {
+  const sender = 'ant-sender'
+  return {
+  senderWrap: css`
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    .ant-sender-content,
-    .ant-sender-input {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
+  `,
+  sendBtn: css`
+    &&.${sender}-actions-btn {
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      background: ${SEND_BTN_GREEN} !important;
+      border-color: ${SEND_BTN_GREEN} !important;
+      color: #fff !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(18, 179, 41, 0.35);
+
+      &:hover:not(:disabled) {
+        background: ${SEND_BTN_GREEN_HOVER} !important;
+        border-color: ${SEND_BTN_GREEN_HOVER} !important;
+        color: #fff !important;
+      }
+
+      .anticon {
+        font-size: 18px;
+      }
     }
-    .ant-sender-input textarea,
-    .ant-sender-input .ant-input {
+  `,
+  sender: css`
+    width: 100%;
+
+    &.${sender}-main {
+      border-radius: 20px;
+      border: 1px solid ${token.colorBorderSecondary};
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      background: ${token.colorBgContainer};
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus-within {
+        border-color: ${SEND_BTN_GREEN};
+        box-shadow: 0 2px 16px rgba(18, 179, 41, 0.12);
+      }
+    }
+
+    .${sender}-content {
+      padding: 14px 16px;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .${sender}-input,
+    .${sender}-input textarea,
+    .${sender}-input .ant-input {
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
       outline: none !important;
       padding: 0 !important;
       resize: none !important;
+      font-size: 15px;
+      line-height: 1.6;
     }
-  `,
-  senderPrompt: css`
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    color: ${token.colorText};
+
+    .${sender}-actions-list {
+      flex-shrink: 0;
+    }
   `,
   chatPrompt: css`
     .ant-prompts-label { color: #000000e0 !important; }
@@ -96,35 +137,39 @@ const useStyle = createStyles(({ token, css }) => ({
     }
     /* 对话区容器：与 Sender 共享 1100px 中央通道，左右边线对齐。
        ！important 是必需的：BubbleList 内部 style/list.js:8 强制 width:100%，
-       普通类选择器的 max-width 优先级不足以覆盖它。 */
+       普通类选择器的 max-width 优先级不足以覆盖它。
+       ！flex 约束是必需的：.ant-bubble-list-scroll-box 内部用 max-height:100%，
+       必须有确定的 flex 容器父级才能解析；否则长内容（如 summary）会把 scroll-box
+       撑成 6 万像素，scrollHeight === clientHeight，autoScroll 完全失效。 */
     .ant-bubble-list {
       max-width: 1100px !important;
       width: 100% !important;
       margin-left: auto !important;
       margin-right: auto !important;
       padding: 0 24px 8px;
+      flex: 1 1 0 !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
     }
   `,
   thinkPanel: css`
     margin-bottom: 12px;
   `,
-}))
+  }})
 
 /**
- * AI 气泡内容渲染：Think 面板 + 打字机切片后的 Markdown。
- * 把 useStreamContent 隔离在子组件里，避免每条消息都创建 hook 闭包。
+ * AI 气泡内容渲染：Think 面板 + Markdown。
+ * 字符级打字机推进由 ChatContent 内的 visibleContent 控制。
  */
 function AssistantBubble({ fullContent, thinking, isUpdating }) {
-  // 完整文本 + 流式标志 → 派生打字机切片（store 里的 content 始终是 source-of-truth）
-  const [streamContent] = useStreamContent(fullContent, { step: 2, interval: 30 })
-  // 历史/已完成的 assistant 消息直接渲染 fullContent；仅 SSE 流式期间用打字机切片
-  const displayContent = isUpdating ? streamContent : fullContent
   return (
     <>
       {thinking && (
         <ThinkingPanel thinking={thinking} streaming={isUpdating} />
       )}
-      <Markdown streaming={isUpdating}>{displayContent}</Markdown>
+      <Markdown streaming={isUpdating}>{fullContent}</Markdown>
     </>
   )
 }
@@ -157,25 +202,56 @@ function ThinkingPanel({ thinking, streaming }) {
  * 居中 max-width 容器、主题色 token、Welcome 左对齐、Prompts 卡片 + chips、
  * 流式渐变动画、圆形发送按钮；集成 Think 组件展示大模型思考过程。
  */
-function ChatContent({ onCollapse }) {
+function ChatContent() {
   const { token } = theme.useToken()
   const { styles } = useStyle()
 
-  const messages = useChatStore(s => s.messages)
   const selectedWorkflow = useChatStore(s => s.selectedWorkflow)
-  const setSelectedWorkflow = useChatStore(s => s.setSelectedWorkflow)
   const setActiveNodeExecution = useChatStore(s => s.setActiveNodeExecution)
   const activeNodeExecutionId = useChatStore(s => s.activeNodeExecutionId)
-  const setFeedback = useChatStore(s => s.setFeedback)
-  const workflows = useWorkflowStore(s => s.workflows)
 
-  const { currentNode, isNodeReady, inputDisabled, isStreaming, nodeStatusLabel, lockMessage,
-          error, handleSend, cancel } = useChatBinding()
+  const { currentNode, currentTask, isNodeReady, inputDisabled, isStreaming,
+          error, handleSend, cancel, messages, setFeedback } = useChatBinding()
 
   // 监听 activeNodeExecutionId 变化，拉取 AgentScope 历史并填充 messages
   useChatHistory()
 
   const senderRef = useRef(null)
+  const bubbleListRef = useRef(null)
+
+  // 「回到底部」浮按钮：常驻显示，点击 → scrollTo({ top: 'bottom' })
+  // 走 antd-x 官方 scrollTo：内部自动按 autoScroll 推算 column-reverse 偏移，
+  // 并触发 useCompatibleScroll 的 scrolling 计时器，避免 ResizeObserver 在内容
+  // 增长瞬间用 enforceScrollLock 把视窗抢回。
+  const handleScrollToBottom = useCallback(() => {
+    bubbleListRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })
+  }, [])
+
+  // 自动滚底（IO 处理 history 覆盖 / tab 切换重入）：
+  // <Bubble.List autoScroll /> 已处理流式 append / 新消息 / smart lock，
+  // 剩 history 覆盖式 setMessages + tab 来回切换这两种「视口已存在但内容换了」的场景
+  // 需要靠监听 scroll-box 可见性 → 重新滚底。不用 done flag（切 tab 是高频行为）。
+  useEffect(() => {
+    if (messages.length === 0) return
+    const sb = bubbleListRef.current?.scrollBoxNativeElement
+    if (!sb) return
+
+    const scrollToEnd = () => {
+      if (sb.clientHeight === 0) return
+      bubbleListRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(scrollToEnd)
+        }
+      },
+      { threshold: 0.01 }
+    )
+    io.observe(sb)
+    return () => io.disconnect()
+  }, [activeNodeExecutionId, messages.length])
 
   useEffect(() => {
     if (currentNode?.id && currentNode.id !== activeNodeExecutionId) {
@@ -185,42 +261,57 @@ function ChatContent({ onCollapse }) {
     }
   }, [currentNode?.id, activeNodeExecutionId, setActiveNodeExecution])
 
-  const workflowOptions = workflows.map(w => ({
-    value: w.id,
-    label: w.title || w.name || '未命名工作流'
-  }))
-
   // 2.x Bubble.List items：含 status / extraInfo / streaming 三个关键字段
   // - user: 用户消息
   // - assistant: AI 消息（含 toolCalls footer 角标）
   // - tool: 工具结果（V1 简化为单行徽标，V2 再加可折叠 JSON）
+  //
+  // useXChat 数据形态：messages: MessageInfo[]，每条形如
+  //   { id, message: { content, thinking, role, toolName?, toolCalls? }, status, extraInfo? }
+  // mapper 在这里把它"翻译"成 Bubble.List 期望的形态（含把 toolCalls 角标塞 footer），
+  // 并把 legacy message 形态（m.type / m.streaming / m.feedback）适配给 MessageActions 用。
   const bubbleItems = useMemo(
-    () => messages.map(m => {
-      if (m.type === 'tool') {
+    () => messages
+      .filter(info => info?.message && ['user', 'assistant', 'tool'].includes(info.message.role))
+      .map(info => {
+      const m = info.message
+      const mRole = m.role
+      const isMsgStreaming = info.status === 'loading' || info.status === 'updating'
+
+      if (mRole === 'tool') {
+        const toolContent = m.content || ''
         return {
-          key: m.id,
+          key: info.id,
           role: 'tool',
-          content: `🔧 ${m.toolName || 'tool'}: ${(m.content || '').slice(0, 80)}${(m.content || '').length > 80 ? '…' : ''}`,
+          content: `🔧 ${m.toolName || 'tool'}: ${toolContent.slice(0, 80)}${toolContent.length > 80 ? '…' : ''}`,
           status: 'local',
         }
       }
-      const isMsgStreaming = m.streaming === true
       const item = {
-        key: m.id,
-        role: m.type === 'user' ? 'user' : 'assistant',
+        key: info.id,
+        role: mRole === 'user' ? 'user' : 'assistant',
         content: m.content,
         // status 决定 contentRender 中 info.status；Bubble 自身据此切换 loading / 内容态
         status: isMsgStreaming
           ? 'updating'
-          : (m.type === 'assistant' ? 'success' : 'local'),
+          : (mRole === 'assistant' ? 'success' : 'local'),
         // 把 thinking 内容塞 extraInfo，contentRender 里通过 info.extraInfo 取出
-        extraInfo: m.type === 'assistant' ? { thinking: m.thinking || '' } : undefined,
+        extraInfo: mRole === 'assistant' ? { thinking: m.thinking || '' } : undefined,
         // 2.x streaming prop：true 时即使 content 变化也只触发一次 onTypingComplete
         streaming: isMsgStreaming,
         // 仅在等待首 chunk（content 与 thinking 都为空）时显示 loading spinner
         loading: isMsgStreaming && !m.content && !(m.thinking || ''),
       }
-      if (m.type === 'assistant' && Array.isArray(m.toolCalls) && m.toolCalls.length > 0) {
+      // 适配 MessageActions 的 legacy message 形态：把 useXChat 形态"投影"成老接口
+      const legacyMessage = {
+        id: info.id,
+        type: mRole,
+        content: m.content,
+        feedback: info.extraInfo?.feedback || null,
+        streaming: isMsgStreaming,
+        toolCalls: m.toolCalls,
+      }
+      if (mRole === 'assistant' && Array.isArray(m.toolCalls) && m.toolCalls.length > 0) {
         const names = m.toolCalls.map(t => t.name).filter(Boolean).join(', ')
         const toolCallsTag = (
           <Tooltip title={names || '已调用工具'}>
@@ -232,15 +323,15 @@ function ChatContent({ onCollapse }) {
         item.footer = (
           <Space size={8} align="center">
             {toolCallsTag}
-            <MessageActions message={m} onFeedback={setFeedback} />
+            <MessageActions message={legacyMessage} onFeedback={setFeedback} />
           </Space>
         )
       } else {
-        item.footer = <MessageActions message={m} onFeedback={setFeedback} />
+        item.footer = <MessageActions message={legacyMessage} onFeedback={setFeedback} />
       }
       return item
     }),
-    [messages]
+    [messages, setFeedback]
   )
 
   const placeholder = inputDisabled && isNodeReady ? 'AI 正在思考…' : '基于工作流结果提问…'
@@ -264,7 +355,7 @@ function ChatContent({ onCollapse }) {
         overflow: 'hidden'
       }}
     >
-      {/* Top bar: workflow selector + collapse button */}
+      {/* Top bar: 当前工作流 + 完成态摘要（AIAssistant 路由确保 ChatContent 只在 task completed 时渲染） */}
       <div style={{
         padding: '12px 24px',
         borderBottom: `1px solid ${token.colorBorderSecondary}`,
@@ -272,46 +363,21 @@ function ChatContent({ onCollapse }) {
         alignItems: 'center',
         gap: 12
       }}>
-        <Select
-          value={selectedWorkflow?.id}
-          onChange={(val) => {
-            const wf = workflows.find(w => w.id === val)
-            setSelectedWorkflow(wf || null)
-          }}
-          placeholder="选择工作流"
-          options={workflowOptions}
-          style={{ width: 280 }}
-          size="middle"
-        />
-        {currentNode && (
-          <Tooltip title={currentNode.node_name || currentNode.node_id}>
-            {isNodeReady ? (
-              <span style={{
-                fontSize: '12px', color: '#52C41A', background: '#F6FFED',
-                padding: '2px 8px', borderRadius: 10
-              }}>● 已就绪</span>
-            ) : (
-              <span style={{
-                fontSize: '12px', color: token.colorTextTertiary, background: token.colorFillTertiary,
-                padding: '2px 8px', borderRadius: 10
-              }}>
-                <LockOutlined style={{ fontSize: '11px', marginRight: 2 }} />{nodeStatusLabel}
-              </span>
-            )}
-          </Tooltip>
+        <Tag color="purple" style={{ margin: 0 }}>AI 智能体</Tag>
+        <span style={{ fontSize: 14, fontWeight: 500, color: token.colorText }}>
+          {currentTask?.name || selectedWorkflow?.title || '工作流对话'}
+        </span>
+        {currentTask && (
+          <Tag color="green" style={{ margin: 0 }}>● 已完成</Tag>
         )}
-        <Button
-          type="text"
-          icon={<CompressOutlined />}
-          onClick={onCollapse}
-          style={{ marginLeft: 'auto', color: token.colorTextTertiary }}
-        >
-          收起
-        </Button>
       </div>
 
       {/* Messages / Empty state - centered with max-width */}
-      <div style={{ flex: 1, overflow: 'auto', padding: '24px 0' }}>
+      {/* ！minHeight: 0 关键：flex item 默认 min-height: auto，会被内容撑爆。
+          没有这个，.ant-bubble-list 的 maxHeight:100% 解析不到 734，scroll-box 长到跟内容一样大，
+          没有 overflow，scrollTo 就无效。
+          position: relative 是为了浮动按钮（absolute）以本容器为定位锚。 */}
+      <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: '24px 0', position: 'relative' }}>
         {error && (
           <div style={{ maxWidth: 940, margin: '0 auto 12px', padding: '0 24px' }}>
             <div style={{
@@ -376,6 +442,7 @@ function ChatContent({ onCollapse }) {
           </div>
         ) : (
           <Bubble.List
+            ref={bubbleListRef}
             items={bubbleItems}
             autoScroll
             role={{
@@ -402,53 +469,54 @@ function ChatContent({ onCollapse }) {
             }}
           />
         )}
+        {/* 「回到底部」浮按钮：常驻，点击即滚底 */}
+        <Button
+          shape="circle"
+          icon={<ArrowDownOutlined />}
+          onClick={handleScrollToBottom}
+          style={{
+            position: 'absolute',
+              bottom: 16,
+              right: 24,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              zIndex: 10,
+            }}
+          />
       </div>
 
-      {/* Input area */}
-      {isNodeReady ? (
-        <div style={{
-          padding: '12px 0 20px', borderTop: `1px solid ${token.colorBorderSecondary}`,
-          background: token.colorBgContainer
-        }}>
-          {/* Sender 上方快捷 chips */}
-          <div style={{ maxWidth: 1100, margin: '0 auto 12px', padding: '0 24px' }}>
-            <Prompts
-              items={SENDER_PROMPTS}
-              wrap
-              onItemClick={(info) => handleSend(`请介绍 ${info.data.label} 相关内容`)}
-              className={styles.senderPrompt}
-              styles={{
-                list: { gap: 8, border: 'none', padding: 0 },
-                item: { padding: '6px 12px', borderRadius: 16, border: `1px solid ${token.colorBorderSecondary}` },
-                title: { color: token.colorTextSecondary, fontSize: 13 },
-              }}
-            />
-          </div>
-          {/* Sender */}
+      {/* Input area：与消息列表同宽同边距（24px） */}
+      <div style={{
+        padding: '12px 24px 24px',
+        borderTop: `1px solid ${token.colorBorderSecondary}`,
+        background: token.colorBgContainer
+      }}>
+        <div className={styles.senderWrap}>
           <Sender
             ref={senderRef}
-            className={styles.sender}
+            className={`ai-agent-chat-sender ${styles.sender}`}
             placeholder={placeholder}
             loading={isStreaming}
-            disabled={inputDisabled && isNodeReady}
+            disabled={inputDisabled}
+            autoSize={{ minRows: 2, maxRows: 8 }}
             onSubmit={(val) => {
               handleSend(val)
               senderRef.current?.clear?.()
             }}
             onCancel={cancel}
-            actions={(ori, { components: { SendButton } }) => <SendButton />}
+            suffix={(_, { components: { SendButton, LoadingButton } }) => (
+              isStreaming ? <LoadingButton className={styles.sendBtn} /> : (
+                <SendButton
+                  color="primary"
+                  variant="solid"
+                  shape="circle"
+                  icon={<ArrowUpOutlined />}
+                  className={`ai-agent-send-btn ${styles.sendBtn}`}
+                />
+              )
+            )}
           />
         </div>
-      ) : (
-        <div style={{
-          padding: '24px', borderTop: `1px solid ${token.colorBorderSecondary}`,
-          background: token.colorFillAlter, display: 'flex',
-          alignItems: 'center', justifyContent: 'center', gap: 8
-        }}>
-          <LockOutlined style={{ color: token.colorTextTertiary, fontSize: 14 }} />
-          <span style={{ fontSize: '13px', color: token.colorTextTertiary }}>{lockMessage}</span>
-        </div>
-      )}
+      </div>
     </div>
   )
 }

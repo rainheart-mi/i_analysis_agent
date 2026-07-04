@@ -9,6 +9,7 @@
     python init_db.py
 """
 import asyncio
+import json
 import sys
 from pathlib import Path
 
@@ -18,15 +19,25 @@ sys.path.insert(0, str(Path(__file__).parent))
 from sqlalchemy import text
 from app.database import engine, Base, AsyncSessionLocal
 from app.models import (
-    User, N8NEnvironment, WorkflowRoute, WorkflowNodeMapping, Tenant
+    N8NEnvironment, WorkflowRoute, WorkflowNodeMapping, Tenant,
+    UploadedFile, FileAttachment,
 )
-from app.services.auth_service import get_password_hash
 
 
 # 默认租户 ID（与部署配置保持一致）
 DEFAULT_TENANT_ID = "default"
 DEFAULT_TENANT_NAME = "默认租户"
 DEFAULT_TENANT_CODE = "default"
+
+
+def _load_schema_json(relative_path: str) -> dict:
+    """从仓库相对路径读取 JSON schema 文件，注入 DB。
+
+    路径以 backend/ 为根（__file__ 所在目录）。
+    """
+    p = Path(__file__).parent / relative_path
+    with open(p, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 async def create_tables():
@@ -58,35 +69,6 @@ async def create_default_tenant(session):
     session.add(tenant)
     await session.flush()
     print(f"默认租户 {DEFAULT_TENANT_ID} 创建完成!")
-
-
-async def create_test_user():
-    """创建测试用户（绑定到默认租户）"""
-    print("正在创建测试用户...")
-    async with AsyncSessionLocal() as session:
-        await create_default_tenant(session)
-        result = await session.execute(
-            text("SELECT id FROM users WHERE username = 'admin'")
-        )
-        existing = result.scalar_one_or_none()
-
-        if existing:
-            print("测试用户已存在，跳过创建")
-            return
-
-        admin_user = User(
-            username="admin",
-            password_hash=get_password_hash("admin123"),
-            email="admin@example.com",
-            is_active=True,
-            tenant_id=DEFAULT_TENANT_ID,
-        )
-        session.add(admin_user)
-        await session.commit()
-        print("测试用户创建完成!")
-        print("  用户名: admin")
-        print("  密码: admin123")
-        print(f"  租户: {DEFAULT_TENANT_ID}")
 
 
 async def create_test_data():
@@ -133,8 +115,8 @@ async def create_test_data():
             route_id=workflow.id,
             node_id="category-analysis-node",
             node_name="品类分析节点",
-            intent_schema_path="schemas/intent_forms/demo/intent_schema.json",
-            artifact_schema_path="schemas/artifact_forms/demo/artifact_schema.json",
+            intent_schema=_load_schema_json("schemas/intent_forms/demo/intent_schema.json"),
+            artifact_schema=_load_schema_json("schemas/artifact_forms/demo/artifact_schema.json"),
             n8n_workflow_id="demo-category-analysis",
             tenant_id=DEFAULT_TENANT_ID,
         )
@@ -158,8 +140,8 @@ async def create_test_data():
             route_id=display_review_workflow.id,
             node_id="display-review-node",
             node_name="陈列复盘节点",
-            intent_schema_path="schemas/intent_forms/demo/display_review_intent_schema.json",
-            artifact_schema_path="schemas/artifact_forms/demo/display_review_artifact_schema.json",
+            intent_schema=_load_schema_json("schemas/intent_forms/demo/display_review_intent_schema.json"),
+            artifact_schema=_load_schema_json("schemas/artifact_forms/demo/display_review_artifact_schema.json"),
             n8n_workflow_id="display-review-workflow",
             tenant_id=DEFAULT_TENANT_ID,
         )
@@ -177,19 +159,16 @@ async def main():
 
     try:
         await create_tables()
-        await create_test_user()
         await create_test_data()
 
         print("=" * 50)
         print("数据库初始化完成!")
         print("=" * 50)
         print("\n快速开始:")
-        print("1. 启动后端: uvicorn app.main:app --reload")
+        print("1. 启动后端: uvicorn app.main:app --reload --port 6000")
         print("2. 启动 Celery worker: python -m celery -A app.celery_app worker --loglevel=info --pool=solo")
-        print("3. 登录后台: http://localhost:8000/docs")
-        print("   用户名: admin")
-        print("   密码: admin123")
-        print(f"   租户: {DEFAULT_TENANT_ID}")
+        print("3. 访问后台: http://localhost:6000/docs")
+        print(f"   默认租户: {DEFAULT_TENANT_ID}")
 
     except Exception as e:
         print(f"初始化失败: {e}")

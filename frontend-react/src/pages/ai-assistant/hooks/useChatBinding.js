@@ -1,7 +1,13 @@
-import { useMemo, useRef, useCallback } from 'react'
+import { useMemo, useCallback } from 'react'
+import { useXChat } from '@ant-design/x-sdk'
 import { useChatStore } from '@/store/chat'
+import { useTaskStore } from '@/store/task'
 import { useNodeState } from './useNodeState'
-import { chatStream } from '@/api/chat'
+import { createAgentScopeProvider } from '../providers/AgentScopeChatProvider'
+
+// 单例 provider：避免 React 组件重渲染时反复 new，导致 AbstractChatProvider 内部
+// _request 引用变化、useXChat 内部 onUpdate/onSuccess/onError 回调链断裂
+const provider = createAgentScopeProvider()
 
 const STATUS_LABEL = {
   pending: '待执行',
@@ -11,94 +17,95 @@ const STATUS_LABEL = {
 }
 
 const LOCK_MESSAGE = {
-  noNode: '请先在中间画布选择并执行一个工作流节点',
-  pending: '请先点击「执行工作流」按钮启动该节点',
-  running: '节点正在执行中，请等待完成后发起对话',
-  failed: '节点执行失败，无法基于该结果发起对话',
-  unknown: '节点未完成，无法发起对话'
+  noTask: '请先在节点工作流页启动并完成工作流执行',
+  pending: '工作流尚未启动，请先在节点 tab 执行',
+  running: '工作流执行中，请等待完成后再发起对话',
+  failed: '工作流执行失败，无法基于该结果发起对话',
+  unknown: '工作流未完成，无法发起对话'
 }
 
 /**
- * 共享 chat 行为 hook：供 ChatPanel（默认态）和 ChatContent（展开态）共用。
- * 返回：当前节点状态、锁状态、发送函数、取消函数、错误信息、清空函数。
+ * 共享 chat 行为 hook：供 ChatContent（默认态）使用。
+ * 返回：当前节点状态、锁状态、发送函数、取消函数、错误信息、useXChat 实例引用。
  *
- * 注：流式"打字机"视觉效果由 ChatContent.jsx 通过 useStreamContent hook 实现，
- *     本 hook 不再做客户端切片 —— store 里的 content 始终是 source-of-truth。
+ * 数据流：
+ *  - useXChat 接管 messages + isRequesting + abort；store 不再持有流式粘合代码
+ *  - 字符级打字机由 ChatContent 内的 useTypewriter 提供（与数据层正交）
  */
 export function useChatBinding() {
   const { currentNode } = useNodeState()
+  const currentTask = useTaskStore(s => s.currentTask)
 
   const activeNodeExecutionId = useChatStore(s => s.activeNodeExecutionId)
-  const isStreaming = useChatStore(s => s.isStreaming)
   const error = useChatStore(s => s.error)
-  const addMessage = useChatStore(s => s.addMessage)
-  const startAssistantMessage = useChatStore(s => s.startAssistantMessage)
-  const appendDelta = useChatStore(s => s.appendDelta)
-  const appendThinking = useChatStore(s => s.appendThinking)
-  const finalizeMessage = useChatStore(s => s.finalizeMessage)
   const setError = useChatStore(s => s.setError)
-  const clearMessages = useChatStore(s => s.clearMessages)
 
-  const abortRef = useRef(null)
+  // 多 hook 共享 useXChat store：用 activeNodeExecutionId 作为 conversationKey
+  // 切节点 → 自动切 store 实例；无节点时回退到 'default'（用 ChatContent 的渲染条件保证）
+  const { onRequest, abort, isRequesting, messages, setMessages, setMessage } = useXChat({
+    provider,
+    conversationKey: activeNodeExecutionId || 'default',
+  })
 
-  const isNodeReady = currentNode?.status === 'completed'
-  const inputDisabled = !isNodeReady || isStreaming
+  // 重构后约束：必须整个工作流任务（currentTask）completed 才能发起对话
+  // 兜底：如果 task 顶层 status 没及时更新，但所有 node_executions 都 completed，也视为就绪
+  const isTaskDone = useMemo(() => {
+    if (currentTask?.status === 'completed') return true
+    const nodes = currentTask?.node_executions
+    return !!nodes?.length && nodes.every(n => n.status === 'completed')
+  }, [currentTask?.status, currentTask?.node_executions])
+  const isNodeReady = isTaskDone
+  const inputDisabled = !isNodeReady || isRequesting
 
   const nodeStatusLabel = STATUS_LABEL[currentNode?.status] || '未开始'
   const lockMessage = useMemo(() => {
-    if (!currentNode) return LOCK_MESSAGE.noNode
-    return LOCK_MESSAGE[currentNode.status] || LOCK_MESSAGE.unknown
-  }, [currentNode])
+    if (!currentTask) return LOCK_MESSAGE.noTask
+    if (isTaskDone) return null
+    return LOCK_MESSAGE[currentTask.status] || LOCK_MESSAGE.unknown
+  }, [currentTask, isTaskDone])
 
   const handleSend = useCallback((text) => {
     const content = (text || '').trim()
     if (!content || inputDisabled || !activeNodeExecutionId) return
 
-    // 取消上一次未完成的流（如有）
-    abortRef.current?.()
-
-    addMessage({ type: 'user', content })
-    startAssistantMessage()
-
-    const history = useChatStore.getState().messages
-      .filter(m => m.type === 'user' || (m.type === 'assistant' && !m.streaming))
-      .map(m => ({ role: m.type === 'user' ? 'user' : 'assistant', content: m.content }))
-
-    const abort = chatStream({
-      nodeExecutionId: activeNodeExecutionId,
-      messages: history,
-      onDelta: appendDelta,
-      onThinkingDelta: appendThinking,
-      onDone: () => {
-        abortRef.current = null
-        finalizeMessage()
-      },
-      onError: (err) => {
-        abortRef.current = null
-        finalizeMessage()
-        setError(err)
-      },
+    // history 由 provider.transformParams → this.getMessages() 自动注入
+    // （OpenAIChatProvider 同款做法；getMessages 已 filter 掉 loading 态）
+    onRequest({
+      query: content,
+      node_execution_id: activeNodeExecutionId,
     })
-    abortRef.current = abort || null
-  }, [inputDisabled, activeNodeExecutionId, addMessage, startAssistantMessage, appendDelta, appendThinking, finalizeMessage, setError])
+  }, [inputDisabled, activeNodeExecutionId, onRequest])
 
   const cancel = useCallback(() => {
-    abortRef.current?.()
-    abortRef.current = null
-    finalizeMessage()
-  }, [finalizeMessage])
+    abort()
+  }, [abort])
+
+  /**
+   * 反馈写入：useXChat.setMessage(id, partial) 更新单条消息的 extraInfo
+   * 模板：setMessage(id, (m) => ({ extraInfo: { ...(m.extraInfo || {}), feedback: v } }))
+   */
+  const setFeedback = useCallback((messageId, value) => {
+    setMessage(messageId, (m) => ({
+      extraInfo: { ...(m.extraInfo || {}), feedback: value },
+    }))
+  }, [setMessage])
 
   return {
     currentNode,
+    currentTask,
     isNodeReady,
     inputDisabled,
     nodeStatusLabel,
     lockMessage,
     activeNodeExecutionId,
-    isStreaming,
+    isStreaming: isRequesting,
     error,
+    setError,
     handleSend,
     cancel,
-    clearMessages,
+    // 暴露 useXChat 实例给上层（ChatContent 渲染 bubbleItems / useChatHistory 拉历史）
+    messages,
+    setMessages,
+    setFeedback,
   }
 }

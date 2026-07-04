@@ -1,175 +1,45 @@
 {
-  "name": "test-api",
-  "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -224,
-        224
-      ],
-      "id": "c0330334-c758-4bd0-a401-b82b50035173",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "url": "https://n8n.hdfmw.com/webhook/b87c633b-5626-49d8-8f3a-75eb15034f82",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        240,
-        0
-      ],
-      "id": "fa3a650d-499e-46ba-b93f-3749705662b2",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://n8n.hdfmw.com/webhook/b87c633b-5626-49d8-8f3a-75eb15034f82",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "dc_code",
-              "value": "=61051-02"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        144,
-        192
-      ],
-      "id": "142f59b3-9c0c-45cc-9813-e54ef382822a",
-      "name": "HTTP Request1"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://n8n.hdfmw.com/webhook-test/cb380f68-389d-4af9-90fb-b8aecc09ed70", https://n8n.hdfmw.com/webhook-test/cb380f68-389d-4af9-90fb-b8aecc09ed70 https://n8n.hdfmw.com/webhook-test/cb380f68-389d-4af9-90fb-b8aecc09ed70
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "startDate",
-              "value": "2026-04-16"
-            },
-            {
-              "name": "endDate",
-              "value": "2026-04-30"
-            },
-            {
-              "name": "comparisonStartDate",
-              "value": "2026-04-01"
-            },
-            {
-              "name": "comparisonEndDate",
-              "value": "2026-04-15"
-            },
-            {
-              "name": "userPromt",
-              "value": "输出复盘报告"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        144,
-        496
-      ],
-      "id": "f15d40f8-1773-4390-bbf0-f3f01b0c958f",
-      "name": "HTTP Request2"
-    }
-  ],
-  "pinData": {},
-  "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request": {
-      "main": [
-        []
-      ]
-    }
+  "relevance_score": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 10,
+    "description": "相关度打分（10为最相关，1为几乎无关）"
   },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate"
+  "primary_category": {
+    "type": "string",
+    "enum": [
+      "中国宏观与政策",
+      "地缘政治与外部风险",
+      "消费者情绪与高端零售",
+      "监管与合规",
+      "新西兰相关行业",
+      "新兴信号"
+    ],
+    "description": "文章所属的主要类别"
   },
-  "versionId": "97b5e94f-670b-48ab-9812-fd6558013437",
-  "meta": {
-    "instanceId": "944f3bcccd956cfb78d3ba895bc20da6aefd69684ff20ab9b2324ef0fb42d6f8"
+  "sub_category": {
+    "type": "string",
+    "enum": [
+      "增长/零售/通胀",
+      "就业/商业信心",
+      "政策刺激",
+      "中东/航运/能源",
+      "中美/中欧关系",
+      "关税/制裁/汇率",
+      "消费行为/性价比",
+      "高端化/奢侈品",
+      "食品安全/标签",
+      "广告宣称/平台规则",
+      "直播电商/市场准入",
+      "乳制品/肉类/海鲜",
+      "红酒/健康营养/宠物食品",
+      "教育/旅游/服务",
+      "前沿趋势/新规萌芽"
+    ],
+    "description": "文章所属的子类别"
   },
-  "id": "0pXFe14OYf0ywyFA",
-  "tags": []
+  "summary_for_report": {
+    "type": "string",
+    "description": "用1-2句话概括本文核心事实及其商业意味，必须客观精炼，可直接作为双周报'新闻条目'的素材"
+  }
 }
-
-
-
-// 定义必需的查询参数字段
-const requiredFields = [
-    'startDate',
-    'endDate',
-    'comparisonStartDate',
-    'comparisonEndDate',
-    'userPromt'
-];
-
-// 获取输入数据 (n8n Code 节点的标准输入对象)
-const inputData = $input.all(); // 获取所有输入项
-// 通常 HTTP Request 触发器的数据在第一个输入项的 json 属性中
-const httpRequestData = inputData[0].json;
-
-// 从 query 对象中提取字段
-const queryData = httpRequestData.query || {};
-
-// 检查必需字段
-const missingFields = [];
-for (const field of requiredFields) {
-    if (!(field in queryData) || queryData[field] === undefined || queryData[field] === null || queryData[field] === '') {
-        missingFields.push(field);
-    }
-}
-
-// 如果有缺失字段，返回失败信息
-if (missingFields.length > 0) {
-    const errorMessage = `Missing required fields in query parameters: ${missingFields.join(', ')}`;
-    // 返回失败的 JSON 结构，不抛出异常
-    return {
-        json: {
-            success: false,
-            error: errorMessage,
-            missingFields: missingFields,
-            receivedQuery: queryData // 可选：返回接收到的查询参数以便调试
-        }
-    };
-}
-
-// 如果所有必需字段都存在，继续执行后续逻辑或返回成功信息
-// console.log("All required date fields are present:", queryData);
-return {
-    json: {
-        success: true,
-        message: "All required date fields are present.",
-        queryParameters: queryData // 可以将解析后的参数传递给下一个节点
-    }
-};

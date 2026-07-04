@@ -1,0 +1,164 @@
+/**
+ * 智能体对话滚动布局
+ *
+ * 滚动容器：.ai-agent-tab-pane-scroll（节点 Tab 内容区，flex:1 + overflow-y:auto）
+ * amis 层：height:auto 随内容撑开，由外层滚动，不在 amis 内部裁切
+ */
+
+/* ── 0. 中心 Tabs flex 高度链 ── */
+.ai-agent-center-tabs.ant-tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.ai-agent-center-tabs .ant-tabs-nav {
+  flex-shrink: 0;
+}
+
+.ai-agent-center-tabs .ant-tabs-content-holder {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ai-agent-center-tabs .ant-tabs-content {
+  height: 100%;
+  min-height: 0;
+}
+
+/* hidden pane 必须保持不可见，不能被下面的 flex 规则覆盖 */
+.ai-agent-center-tabs .ant-tabs-tabpane-hidden {
+  display: none !important;
+}
+
+.ai-agent-center-tabs .ant-tabs-tabpane-active {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* motion 中间层（若存在）；勿把 overflow:hidden 加在滚动容器上 */
+.ai-agent-center-tabs .ant-tabs-tabpane-active > div:not(.ai-agent-tab-pane-scroll):not(.ai-agent-page-fill) {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── 1. 节点 Tab 滚动容器（必须 flex:1 + min-height:0 + overflow-y:auto） ── */
+.ai-agent-tab-pane-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.ai-agent-tab-pane-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ai-agent-tab-pane-scroll::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ai-agent-tab-pane-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* ChatContent / IntentFormPreview 等自带内部 flex 滚动 */
+.ai-agent-page-fill {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── 2. amis 嵌入根：随内容撑高，不抢占父级 100% 高度 ── */
+.ai-agent-amis-root {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* ── 3. artifact 内层 tab（如「初始化价格带数据模型」）及 page/table ── */
+.artifact-tabs.cxd-Tabs,
+.artifact-tabs {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.artifact-tabs .cxd-Tabs-content,
+.artifact-tabs-content {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.artifact-tabs .cxd-Page,
+.artifact-tabs .cxd-Page-content,
+.artifact-tabs .cxd-Page-body,
+.artifact-tabs .cxd-Panel,
+.artifact-tabs .cxd-Panel-body {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.artifact-tabs .cxd-Table,
+.artifact-tabs .cxd-Table2,
+.artifact-tabs .cxd-Table-body,
+.artifact-tabs .cxd-Table-content,
+.artifact-tabs .cxd-Table-contentWrap,
+.artifact-tabs .cxd-Table-wrapper,
+.artifact-tabs .cxd-Table-container,
+.artifact-tabs .cxd-Table-fixedTop,
+.artifact-tabs .cxd-Table-fixedTop-inner {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* 意图澄清 amis 表单同理 */
+.ai-agent-node-content .ai-agent-amis-root .cxd-Page,
+.ai-agent-node-content .ai-agent-amis-root .cxd-Page-body {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* ── 4. AI 智能体对话输入框（全局兜底，使用标准 ant- 前缀） ── */
+.ai-agent-chat-sender.ant-sender-main {
+  border-radius: 20px !important;
+}
+
+.ai-agent-send-btn.ant-sender-actions-btn,
+.ai-agent-send-btn.ant-btn {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: #12b329 !important;
+  border-color: #12b329 !important;
+  color: #fff !important;
+  line-height: 40px !important;
+}
+
+.ai-agent-send-btn.ant-sender-actions-btn:hover:not(:disabled),
+.ai-agent-send-btn.ant-btn:hover:not(:disabled) {
+  background: #0fa824 !important;
+  border-color: #0fa824 !important;
+  color: #fff !important;
+}
