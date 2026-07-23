@@ -1,0 +1,5404 @@
+[
+  {
+    "code": 200,
+    "message": "success",
+    "data": [
+      {
+        "bigId": "920",
+        "bigName": "烟草",
+        "mediumList": [
+          {
+            "mediumId": "92001",
+            "mediumName": "香烟",
+            "smallList": [
+              {
+                "smallId": "92001001",
+                "smallName": "烤烟型香烟"
+              },
+              {
+                "smallId": "92001002",
+                "smallName": "混合型香烟"
+              },
+              {
+                "smallId": "92001003",
+                "smallName": "雪茄"
+              },
+              {
+                "smallId": "92001004",
+                "smallName": "其它型香烟"
+              }
+            ]
+          },
+          {
+            "mediumId": "92002",
+            "mediumName": "电子烟及烟具类",
+            "smallList": [
+              {
+                "smallId": "92002001",
+                "smallName": "电子烟"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "921",
+        "bigName": "酒饮",
+        "mediumList": [
+          {
+            "mediumId": "92101",
+            "mediumName": "白酒",
+            "smallList": [
+              {
+                "smallId": "92101001",
+                "smallName": "名优精品白酒"
+              },
+              {
+                "smallId": "92101002",
+                "smallName": "酱香盒装"
+              },
+              {
+                "smallId": "92101003",
+                "smallName": "浓香盒装"
+              },
+              {
+                "smallId": "92101004",
+                "smallName": "清香盒装"
+              },
+              {
+                "smallId": "92101005",
+                "smallName": "其它香型盒装"
+              },
+              {
+                "smallId": "92101006",
+                "smallName": "盒装高粱酒"
+              },
+              {
+                "smallId": "92101007",
+                "smallName": "简装白瓶类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92102",
+            "mediumName": "黄酒保健酒米酒",
+            "smallList": [
+              {
+                "smallId": "92102001",
+                "smallName": "黄酒"
+              },
+              {
+                "smallId": "92102002",
+                "smallName": "保健酒"
+              },
+              {
+                "smallId": "92102003",
+                "smallName": "米酒类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92103",
+            "mediumName": "葡萄酒",
+            "smallList": [
+              {
+                "smallId": "92103001",
+                "smallName": "干红葡萄酒"
+              },
+              {
+                "smallId": "92103002",
+                "smallName": "桃红葡萄酒"
+              },
+              {
+                "smallId": "92103003",
+                "smallName": "干白葡萄酒"
+              },
+              {
+                "smallId": "92103004",
+                "smallName": "香槟/起泡酒"
+              },
+              {
+                "smallId": "92103005",
+                "smallName": "其它葡萄酒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92104",
+            "mediumName": "洋酒",
+            "smallList": [
+              {
+                "smallId": "92104001",
+                "smallName": "威士忌"
+              },
+              {
+                "smallId": "92104002",
+                "smallName": "白兰地"
+              },
+              {
+                "smallId": "92104003",
+                "smallName": "伏特加"
+              },
+              {
+                "smallId": "92104004",
+                "smallName": "其它基酒洋酒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92105",
+            "mediumName": "清酒果酒预调酒",
+            "smallList": [
+              {
+                "smallId": "92105001",
+                "smallName": "日式清酒"
+              },
+              {
+                "smallId": "92105002",
+                "smallName": "韩式露酒"
+              },
+              {
+                "smallId": "92105003",
+                "smallName": "果味风味配制酒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92106",
+            "mediumName": "啤酒",
+            "smallList": [
+              {
+                "smallId": "92106001",
+                "smallName": "冷鲜啤酒"
+              },
+              {
+                "smallId": "92106002",
+                "smallName": "果味啤酒"
+              },
+              {
+                "smallId": "92106003",
+                "smallName": "精酿啤酒"
+              },
+              {
+                "smallId": "92106004",
+                "smallName": "工业啤酒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92110",
+            "mediumName": "100%果蔬汁",
+            "smallList": [
+              {
+                "smallId": "92110001",
+                "smallName": "NFC-菠萝汁"
+              },
+              {
+                "smallId": "92110002",
+                "smallName": "NFC-葡萄汁"
+              },
+              {
+                "smallId": "92110003",
+                "smallName": "NFC-苹果汁"
+              },
+              {
+                "smallId": "92110004",
+                "smallName": "NFC-蓝莓汁"
+              },
+              {
+                "smallId": "92110005",
+                "smallName": "NFC-百香果汁"
+              },
+              {
+                "smallId": "92110006",
+                "smallName": "NFC-柚子果汁"
+              },
+              {
+                "smallId": "92110007",
+                "smallName": "NFC-番茄汁"
+              },
+              {
+                "smallId": "92110008",
+                "smallName": "NFC-胡萝卜汁"
+              },
+              {
+                "smallId": "92110009",
+                "smallName": "NFC-蜜桃汁"
+              },
+              {
+                "smallId": "92110010",
+                "smallName": "NFC-黄桃汁"
+              },
+              {
+                "smallId": "92110011",
+                "smallName": "NFC-芒果汁"
+              },
+              {
+                "smallId": "92110012",
+                "smallName": "NFC-芭乐汁"
+              },
+              {
+                "smallId": "92110013",
+                "smallName": "NFC-椰子水"
+              },
+              {
+                "smallId": "92110014",
+                "smallName": "NFC-芒果蜜桃汁"
+              },
+              {
+                "smallId": "92110015",
+                "smallName": "NFC-混合汁"
+              },
+              {
+                "smallId": "92110016",
+                "smallName": "NFC-橙汁"
+              },
+              {
+                "smallId": "92110017",
+                "smallName": "NFC-桑果汁"
+              },
+              {
+                "smallId": "92110018",
+                "smallName": "NFC-荔枝果汁"
+              },
+              {
+                "smallId": "92110019",
+                "smallName": "NFC-杨梅汁"
+              },
+              {
+                "smallId": "92110020",
+                "smallName": "NFC-猕猴桃汁"
+              },
+              {
+                "smallId": "92110021",
+                "smallName": "NFC-石榴汁"
+              },
+              {
+                "smallId": "92110022",
+                "smallName": "NFC-梨汁"
+              },
+              {
+                "smallId": "92110023",
+                "smallName": "NFC-其他果汁"
+              },
+              {
+                "smallId": "92110024",
+                "smallName": "浓缩还原-橙汁"
+              },
+              {
+                "smallId": "92110025",
+                "smallName": "浓缩还原-桃汁"
+              },
+              {
+                "smallId": "92110026",
+                "smallName": "浓缩还原-葡萄汁"
+              },
+              {
+                "smallId": "92110027",
+                "smallName": "浓缩还原-苹果汁"
+              },
+              {
+                "smallId": "92110028",
+                "smallName": "浓缩还原-混合汁"
+              },
+              {
+                "smallId": "92110029",
+                "smallName": "浓缩还原-柠檬汁"
+              }
+            ]
+          },
+          {
+            "mediumId": "92111",
+            "mediumName": "低浓度果汁饮料",
+            "smallList": [
+              {
+                "smallId": "92111001",
+                "smallName": "橙汁"
+              },
+              {
+                "smallId": "92111002",
+                "smallName": "葡萄汁"
+              },
+              {
+                "smallId": "92111003",
+                "smallName": "苹果汁"
+              },
+              {
+                "smallId": "92111004",
+                "smallName": "青柠汁"
+              },
+              {
+                "smallId": "92111005",
+                "smallName": "其它风味复合果蔬饮料"
+              }
+            ]
+          },
+          {
+            "mediumId": "92112",
+            "mediumName": "植物蛋白/含乳饮料",
+            "smallList": [
+              {
+                "smallId": "92112001",
+                "smallName": "椰汁/杏仁/核桃露"
+              },
+              {
+                "smallId": "92112002",
+                "smallName": "谷物杂粮饮料"
+              },
+              {
+                "smallId": "92112003",
+                "smallName": "豆浆豆奶"
+              },
+              {
+                "smallId": "92112004",
+                "smallName": "酸乳风味/乳酸菌饮料"
+              }
+            ]
+          },
+          {
+            "mediumId": "92113",
+            "mediumName": "点心罐头",
+            "smallList": [
+              {
+                "smallId": "92113001",
+                "smallName": "水果罐头"
+              },
+              {
+                "smallId": "92113002",
+                "smallName": "八宝粥杂粮粥绿豆汤"
+              },
+              {
+                "smallId": "92113003",
+                "smallName": "炖银耳/燕窝甜品类"
+              },
+              {
+                "smallId": "92113004",
+                "smallName": "燕窝粥"
+              },
+              {
+                "smallId": "92113005",
+                "smallName": "龟苓膏/仙草制品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92114",
+            "mediumName": "咖啡/奶茶",
+            "smallList": [
+              {
+                "smallId": "92114001",
+                "smallName": "奶茶"
+              },
+              {
+                "smallId": "92114002",
+                "smallName": "咖啡/咖啡饮料"
+              }
+            ]
+          },
+          {
+            "mediumId": "92115",
+            "mediumName": "茶饮料",
+            "smallList": [
+              {
+                "smallId": "92115001",
+                "smallName": "绿茶饮料"
+              },
+              {
+                "smallId": "92115002",
+                "smallName": "红茶饮料"
+              },
+              {
+                "smallId": "92115003",
+                "smallName": "乌龙茶饮料"
+              },
+              {
+                "smallId": "92115004",
+                "smallName": "大麦茶饮料"
+              },
+              {
+                "smallId": "92115005",
+                "smallName": "花果风味茶饮料"
+              },
+              {
+                "smallId": "92115006",
+                "smallName": "凉茶植物饮料"
+              },
+              {
+                "smallId": "92115007",
+                "smallName": "其它调味茶饮料"
+              }
+            ]
+          },
+          {
+            "mediumId": "92116",
+            "mediumName": "碳酸汽水",
+            "smallList": [
+              {
+                "smallId": "92116001",
+                "smallName": "可乐"
+              },
+              {
+                "smallId": "92116002",
+                "smallName": "柠檬味汽水"
+              },
+              {
+                "smallId": "92116003",
+                "smallName": "其它果味复合风味汽水"
+              }
+            ]
+          },
+          {
+            "mediumId": "92117",
+            "mediumName": "气泡水苏打水",
+            "smallList": [
+              {
+                "smallId": "92117001",
+                "smallName": "汽泡水"
+              },
+              {
+                "smallId": "92117002",
+                "smallName": "天然苏打水"
+              },
+              {
+                "smallId": "92117003",
+                "smallName": "配制苏打水"
+              },
+              {
+                "smallId": "92117004",
+                "smallName": "充气配制苏打水"
+              }
+            ]
+          },
+          {
+            "mediumId": "92118",
+            "mediumName": "饮用水",
+            "smallList": [
+              {
+                "smallId": "92118001",
+                "smallName": "纯净水"
+              },
+              {
+                "smallId": "92118002",
+                "smallName": "天然水"
+              },
+              {
+                "smallId": "92118003",
+                "smallName": "天然矿泉水"
+              },
+              {
+                "smallId": "92118004",
+                "smallName": "蒸馏水熟开水"
+              }
+            ]
+          },
+          {
+            "mediumId": "92119",
+            "mediumName": "运动功能饮料",
+            "smallList": [
+              {
+                "smallId": "92119001",
+                "smallName": "运动饮料/电解质水/盐汽水"
+              },
+              {
+                "smallId": "92119002",
+                "smallName": "维生素营养素饮料"
+              },
+              {
+                "smallId": "92119003",
+                "smallName": "保健功能维生素营养素饮料"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "922",
+        "bigName": "乳品",
+        "mediumList": [
+          {
+            "mediumId": "92201",
+            "mediumName": "牛奶",
+            "smallList": [
+              {
+                "smallId": "92201001",
+                "smallName": "纯牛奶"
+              },
+              {
+                "smallId": "92201002",
+                "smallName": "0乳糖/半脂/脱脂类纯牛奶"
+              },
+              {
+                "smallId": "92201003",
+                "smallName": "水牛奶"
+              },
+              {
+                "smallId": "92201004",
+                "smallName": "羊奶"
+              },
+              {
+                "smallId": "92201005",
+                "smallName": "调制奶"
+              },
+              {
+                "smallId": "92201006",
+                "smallName": "豆奶及其它"
+              },
+              {
+                "smallId": "92201007",
+                "smallName": "箱装纯牛奶羊奶"
+              },
+              {
+                "smallId": "92201008",
+                "smallName": "箱装调制奶"
+              },
+              {
+                "smallId": "92201009",
+                "smallName": "箱装豆奶及其它"
+              }
+            ]
+          },
+          {
+            "mediumId": "92202",
+            "mediumName": "酸奶/乳酸饮品",
+            "smallList": [
+              {
+                "smallId": "92202001",
+                "smallName": "酸奶"
+              },
+              {
+                "smallId": "92202002",
+                "smallName": "乳酸饮品"
+              },
+              {
+                "smallId": "92202003",
+                "smallName": "箱装酸奶"
+              },
+              {
+                "smallId": "92202004",
+                "smallName": "箱装乳酸饮品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "923",
+        "bigName": "散称零食",
+        "mediumList": [
+          {
+            "mediumId": "92301",
+            "mediumName": "散称糖类",
+            "smallList": [
+              {
+                "smallId": "92301001",
+                "smallName": "散称糖果"
+              },
+              {
+                "smallId": "92301002",
+                "smallName": "散称奶制品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92302",
+            "mediumName": "散称巧克力",
+            "smallList": [
+              {
+                "smallId": "92302001",
+                "smallName": "散称巧克力制品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92303",
+            "mediumName": "散称果冻甜品",
+            "smallList": [
+              {
+                "smallId": "92303001",
+                "smallName": "散称果冻布丁"
+              },
+              {
+                "smallId": "92303002",
+                "smallName": "散称其他甜品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92304",
+            "mediumName": "散称蜜饯",
+            "smallList": [
+              {
+                "smallId": "92304001",
+                "smallName": "散称包装蜜饯"
+              }
+            ]
+          },
+          {
+            "mediumId": "92305",
+            "mediumName": "散称坚果炒货",
+            "smallList": [
+              {
+                "smallId": "92305001",
+                "smallName": "散称瓜子花生类炒货"
+              },
+              {
+                "smallId": "92305002",
+                "smallName": "散称坚果类"
+              },
+              {
+                "smallId": "92305003",
+                "smallName": "散称海苔零食"
+              }
+            ]
+          },
+          {
+            "mediumId": "92306",
+            "mediumName": "散称肉制品",
+            "smallList": [
+              {
+                "smallId": "92306001",
+                "smallName": "散称肉类零食"
+              },
+              {
+                "smallId": "92306002",
+                "smallName": "散称海产制品"
+              },
+              {
+                "smallId": "92306003",
+                "smallName": "散称卤蛋/肠制品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92307",
+            "mediumName": "散称豆制品",
+            "smallList": [
+              {
+                "smallId": "92307001",
+                "smallName": "散称面筋辣条/魔芋制品"
+              },
+              {
+                "smallId": "92307002",
+                "smallName": "散称豆制品/素肉类零食"
+              },
+              {
+                "smallId": "92307003",
+                "smallName": "散称腌泡蔬菜零食"
+              }
+            ]
+          },
+          {
+            "mediumId": "92308",
+            "mediumName": "散称饼干",
+            "smallList": [
+              {
+                "smallId": "92308001",
+                "smallName": "散称饼干类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92309",
+            "mediumName": "散称糕点",
+            "smallList": [
+              {
+                "smallId": "92309001",
+                "smallName": "散称西式糕点"
+              },
+              {
+                "smallId": "92309002",
+                "smallName": "散称中式糕点"
+              }
+            ]
+          },
+          {
+            "mediumId": "92310",
+            "mediumName": "散称膨化食品",
+            "smallList": [
+              {
+                "smallId": "92310001",
+                "smallName": "散称薯片虾片"
+              },
+              {
+                "smallId": "92310002",
+                "smallName": "散称玉米片/米通/锅巴"
+              },
+              {
+                "smallId": "92310003",
+                "smallName": "散称其他膨化干脆小食"
+              }
+            ]
+          },
+          {
+            "mediumId": "92311",
+            "mediumName": "散称冲泡食品",
+            "smallList": [
+              {
+                "smallId": "92311001",
+                "smallName": "散称冲泡麦片谷物食品"
+              },
+              {
+                "smallId": "92311002",
+                "smallName": "散称冲调奶粉类食品"
+              },
+              {
+                "smallId": "92311003",
+                "smallName": "散称其它冲泡食品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92312",
+            "mediumName": "散称休闲冲泡饮品",
+            "smallList": [
+              {
+                "smallId": "92312001",
+                "smallName": "散称冲泡固体果汁饮品"
+              },
+              {
+                "smallId": "92312002",
+                "smallName": "散称冲泡咖啡饮品"
+              },
+              {
+                "smallId": "92312003",
+                "smallName": "散称冲泡茶包类"
+              },
+              {
+                "smallId": "92312004",
+                "smallName": "散称其他休闲冲泡饮品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92313",
+            "mediumName": "散称零食DIY",
+            "smallList": [
+              {
+                "smallId": "92313001",
+                "smallName": "散称零食DIY礼袋"
+              },
+              {
+                "smallId": "92313002",
+                "smallName": "散称零食DIY礼盒"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "924",
+        "bigName": "休闲食品",
+        "mediumList": [
+          {
+            "mediumId": "92401",
+            "mediumName": "糖果",
+            "smallList": [
+              {
+                "smallId": "92401001",
+                "smallName": "口香糖"
+              },
+              {
+                "smallId": "92401002",
+                "smallName": "泡泡糖"
+              },
+              {
+                "smallId": "92401003",
+                "smallName": "条糖"
+              },
+              {
+                "smallId": "92401004",
+                "smallName": "含片糖"
+              },
+              {
+                "smallId": "92401005",
+                "smallName": "小袋装糖果"
+              },
+              {
+                "smallId": "92401006",
+                "smallName": "袋装凝胶糖"
+              },
+              {
+                "smallId": "92401007",
+                "smallName": "袋装软糖"
+              },
+              {
+                "smallId": "92401008",
+                "smallName": "袋装棉花糖"
+              },
+              {
+                "smallId": "92401009",
+                "smallName": "袋装硬糖"
+              },
+              {
+                "smallId": "92401010",
+                "smallName": "袋装棒棒糖"
+              },
+              {
+                "smallId": "92401011",
+                "smallName": "袋装奶糖"
+              },
+              {
+                "smallId": "92401012",
+                "smallName": "袋装奶片糖"
+              },
+              {
+                "smallId": "92401013",
+                "smallName": "袋装奶酪棒"
+              },
+              {
+                "smallId": "92401014",
+                "smallName": "袋装跳跳糖"
+              },
+              {
+                "smallId": "92401015",
+                "smallName": "袋装果味糖"
+              },
+              {
+                "smallId": "92401016",
+                "smallName": "瓶装糖果"
+              },
+              {
+                "smallId": "92401017",
+                "smallName": "其他糖果类"
+              },
+              {
+                "smallId": "92401018",
+                "smallName": "糖果礼盒"
+              },
+              {
+                "smallId": "92401019",
+                "smallName": "造型糖玩"
+              },
+              {
+                "smallId": "92401020",
+                "smallName": "其他玩具糖类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92402",
+            "mediumName": "巧克力制品",
+            "smallList": [
+              {
+                "smallId": "92402001",
+                "smallName": "麦丽素"
+              },
+              {
+                "smallId": "92402002",
+                "smallName": "星球杯"
+              },
+              {
+                "smallId": "92402003",
+                "smallName": "瓶装巧克力"
+              },
+              {
+                "smallId": "92402004",
+                "smallName": "小盒装巧克力"
+              },
+              {
+                "smallId": "92402005",
+                "smallName": "条装巧克力"
+              },
+              {
+                "smallId": "92402006",
+                "smallName": "碗装巧克力"
+              },
+              {
+                "smallId": "92402007",
+                "smallName": "袋装巧克力"
+              },
+              {
+                "smallId": "92402008",
+                "smallName": "其他巧克力类"
+              },
+              {
+                "smallId": "92402009",
+                "smallName": "礼盒装巧克力"
+              }
+            ]
+          },
+          {
+            "mediumId": "92403",
+            "mediumName": "果冻/布丁",
+            "smallList": [
+              {
+                "smallId": "92403001",
+                "smallName": "吸吸装果冻"
+              },
+              {
+                "smallId": "92403002",
+                "smallName": "杯装果冻"
+              },
+              {
+                "smallId": "92403003",
+                "smallName": "盒装果冻布丁"
+              },
+              {
+                "smallId": "92403004",
+                "smallName": "小袋装果冻布丁"
+              },
+              {
+                "smallId": "92403005",
+                "smallName": "分享装果冻布丁"
+              },
+              {
+                "smallId": "92403006",
+                "smallName": "果肉果冻"
+              },
+              {
+                "smallId": "92403007",
+                "smallName": "碎碎冰"
+              },
+              {
+                "smallId": "92403008",
+                "smallName": "龟苓膏"
+              },
+              {
+                "smallId": "92403009",
+                "smallName": "烧仙草制品"
+              },
+              {
+                "smallId": "92403010",
+                "smallName": "其他果冻类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92404",
+            "mediumName": "蜜饯",
+            "smallList": [
+              {
+                "smallId": "92404001",
+                "smallName": "袋装果蔬脆冻干类"
+              },
+              {
+                "smallId": "92404002",
+                "smallName": "袋装金桔陈皮/梅子/桃李杏类"
+              },
+              {
+                "smallId": "92404003",
+                "smallName": "袋装水果干"
+              },
+              {
+                "smallId": "92404004",
+                "smallName": "袋装芒果干"
+              },
+              {
+                "smallId": "92404005",
+                "smallName": "袋装地瓜干"
+              },
+              {
+                "smallId": "92404006",
+                "smallName": "袋装葡提类"
+              },
+              {
+                "smallId": "92404007",
+                "smallName": "袋装枣糕"
+              },
+              {
+                "smallId": "92404008",
+                "smallName": "袋装红枣"
+              },
+              {
+                "smallId": "92404009",
+                "smallName": "袋装山楂"
+              },
+              {
+                "smallId": "92404010",
+                "smallName": "油栗仁"
+              },
+              {
+                "smallId": "92404011",
+                "smallName": "瓶装蜜饯"
+              },
+              {
+                "smallId": "92404012",
+                "smallName": "小瓶装蜜饯"
+              },
+              {
+                "smallId": "92404013",
+                "smallName": "其它蜜饯类"
+              },
+              {
+                "smallId": "92404014",
+                "smallName": "蜜饯礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92405",
+            "mediumName": "坚果炒货",
+            "smallList": [
+              {
+                "smallId": "92405001",
+                "smallName": "瓜子"
+              },
+              {
+                "smallId": "92405002",
+                "smallName": "西瓜子"
+              },
+              {
+                "smallId": "92405003",
+                "smallName": "瓜子仁"
+              },
+              {
+                "smallId": "92405004",
+                "smallName": "花生"
+              },
+              {
+                "smallId": "92405005",
+                "smallName": "蚕豆"
+              },
+              {
+                "smallId": "92405006",
+                "smallName": "小袋装豆类"
+              },
+              {
+                "smallId": "92405007",
+                "smallName": "青豆"
+              },
+              {
+                "smallId": "92405008",
+                "smallName": "腰果"
+              },
+              {
+                "smallId": "92405009",
+                "smallName": "巴旦木"
+              },
+              {
+                "smallId": "92405010",
+                "smallName": "开心果"
+              },
+              {
+                "smallId": "92405011",
+                "smallName": "松子"
+              },
+              {
+                "smallId": "92405012",
+                "smallName": "榛子"
+              },
+              {
+                "smallId": "92405013",
+                "smallName": "夏威夷果"
+              },
+              {
+                "smallId": "92405014",
+                "smallName": "碧根果"
+              },
+              {
+                "smallId": "92405015",
+                "smallName": "核桃"
+              },
+              {
+                "smallId": "92405016",
+                "smallName": "混合果仁"
+              },
+              {
+                "smallId": "92405017",
+                "smallName": "其它坚果炒货"
+              },
+              {
+                "smallId": "92405018",
+                "smallName": "坚果炒货礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92406",
+            "mediumName": "海苔",
+            "smallList": [
+              {
+                "smallId": "92406001",
+                "smallName": "盒装/罐装海苔"
+              },
+              {
+                "smallId": "92406002",
+                "smallName": "夹心脆/海苔片/海苔卷"
+              },
+              {
+                "smallId": "92406003",
+                "smallName": "拌饭海苔"
+              },
+              {
+                "smallId": "92406004",
+                "smallName": "寿司海苔"
+              }
+            ]
+          },
+          {
+            "mediumId": "92407",
+            "mediumName": "肉类零食",
+            "smallList": [
+              {
+                "smallId": "92407001",
+                "smallName": "海产制品"
+              },
+              {
+                "smallId": "92407002",
+                "smallName": "牛肉干"
+              },
+              {
+                "smallId": "92407003",
+                "smallName": "牛肉类"
+              },
+              {
+                "smallId": "92407004",
+                "smallName": "牛肉粒"
+              },
+              {
+                "smallId": "92407005",
+                "smallName": "猪肉脯"
+              },
+              {
+                "smallId": "92407006",
+                "smallName": "肉干"
+              },
+              {
+                "smallId": "92407007",
+                "smallName": "鸡胸肉"
+              },
+              {
+                "smallId": "92407008",
+                "smallName": "卤猪蹄类"
+              },
+              {
+                "smallId": "92407009",
+                "smallName": "鸭脖类"
+              },
+              {
+                "smallId": "92407010",
+                "smallName": "卤鸡鸭腿/翅类"
+              },
+              {
+                "smallId": "92407011",
+                "smallName": "卤鸡鸭爪类"
+              },
+              {
+                "smallId": "92407012",
+                "smallName": "腌泡鸡鸭爪/翅类"
+              },
+              {
+                "smallId": "92407013",
+                "smallName": "肉肠制品"
+              },
+              {
+                "smallId": "92407014",
+                "smallName": "蟹柳/蟹味棒"
+              },
+              {
+                "smallId": "92407015",
+                "smallName": "卤蛋制品类"
+              },
+              {
+                "smallId": "92407016",
+                "smallName": "盒装肉制品类"
+              },
+              {
+                "smallId": "92407017",
+                "smallName": "其他肉制品类"
+              },
+              {
+                "smallId": "92407018",
+                "smallName": "肉制品礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92408",
+            "mediumName": "素类零食",
+            "smallList": [
+              {
+                "smallId": "92408001",
+                "smallName": "腌泡蔬菜海带类零食"
+              },
+              {
+                "smallId": "92408002",
+                "smallName": "面筋辣条类"
+              },
+              {
+                "smallId": "92408003",
+                "smallName": "魔芋制品"
+              },
+              {
+                "smallId": "92408004",
+                "smallName": "豆制品类零食"
+              },
+              {
+                "smallId": "92408005",
+                "smallName": "盒装素食类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92409",
+            "mediumName": "膨化食品",
+            "smallList": [
+              {
+                "smallId": "92409001",
+                "smallName": "薯片薯条/虾片蟹条"
+              },
+              {
+                "smallId": "92409002",
+                "smallName": "瓶装/罐装薯片"
+              },
+              {
+                "smallId": "92409003",
+                "smallName": "袋装山药片"
+              },
+              {
+                "smallId": "92409004",
+                "smallName": "袋装香芋片"
+              },
+              {
+                "smallId": "92409005",
+                "smallName": "袋装锅巴"
+              },
+              {
+                "smallId": "92409006",
+                "smallName": "干脆面"
+              },
+              {
+                "smallId": "92409009",
+                "smallName": "爆米花"
+              },
+              {
+                "smallId": "92409010",
+                "smallName": "其它膨化干脆小食"
+              },
+              {
+                "smallId": "92409011",
+                "smallName": "膨化礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92410",
+            "mediumName": "饼干",
+            "smallList": [
+              {
+                "smallId": "92410001",
+                "smallName": "注心/儿童饼干"
+              },
+              {
+                "smallId": "92410002",
+                "smallName": "夹心饼干"
+              },
+              {
+                "smallId": "92410003",
+                "smallName": "威化饼干"
+              },
+              {
+                "smallId": "92410004",
+                "smallName": "苏打饼干"
+              },
+              {
+                "smallId": "92410005",
+                "smallName": "曲奇饼干"
+              },
+              {
+                "smallId": "92410006",
+                "smallName": "薄脆饼干"
+              },
+              {
+                "smallId": "92410007",
+                "smallName": "韧性/酥性饼干"
+              },
+              {
+                "smallId": "92410008",
+                "smallName": "粗粮饼干"
+              },
+              {
+                "smallId": "92410009",
+                "smallName": "煎饼类"
+              },
+              {
+                "smallId": "92410010",
+                "smallName": "粗粮棒"
+              },
+              {
+                "smallId": "92410011",
+                "smallName": "米饼米通"
+              },
+              {
+                "smallId": "92410012",
+                "smallName": "其它饼干"
+              },
+              {
+                "smallId": "92410013",
+                "smallName": "饼干礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92411",
+            "mediumName": "糕点",
+            "smallList": [
+              {
+                "smallId": "92411001",
+                "smallName": "蛋糕类"
+              },
+              {
+                "smallId": "92411002",
+                "smallName": "面包/牛角包"
+              },
+              {
+                "smallId": "92411003",
+                "smallName": "面包干"
+              },
+              {
+                "smallId": "92411004",
+                "smallName": "华夫饼"
+              },
+              {
+                "smallId": "92411005",
+                "smallName": "铜锣烧"
+              },
+              {
+                "smallId": "92411006",
+                "smallName": "沙琪玛"
+              },
+              {
+                "smallId": "92411007",
+                "smallName": "蛋黄酥/其他酥类"
+              },
+              {
+                "smallId": "92411008",
+                "smallName": "麻花"
+              },
+              {
+                "smallId": "92411009",
+                "smallName": "蛋卷"
+              },
+              {
+                "smallId": "92411010",
+                "smallName": "其它糕点"
+              },
+              {
+                "smallId": "92411011",
+                "smallName": "短保糕点"
+              },
+              {
+                "smallId": "92411012",
+                "smallName": "糕点礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92412",
+            "mediumName": "地方特产专区",
+            "smallList": [
+              {
+                "smallId": "92412001",
+                "smallName": "地方特色饼干糕点类"
+              },
+              {
+                "smallId": "92412002",
+                "smallName": "地方特色禽畜肉制品类"
+              },
+              {
+                "smallId": "92412003",
+                "smallName": "地方特色茶/冲泡食品类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92413",
+            "mediumName": "节庆食品专区",
+            "smallList": [
+              {
+                "smallId": "92413001",
+                "smallName": "简装粽子"
+              },
+              {
+                "smallId": "92413002",
+                "smallName": "礼盒装粽子"
+              },
+              {
+                "smallId": "92413003",
+                "smallName": "简装月饼"
+              },
+              {
+                "smallId": "92413004",
+                "smallName": "礼盒装月饼"
+              },
+              {
+                "smallId": "92413005",
+                "smallName": "冷藏冰皮月饼"
+              }
+            ]
+          },
+          {
+            "mediumId": "92420",
+            "mediumName": "冲调",
+            "smallList": [
+              {
+                "smallId": "92420001",
+                "smallName": "燕麦片"
+              },
+              {
+                "smallId": "92420002",
+                "smallName": "核桃粉"
+              },
+              {
+                "smallId": "92420003",
+                "smallName": "芝麻糊"
+              },
+              {
+                "smallId": "92420004",
+                "smallName": "水果谷物即食麦片"
+              },
+              {
+                "smallId": "92420005",
+                "smallName": "藕粉"
+              },
+              {
+                "smallId": "92420006",
+                "smallName": "羹粉类"
+              },
+              {
+                "smallId": "92420007",
+                "smallName": "豆奶粉"
+              },
+              {
+                "smallId": "92420008",
+                "smallName": "豆浆粉"
+              },
+              {
+                "smallId": "92420009",
+                "smallName": "早餐粉"
+              },
+              {
+                "smallId": "92420010",
+                "smallName": "玉米粉"
+              },
+              {
+                "smallId": "92420011",
+                "smallName": "蛋白质粉"
+              },
+              {
+                "smallId": "92420012",
+                "smallName": "其他冲调粉"
+              },
+              {
+                "smallId": "92420013",
+                "smallName": "冲调礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92421",
+            "mediumName": "奶粉",
+            "smallList": [
+              {
+                "smallId": "92421001",
+                "smallName": "纯奶粉"
+              },
+              {
+                "smallId": "92421002",
+                "smallName": "调制奶粉"
+              },
+              {
+                "smallId": "92421003",
+                "smallName": "中老年调制奶粉"
+              },
+              {
+                "smallId": "92421004",
+                "smallName": "学生奶粉"
+              },
+              {
+                "smallId": "92421005",
+                "smallName": "羊奶粉"
+              },
+              {
+                "smallId": "92421006",
+                "smallName": "奶粉礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92422",
+            "mediumName": "保健食品",
+            "smallList": [
+              {
+                "smallId": "92422001",
+                "smallName": "传统滋补品"
+              },
+              {
+                "smallId": "92422002",
+                "smallName": "传统保健品"
+              },
+              {
+                "smallId": "92422003",
+                "smallName": "营养素类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92423",
+            "mediumName": "冲泡茶",
+            "smallList": [
+              {
+                "smallId": "92423001",
+                "smallName": "绿茶"
+              },
+              {
+                "smallId": "92423002",
+                "smallName": "红茶"
+              },
+              {
+                "smallId": "92423003",
+                "smallName": "白茶"
+              },
+              {
+                "smallId": "92423004",
+                "smallName": "乌龙茶"
+              },
+              {
+                "smallId": "92423005",
+                "smallName": "普洱茶"
+              },
+              {
+                "smallId": "92423006",
+                "smallName": "红枣茶/姜茶"
+              },
+              {
+                "smallId": "92423007",
+                "smallName": "其它茶种/代用茶/再加工调制茶"
+              },
+              {
+                "smallId": "92423008",
+                "smallName": "袋泡/调制茶包"
+              },
+              {
+                "smallId": "92423009",
+                "smallName": "花果茶包"
+              },
+              {
+                "smallId": "92423010",
+                "smallName": "茶礼盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "92424",
+            "mediumName": "冲泡咖啡",
+            "smallList": [
+              {
+                "smallId": "92424001",
+                "smallName": "咖啡豆"
+              },
+              {
+                "smallId": "92424002",
+                "smallName": "冻干咖啡粉"
+              },
+              {
+                "smallId": "92424003",
+                "smallName": "挂耳咖啡"
+              },
+              {
+                "smallId": "92424004",
+                "smallName": "速溶咖啡"
+              },
+              {
+                "smallId": "92424005",
+                "smallName": "胶囊咖啡"
+              },
+              {
+                "smallId": "92424006",
+                "smallName": "咖啡液"
+              },
+              {
+                "smallId": "92424007",
+                "smallName": "其他速溶咖啡"
+              }
+            ]
+          },
+          {
+            "mediumId": "92425",
+            "mediumName": "冲泡饮品",
+            "smallList": [
+              {
+                "smallId": "92425001",
+                "smallName": "奶茶固体饮料"
+              },
+              {
+                "smallId": "92425002",
+                "smallName": "蜂蜜"
+              },
+              {
+                "smallId": "92425003",
+                "smallName": "泡腾片"
+              },
+              {
+                "smallId": "92425004",
+                "smallName": "葡萄糖"
+              },
+              {
+                "smallId": "92425005",
+                "smallName": "椰子粉"
+              },
+              {
+                "smallId": "92425006",
+                "smallName": "麦芽粉"
+              },
+              {
+                "smallId": "92425007",
+                "smallName": "可可粉"
+              },
+              {
+                "smallId": "92425008",
+                "smallName": "麦乳精"
+              },
+              {
+                "smallId": "92425009",
+                "smallName": "方糖/调糖"
+              },
+              {
+                "smallId": "92425010",
+                "smallName": "柠檬柚子茶调制饮品"
+              },
+              {
+                "smallId": "92425011",
+                "smallName": "秋梨膏"
+              },
+              {
+                "smallId": "92425012",
+                "smallName": "自制甜品果冻冰淇淋粉"
+              },
+              {
+                "smallId": "92425013",
+                "smallName": "冲煮凉粉"
+              },
+              {
+                "smallId": "92425014",
+                "smallName": "其他冲调饮品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "925",
+        "bigName": "副食调料",
+        "mediumList": [
+          {
+            "mediumId": "92501",
+            "mediumName": "烹饪油",
+            "smallList": [
+              {
+                "smallId": "92501001",
+                "smallName": "橄榄油"
+              },
+              {
+                "smallId": "92501002",
+                "smallName": "茶籽油"
+              },
+              {
+                "smallId": "92501003",
+                "smallName": "亚麻籽油"
+              },
+              {
+                "smallId": "92501004",
+                "smallName": "稻米油"
+              },
+              {
+                "smallId": "92501005",
+                "smallName": "花生油"
+              },
+              {
+                "smallId": "92501006",
+                "smallName": "玉米油"
+              },
+              {
+                "smallId": "92501007",
+                "smallName": "葵花籽油"
+              },
+              {
+                "smallId": "92501008",
+                "smallName": "大豆油"
+              },
+              {
+                "smallId": "92501009",
+                "smallName": "菜籽油"
+              },
+              {
+                "smallId": "92501010",
+                "smallName": "植物调和油"
+              },
+              {
+                "smallId": "92501011",
+                "smallName": "动物油"
+              },
+              {
+                "smallId": "92501012",
+                "smallName": "其他油"
+              }
+            ]
+          },
+          {
+            "mediumId": "92502",
+            "mediumName": "煮食面条",
+            "smallList": [
+              {
+                "smallId": "92502001",
+                "smallName": "挂面"
+              },
+              {
+                "smallId": "92502002",
+                "smallName": "刀削面"
+              },
+              {
+                "smallId": "92502003",
+                "smallName": "拉面"
+              },
+              {
+                "smallId": "92502004",
+                "smallName": "线面"
+              },
+              {
+                "smallId": "92502005",
+                "smallName": "拌面"
+              },
+              {
+                "smallId": "92502006",
+                "smallName": "袋装面饼"
+              },
+              {
+                "smallId": "92502007",
+                "smallName": "其它面条"
+              },
+              {
+                "smallId": "92502008",
+                "smallName": "儿童小面类"
+              },
+              {
+                "smallId": "92502009",
+                "smallName": "意大利面/通心粉"
+              }
+            ]
+          },
+          {
+            "mediumId": "92503",
+            "mediumName": "南北干货-粉条/豆制品",
+            "smallList": [
+              {
+                "smallId": "92503001",
+                "smallName": "粉丝"
+              },
+              {
+                "smallId": "92503002",
+                "smallName": "粉条"
+              },
+              {
+                "smallId": "92503003",
+                "smallName": "米粉"
+              },
+              {
+                "smallId": "92503004",
+                "smallName": "豆制品类"
+              },
+              {
+                "smallId": "92503005",
+                "smallName": "年糕/川粉"
+              }
+            ]
+          },
+          {
+            "mediumId": "92504",
+            "mediumName": "酱油/功能性烹调汁",
+            "smallList": [
+              {
+                "smallId": "92504001",
+                "smallName": "生抽"
+              },
+              {
+                "smallId": "92504002",
+                "smallName": "老抽"
+              },
+              {
+                "smallId": "92504003",
+                "smallName": "味极鲜酱油"
+              },
+              {
+                "smallId": "92504004",
+                "smallName": "蒸鱼豉油"
+              },
+              {
+                "smallId": "92504005",
+                "smallName": "蚝油"
+              },
+              {
+                "smallId": "92504006",
+                "smallName": "白灼汁/凉拌汁/生姜汁"
+              },
+              {
+                "smallId": "92504007",
+                "smallName": "鸡汁/鲍鱼汁/烧烤汁"
+              },
+              {
+                "smallId": "92504008",
+                "smallName": "其它调味酱汁"
+              }
+            ]
+          },
+          {
+            "mediumId": "92505",
+            "mediumName": "料酒/醋/调味油",
+            "smallList": [
+              {
+                "smallId": "92505001",
+                "smallName": "料酒"
+              },
+              {
+                "smallId": "92505002",
+                "smallName": "米酒/老酒/黄酒"
+              },
+              {
+                "smallId": "92505003",
+                "smallName": "香醋"
+              },
+              {
+                "smallId": "92505004",
+                "smallName": "老醋/陈醋"
+              },
+              {
+                "smallId": "92505005",
+                "smallName": "白醋"
+              },
+              {
+                "smallId": "92505006",
+                "smallName": "米醋/果醋"
+              },
+              {
+                "smallId": "92505007",
+                "smallName": "芝麻油"
+              },
+              {
+                "smallId": "92505008",
+                "smallName": "花椒油/辣椒油"
+              },
+              {
+                "smallId": "92505009",
+                "smallName": "酒酿"
+              }
+            ]
+          },
+          {
+            "mediumId": "92506",
+            "mediumName": "调味酱",
+            "smallList": [
+              {
+                "smallId": "92506001",
+                "smallName": "豆瓣酱"
+              },
+              {
+                "smallId": "92506002",
+                "smallName": "黄豆酱"
+              },
+              {
+                "smallId": "92506003",
+                "smallName": "甜面酱"
+              },
+              {
+                "smallId": "92506004",
+                "smallName": "沙茶酱"
+              },
+              {
+                "smallId": "92506005",
+                "smallName": "甜辣/酸甜酱"
+              },
+              {
+                "smallId": "92506006",
+                "smallName": "咖喱酱"
+              },
+              {
+                "smallId": "92506007",
+                "smallName": "胡椒酱/烤肉酱"
+              },
+              {
+                "smallId": "92506008",
+                "smallName": "特色菜专用调味酱"
+              }
+            ]
+          },
+          {
+            "mediumId": "92507",
+            "mediumName": "果酱/拌酱",
+            "smallList": [
+              {
+                "smallId": "92507001",
+                "smallName": "番茄酱"
+              },
+              {
+                "smallId": "92507002",
+                "smallName": "果酱"
+              },
+              {
+                "smallId": "92507003",
+                "smallName": "炼乳"
+              },
+              {
+                "smallId": "92507004",
+                "smallName": "沙拉汁/沙拉拌酱"
+              },
+              {
+                "smallId": "92507005",
+                "smallName": "芝麻酱"
+              },
+              {
+                "smallId": "92507006",
+                "smallName": "花生酱"
+              },
+              {
+                "smallId": "92507007",
+                "smallName": "芥末酱"
+              },
+              {
+                "smallId": "92507008",
+                "smallName": "其他酱类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92508",
+            "mediumName": "肉松",
+            "smallList": [
+              {
+                "smallId": "92508001",
+                "smallName": "猪肉肉松类"
+              },
+              {
+                "smallId": "92508002",
+                "smallName": "鱼松"
+              }
+            ]
+          },
+          {
+            "mediumId": "92509",
+            "mediumName": "火锅汤底汤料类",
+            "smallList": [
+              {
+                "smallId": "92509001",
+                "smallName": "小龙虾调料"
+              },
+              {
+                "smallId": "92509002",
+                "smallName": "火锅底料"
+              },
+              {
+                "smallId": "92509003",
+                "smallName": "酸菜鱼/水煮鱼"
+              },
+              {
+                "smallId": "92509004",
+                "smallName": "火锅蘸料"
+              },
+              {
+                "smallId": "92509005",
+                "smallName": "特色菜专用调料包"
+              }
+            ]
+          },
+          {
+            "mediumId": "92510",
+            "mediumName": "烹调汤料",
+            "smallList": [
+              {
+                "smallId": "92510001",
+                "smallName": "即食冲泡紫菜汤"
+              },
+              {
+                "smallId": "92510002",
+                "smallName": "非即食紫菜海产干货"
+              },
+              {
+                "smallId": "92510003",
+                "smallName": "烹调汤料包"
+              }
+            ]
+          },
+          {
+            "mediumId": "92511",
+            "mediumName": "烹调香辛料类",
+            "smallList": [
+              {
+                "smallId": "92511001",
+                "smallName": "瓶装花椒粉/胡椒粉/辣椒粉"
+              },
+              {
+                "smallId": "92511002",
+                "smallName": "炖卤汤料包"
+              },
+              {
+                "smallId": "92511003",
+                "smallName": "袋装花椒粉/胡椒粉/辣椒粉"
+              },
+              {
+                "smallId": "92511004",
+                "smallName": "辣椒干/辣椒粉类"
+              },
+              {
+                "smallId": "92511005",
+                "smallName": "黑芝麻/白芝麻"
+              },
+              {
+                "smallId": "92511006",
+                "smallName": "烧烤料"
+              },
+              {
+                "smallId": "92511007",
+                "smallName": "其它香辛料类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92512",
+            "mediumName": "调味料/特制菜调味粉",
+            "smallList": [
+              {
+                "smallId": "92512001",
+                "smallName": "咖喱调味料"
+              },
+              {
+                "smallId": "92512002",
+                "smallName": "浓汤汤底调味料"
+              },
+              {
+                "smallId": "92512003",
+                "smallName": "豆豉"
+              },
+              {
+                "smallId": "92512004",
+                "smallName": "酵母/酒曲"
+              },
+              {
+                "smallId": "92512005",
+                "smallName": "小苏打/食用碱"
+              },
+              {
+                "smallId": "92512006",
+                "smallName": "面包糠"
+              },
+              {
+                "smallId": "92512007",
+                "smallName": "玉米淀粉"
+              },
+              {
+                "smallId": "92512008",
+                "smallName": "地瓜淀粉"
+              },
+              {
+                "smallId": "92512009",
+                "smallName": "嫩肉粉"
+              },
+              {
+                "smallId": "92512010",
+                "smallName": "糯米粉"
+              },
+              {
+                "smallId": "92512011",
+                "smallName": "特制菜专用调味粉"
+              },
+              {
+                "smallId": "92512012",
+                "smallName": "其他面粉"
+              }
+            ]
+          },
+          {
+            "mediumId": "92513",
+            "mediumName": "糖盐味精",
+            "smallList": [
+              {
+                "smallId": "92513001",
+                "smallName": "白糖"
+              },
+              {
+                "smallId": "92513002",
+                "smallName": "红糖"
+              },
+              {
+                "smallId": "92513003",
+                "smallName": "冰糖"
+              },
+              {
+                "smallId": "92513004",
+                "smallName": "盐"
+              },
+              {
+                "smallId": "92513005",
+                "smallName": "味精"
+              },
+              {
+                "smallId": "92513006",
+                "smallName": "鸡精/鸡粉"
+              },
+              {
+                "smallId": "92513007",
+                "smallName": "其他蔬菜精"
+              }
+            ]
+          },
+          {
+            "mediumId": "92514",
+            "mediumName": "调味酱佐餐酱佐餐罐头",
+            "smallList": [
+              {
+                "smallId": "92514001",
+                "smallName": "辣椒酱/油辣子"
+              },
+              {
+                "smallId": "92514002",
+                "smallName": "葱头油"
+              },
+              {
+                "smallId": "92514003",
+                "smallName": "剁椒酱/泡椒类"
+              },
+              {
+                "smallId": "92514004",
+                "smallName": "蒜蓉/腐乳"
+              },
+              {
+                "smallId": "92514005",
+                "smallName": "肉酱"
+              },
+              {
+                "smallId": "92514006",
+                "smallName": "香菇酱"
+              },
+              {
+                "smallId": "92514007",
+                "smallName": "豆豉酱"
+              },
+              {
+                "smallId": "92514008",
+                "smallName": "拌面拌饭酱"
+              },
+              {
+                "smallId": "92514009",
+                "smallName": "其它佐餐酱"
+              },
+              {
+                "smallId": "92514010",
+                "smallName": "鱼制品罐头"
+              },
+              {
+                "smallId": "92514011",
+                "smallName": "肉制品罐头"
+              }
+            ]
+          },
+          {
+            "mediumId": "92515",
+            "mediumName": "酱泡菜榨菜",
+            "smallList": [
+              {
+                "smallId": "92515001",
+                "smallName": "瓶装罐装小菜"
+              },
+              {
+                "smallId": "92515002",
+                "smallName": "袋装小菜"
+              }
+            ]
+          },
+          {
+            "mediumId": "92516",
+            "mediumName": "火腿肠/台式肠",
+            "smallList": [
+              {
+                "smallId": "92516001",
+                "smallName": "火腿肠/热狗肠类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92517",
+            "mediumName": "加工蛋",
+            "smallList": [
+              {
+                "smallId": "92517001",
+                "smallName": "皮蛋/咸鸭蛋/卤蛋/盐焗蛋"
+              }
+            ]
+          },
+          {
+            "mediumId": "92518",
+            "mediumName": "方便食品",
+            "smallList": [
+              {
+                "smallId": "92518001",
+                "smallName": "桶/碗装方便面"
+              },
+              {
+                "smallId": "92518002",
+                "smallName": "袋装方便面"
+              },
+              {
+                "smallId": "92518003",
+                "smallName": "米线/粉"
+              },
+              {
+                "smallId": "92518004",
+                "smallName": "螺蛳粉"
+              },
+              {
+                "smallId": "92518005",
+                "smallName": "自热火锅"
+              },
+              {
+                "smallId": "92518006",
+                "smallName": "自热米饭"
+              },
+              {
+                "smallId": "92518007",
+                "smallName": "其他自热系列"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "926",
+        "bigName": "冷藏食品",
+        "mediumList": [
+          {
+            "mediumId": "92601",
+            "mediumName": "冷藏鲜奶",
+            "smallList": [
+              {
+                "smallId": "92601001",
+                "smallName": "冷藏鲜纯奶"
+              },
+              {
+                "smallId": "92601002",
+                "smallName": "冷藏调制奶"
+              },
+              {
+                "smallId": "92601003",
+                "smallName": "其它调制风味乳饮品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92602",
+            "mediumName": "冷藏酸奶",
+            "smallList": [
+              {
+                "smallId": "92602001",
+                "smallName": "冷藏鲜酸奶"
+              },
+              {
+                "smallId": "92602002",
+                "smallName": "冷藏酸奶/风味酸奶"
+              },
+              {
+                "smallId": "92602003",
+                "smallName": "活菌型乳酸菌饮品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92603",
+            "mediumName": "冷藏饮品甜点",
+            "smallList": [
+              {
+                "smallId": "92603001",
+                "smallName": "冷藏100%果蔬汁"
+              },
+              {
+                "smallId": "92603002",
+                "smallName": "其他冷藏果蔬汁"
+              },
+              {
+                "smallId": "92603003",
+                "smallName": "冷藏果茶/奶茶类"
+              },
+              {
+                "smallId": "92603004",
+                "smallName": "冷藏咖啡/咖啡饮料"
+              },
+              {
+                "smallId": "92603005",
+                "smallName": "米酒/甜酒类"
+              }
+            ]
+          },
+          {
+            "mediumId": "92604",
+            "mediumName": "冷藏乳制品",
+            "smallList": [
+              {
+                "smallId": "92604001",
+                "smallName": "儿童奶酪"
+              },
+              {
+                "smallId": "92604002",
+                "smallName": "新鲜奶酪/芝士杯"
+              },
+              {
+                "smallId": "92604003",
+                "smallName": "干制奶酪"
+              },
+              {
+                "smallId": "92604004",
+                "smallName": "黄油"
+              },
+              {
+                "smallId": "92604005",
+                "smallName": "芝士"
+              },
+              {
+                "smallId": "92604006",
+                "smallName": "奶油"
+              }
+            ]
+          },
+          {
+            "mediumId": "92605",
+            "mediumName": "冷藏糕点/蛋糕",
+            "smallList": [
+              {
+                "smallId": "92605001",
+                "smallName": "冷藏蛋糕"
+              }
+            ]
+          },
+          {
+            "mediumId": "92606",
+            "mediumName": "冷藏面制品",
+            "smallList": [
+              {
+                "smallId": "92606001",
+                "smallName": "面条类"
+              },
+              {
+                "smallId": "92606002",
+                "smallName": "年糕"
+              },
+              {
+                "smallId": "92606003",
+                "smallName": "意大利面"
+              },
+              {
+                "smallId": "92606004",
+                "smallName": "冷藏面点"
+              }
+            ]
+          },
+          {
+            "mediumId": "92607",
+            "mediumName": "冷藏豆制品",
+            "smallList": [
+              {
+                "smallId": "92607001",
+                "smallName": "豆干/豆皮/血豆腐类"
+              },
+              {
+                "smallId": "92607002",
+                "smallName": "冷藏豆浆"
+              },
+              {
+                "smallId": "92607003",
+                "smallName": "冷藏魔芋制品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92608",
+            "mediumName": "冷藏加工蔬菜",
+            "smallList": [
+              {
+                "smallId": "92608001",
+                "smallName": "酱菜泡菜咸菜"
+              },
+              {
+                "smallId": "92608002",
+                "smallName": "冷藏海带"
+              }
+            ]
+          },
+          {
+            "mediumId": "92609",
+            "mediumName": "冷藏熟食肉制品",
+            "smallList": [
+              {
+                "smallId": "92609001",
+                "smallName": "西式培根/火腿"
+              },
+              {
+                "smallId": "92609002",
+                "smallName": "香肠热狗灌肠"
+              },
+              {
+                "smallId": "92609003",
+                "smallName": "冷藏肉制品"
+              },
+              {
+                "smallId": "92609004",
+                "smallName": "其它酱卤肉制品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "927",
+        "bigName": "冷冻食品",
+        "mediumList": [
+          {
+            "mediumId": "92701",
+            "mediumName": "冷冻丸子",
+            "smallList": [
+              {
+                "smallId": "92701001",
+                "smallName": "牛肉丸"
+              },
+              {
+                "smallId": "92701002",
+                "smallName": "鱼虾蟹丸"
+              },
+              {
+                "smallId": "92701003",
+                "smallName": "猪肉丸"
+              },
+              {
+                "smallId": "92701004",
+                "smallName": "冷冻散称丸子"
+              }
+            ]
+          },
+          {
+            "mediumId": "92702",
+            "mediumName": "冷冻火锅食材",
+            "smallList": [
+              {
+                "smallId": "92702001",
+                "smallName": "牛羊肉卷"
+              },
+              {
+                "smallId": "92702002",
+                "smallName": "冷冻虾滑"
+              },
+              {
+                "smallId": "92702003",
+                "smallName": "其它火锅食材"
+              }
+            ]
+          },
+          {
+            "mediumId": "92703",
+            "mediumName": "冷冻调理",
+            "smallList": [
+              {
+                "smallId": "92703001",
+                "smallName": "冷冻烤串"
+              },
+              {
+                "smallId": "92703002",
+                "smallName": "冷冻烤肠"
+              },
+              {
+                "smallId": "92703003",
+                "smallName": "冷冻调理海鲜"
+              },
+              {
+                "smallId": "92703004",
+                "smallName": "传统鱼糜制品"
+              },
+              {
+                "smallId": "92703005",
+                "smallName": "冷冻牛排"
+              },
+              {
+                "smallId": "92703006",
+                "smallName": "冷冻蔬菜"
+              },
+              {
+                "smallId": "92703007",
+                "smallName": "冷冻调理肉制品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92704",
+            "mediumName": "冷冻油炸",
+            "smallList": [
+              {
+                "smallId": "92704001",
+                "smallName": "冷冻点心"
+              },
+              {
+                "smallId": "92704002",
+                "smallName": "冷冻炸肉制品"
+              },
+              {
+                "smallId": "92704003",
+                "smallName": "冷冻炸海鲜"
+              }
+            ]
+          },
+          {
+            "mediumId": "92705",
+            "mediumName": "冷冻水饺",
+            "smallList": [
+              {
+                "smallId": "92705001",
+                "smallName": "水饺"
+              },
+              {
+                "smallId": "92705002",
+                "smallName": "蒸煎饺"
+              },
+              {
+                "smallId": "92705003",
+                "smallName": "扁食/云吞/肉燕"
+              }
+            ]
+          },
+          {
+            "mediumId": "92706",
+            "mediumName": "冷冻汤圆",
+            "smallList": [
+              {
+                "smallId": "92706001",
+                "smallName": "汤圆"
+              }
+            ]
+          },
+          {
+            "mediumId": "92707",
+            "mediumName": "冷冻面点",
+            "smallList": [
+              {
+                "smallId": "92707001",
+                "smallName": "冷冻手抓饼/飞饼"
+              },
+              {
+                "smallId": "92707002",
+                "smallName": "冷冻馅饼"
+              },
+              {
+                "smallId": "92707003",
+                "smallName": "冷冻披萨"
+              },
+              {
+                "smallId": "92707004",
+                "smallName": "冷冻花式面点"
+              }
+            ]
+          },
+          {
+            "mediumId": "92708",
+            "mediumName": "冷冻包点",
+            "smallList": [
+              {
+                "smallId": "92708001",
+                "smallName": "冷冻馒头"
+              },
+              {
+                "smallId": "92708002",
+                "smallName": "冷冻花卷"
+              },
+              {
+                "smallId": "92708003",
+                "smallName": "冷冻甜包"
+              },
+              {
+                "smallId": "92708004",
+                "smallName": "冷冻肉包"
+              },
+              {
+                "smallId": "92708005",
+                "smallName": "冷冻小笼包"
+              },
+              {
+                "smallId": "92708006",
+                "smallName": "冷冻米制品"
+              },
+              {
+                "smallId": "92708007",
+                "smallName": "冷冻饭团/粽子"
+              },
+              {
+                "smallId": "92708008",
+                "smallName": "冷冻烧麦"
+              }
+            ]
+          },
+          {
+            "mediumId": "92709",
+            "mediumName": "冷冻烘焙",
+            "smallList": [
+              {
+                "smallId": "92709001",
+                "smallName": "冷冻蛋挞"
+              }
+            ]
+          },
+          {
+            "mediumId": "92710",
+            "mediumName": "冰品",
+            "smallList": [
+              {
+                "smallId": "92710001",
+                "smallName": "冰棍"
+              },
+              {
+                "smallId": "92710002",
+                "smallName": "雪糕"
+              },
+              {
+                "smallId": "92710003",
+                "smallName": "冰淇淋"
+              },
+              {
+                "smallId": "92710004",
+                "smallName": "其它冰品甜品"
+              }
+            ]
+          },
+          {
+            "mediumId": "92711",
+            "mediumName": "冷冻饮料",
+            "smallList": [
+              {
+                "smallId": "92711001",
+                "smallName": "速冻果汁"
+              },
+              {
+                "smallId": "92711002",
+                "smallName": "冰杯"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "930",
+        "bigName": "日化用品",
+        "mediumList": [
+          {
+            "mediumId": "93001",
+            "mediumName": "洗发护发",
+            "smallList": [
+              {
+                "smallId": "93001001",
+                "smallName": "洗发"
+              },
+              {
+                "smallId": "93001002",
+                "smallName": "护发"
+              },
+              {
+                "smallId": "93001003",
+                "smallName": "洗护组合装"
+              },
+              {
+                "smallId": "93001004",
+                "smallName": "发膜"
+              },
+              {
+                "smallId": "93001005",
+                "smallName": "造型"
+              },
+              {
+                "smallId": "93001006",
+                "smallName": "染发"
+              }
+            ]
+          },
+          {
+            "mediumId": "93002",
+            "mediumName": "沐浴用品",
+            "smallList": [
+              {
+                "smallId": "93002001",
+                "smallName": "沐浴露"
+              },
+              {
+                "smallId": "93002002",
+                "smallName": "浴油/浴盐"
+              },
+              {
+                "smallId": "93002003",
+                "smallName": "洗沐组合"
+              }
+            ]
+          },
+          {
+            "mediumId": "93003",
+            "mediumName": "香皂类",
+            "smallList": [
+              {
+                "smallId": "93003001",
+                "smallName": "香皂"
+              },
+              {
+                "smallId": "93003002",
+                "smallName": "硫磺皂/药皂"
+              },
+              {
+                "smallId": "93003003",
+                "smallName": "个护除菌/消毒液"
+              },
+              {
+                "smallId": "93003004",
+                "smallName": "功能性香皂/精油皂"
+              }
+            ]
+          },
+          {
+            "mediumId": "93004",
+            "mediumName": "洗手液",
+            "smallList": [
+              {
+                "smallId": "93004001",
+                "smallName": "常规洗手液"
+              },
+              {
+                "smallId": "93004002",
+                "smallName": "儿童洗手液"
+              }
+            ]
+          },
+          {
+            "mediumId": "93005",
+            "mediumName": "口腔护理",
+            "smallList": [
+              {
+                "smallId": "93005001",
+                "smallName": "牙刷"
+              },
+              {
+                "smallId": "93005002",
+                "smallName": "电动牙刷"
+              },
+              {
+                "smallId": "93005003",
+                "smallName": "牙膏"
+              },
+              {
+                "smallId": "93005004",
+                "smallName": "漱口水"
+              },
+              {
+                "smallId": "93005005",
+                "smallName": "儿童牙膏"
+              },
+              {
+                "smallId": "93005006",
+                "smallName": "儿童牙刷"
+              },
+              {
+                "smallId": "93005007",
+                "smallName": "其他口腔护理"
+              }
+            ]
+          },
+          {
+            "mediumId": "93006",
+            "mediumName": "膏霜类彩妆护肤品",
+            "smallList": [
+              {
+                "smallId": "93006001",
+                "smallName": "唇釉/彩"
+              },
+              {
+                "smallId": "93006002",
+                "smallName": "卸妆水"
+              },
+              {
+                "smallId": "93006003",
+                "smallName": "其他彩妆用品"
+              },
+              {
+                "smallId": "93006004",
+                "smallName": "粉底液/空气粉饼"
+              },
+              {
+                "smallId": "93006005",
+                "smallName": "基础面霜/膏/乳"
+              },
+              {
+                "smallId": "93006006",
+                "smallName": "品牌面部保养"
+              },
+              {
+                "smallId": "93006007",
+                "smallName": "男士保湿"
+              },
+              {
+                "smallId": "93006008",
+                "smallName": "润唇膏"
+              },
+              {
+                "smallId": "93006009",
+                "smallName": "护手霜"
+              },
+              {
+                "smallId": "93006010",
+                "smallName": "身体保养"
+              },
+              {
+                "smallId": "93006011",
+                "smallName": "护肤礼盒"
+              },
+              {
+                "smallId": "93006012",
+                "smallName": "基础洁面"
+              },
+              {
+                "smallId": "93006013",
+                "smallName": "男士洁面"
+              },
+              {
+                "smallId": "93006014",
+                "smallName": "面膜/眼膜"
+              },
+              {
+                "smallId": "93006015",
+                "smallName": "防晒霜"
+              },
+              {
+                "smallId": "93006016",
+                "smallName": "止汗香体剂"
+              },
+              {
+                "smallId": "93006017",
+                "smallName": "脱毛产品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93007",
+            "mediumName": "男士护理",
+            "smallList": [
+              {
+                "smallId": "93007001",
+                "smallName": "手动剃须刀架"
+              },
+              {
+                "smallId": "93007002",
+                "smallName": "手动剃须刀头"
+              },
+              {
+                "smallId": "93007003",
+                "smallName": "电动剃须刀"
+              },
+              {
+                "smallId": "93007004",
+                "smallName": "剃须泡"
+              },
+              {
+                "smallId": "93007005",
+                "smallName": "其它男士护理品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93008",
+            "mediumName": "防护计生",
+            "smallList": [
+              {
+                "smallId": "93008001",
+                "smallName": "家庭常备防护"
+              },
+              {
+                "smallId": "93008002",
+                "smallName": "急救用品"
+              },
+              {
+                "smallId": "93008003",
+                "smallName": "计生用品"
+              },
+              {
+                "smallId": "93008004",
+                "smallName": "暖宝冰贴"
+              }
+            ]
+          },
+          {
+            "mediumId": "93009",
+            "mediumName": "女性护理",
+            "smallList": [
+              {
+                "smallId": "93009001",
+                "smallName": "夜用卫生巾"
+              },
+              {
+                "smallId": "93009002",
+                "smallName": "日用卫生巾"
+              },
+              {
+                "smallId": "93009003",
+                "smallName": "裤型卫生巾"
+              },
+              {
+                "smallId": "93009004",
+                "smallName": "迷你/护垫卫生巾"
+              },
+              {
+                "smallId": "93009005",
+                "smallName": "日夜/组合卫生巾"
+              },
+              {
+                "smallId": "93009006",
+                "smallName": "私秘护理液"
+              }
+            ]
+          },
+          {
+            "mediumId": "93010",
+            "mediumName": "纸尿裤/护理垫",
+            "smallList": [
+              {
+                "smallId": "93010001",
+                "smallName": "成人纸尿裤"
+              },
+              {
+                "smallId": "93010002",
+                "smallName": "护理垫"
+              },
+              {
+                "smallId": "93010003",
+                "smallName": "婴儿尿片"
+              },
+              {
+                "smallId": "93010004",
+                "smallName": "婴儿拉拉裤"
+              }
+            ]
+          },
+          {
+            "mediumId": "93011",
+            "mediumName": "婴童洗护用品",
+            "smallList": [
+              {
+                "smallId": "93011001",
+                "smallName": "婴童洗发沐浴"
+              },
+              {
+                "smallId": "93011002",
+                "smallName": "婴儿抚触油类"
+              },
+              {
+                "smallId": "93011003",
+                "smallName": "婴儿爽身粉"
+              },
+              {
+                "smallId": "93011004",
+                "smallName": "婴童洁面/保湿润肤"
+              },
+              {
+                "smallId": "93011005",
+                "smallName": "婴童润唇"
+              }
+            ]
+          },
+          {
+            "mediumId": "93012",
+            "mediumName": "卫生用纸",
+            "smallList": [
+              {
+                "smallId": "93012001",
+                "smallName": "软抽纸"
+              },
+              {
+                "smallId": "93012002",
+                "smallName": "挂式抽纸"
+              },
+              {
+                "smallId": "93012003",
+                "smallName": "便携装手帕纸"
+              },
+              {
+                "smallId": "93012004",
+                "smallName": "卷纸"
+              }
+            ]
+          },
+          {
+            "mediumId": "93013",
+            "mediumName": "湿巾/绵柔巾",
+            "smallList": [
+              {
+                "smallId": "93013001",
+                "smallName": "婴童湿巾"
+              },
+              {
+                "smallId": "93013002",
+                "smallName": "抽取式普通湿巾"
+              },
+              {
+                "smallId": "93013003",
+                "smallName": "便携装湿巾"
+              },
+              {
+                "smallId": "93013004",
+                "smallName": "一次性棉柔巾"
+              },
+              {
+                "smallId": "93013005",
+                "smallName": "湿厕纸巾"
+              }
+            ]
+          },
+          {
+            "mediumId": "93014",
+            "mediumName": "厨房纸巾",
+            "smallList": [
+              {
+                "smallId": "93014001",
+                "smallName": "厨房卷纸"
+              },
+              {
+                "smallId": "93014002",
+                "smallName": "厨房抽纸"
+              },
+              {
+                "smallId": "93014003",
+                "smallName": "厨房湿巾"
+              }
+            ]
+          },
+          {
+            "mediumId": "93015",
+            "mediumName": "洗衣/护理液",
+            "smallList": [
+              {
+                "smallId": "93015001",
+                "smallName": "洗衣液"
+              },
+              {
+                "smallId": "93015002",
+                "smallName": "洗衣凝珠"
+              },
+              {
+                "smallId": "93015003",
+                "smallName": "专用洗衣液"
+              },
+              {
+                "smallId": "93015004",
+                "smallName": "漂渍液"
+              },
+              {
+                "smallId": "93015005",
+                "smallName": "衣物除菌/消毒液"
+              },
+              {
+                "smallId": "93015006",
+                "smallName": "柔顺护理剂"
+              },
+              {
+                "smallId": "93015007",
+                "smallName": "洗衣留香珠"
+              },
+              {
+                "smallId": "93015008",
+                "smallName": "其它洗衣护理液"
+              }
+            ]
+          },
+          {
+            "mediumId": "93016",
+            "mediumName": "洗衣（鞋）粉/皂",
+            "smallList": [
+              {
+                "smallId": "93016001",
+                "smallName": "洗衣粉"
+              },
+              {
+                "smallId": "93016002",
+                "smallName": "洗衣皂"
+              },
+              {
+                "smallId": "93016003",
+                "smallName": "专用洗衣皂"
+              },
+              {
+                "smallId": "93016004",
+                "smallName": "洗衣盐/其它"
+              }
+            ]
+          },
+          {
+            "mediumId": "93017",
+            "mediumName": "洗洁精类",
+            "smallList": [
+              {
+                "smallId": "93017001",
+                "smallName": "洗洁精"
+              },
+              {
+                "smallId": "93017002",
+                "smallName": "蔬果清洁剂"
+              }
+            ]
+          },
+          {
+            "mediumId": "93018",
+            "mediumName": "家居皮革护理剂",
+            "smallList": [
+              {
+                "smallId": "93018001",
+                "smallName": "家具护理"
+              },
+              {
+                "smallId": "93018002",
+                "smallName": "皮具护理"
+              },
+              {
+                "smallId": "93018003",
+                "smallName": "汽车玻璃水"
+              },
+              {
+                "smallId": "93018004",
+                "smallName": "鞋油鞋刷"
+              }
+            ]
+          },
+          {
+            "mediumId": "93019",
+            "mediumName": "厨卫浴清洁剂",
+            "smallList": [
+              {
+                "smallId": "93019001",
+                "smallName": "浴室清洁剂"
+              },
+              {
+                "smallId": "93019002",
+                "smallName": "厨房清洁剂"
+              },
+              {
+                "smallId": "93019003",
+                "smallName": "地板瓷砖清洁剂"
+              },
+              {
+                "smallId": "93019004",
+                "smallName": "厨卫消毒/除菌液"
+              },
+              {
+                "smallId": "93019005",
+                "smallName": "其他专用清洗剂"
+              },
+              {
+                "smallId": "93019006",
+                "smallName": "管道疏通剂"
+              },
+              {
+                "smallId": "93019007",
+                "smallName": "洁厕灵/宝"
+              },
+              {
+                "smallId": "93019008",
+                "smallName": "厕所清洁剂"
+              }
+            ]
+          },
+          {
+            "mediumId": "93020",
+            "mediumName": "空气清新",
+            "smallList": [
+              {
+                "smallId": "93020001",
+                "smallName": "工艺品蜡烛"
+              },
+              {
+                "smallId": "93020002",
+                "smallName": "香薰/香包类"
+              },
+              {
+                "smallId": "93020003",
+                "smallName": "除臭芳香剂/喷雾"
+              },
+              {
+                "smallId": "93020004",
+                "smallName": "除臭芳香固体"
+              },
+              {
+                "smallId": "93020005",
+                "smallName": "防霉去湿"
+              }
+            ]
+          },
+          {
+            "mediumId": "93021",
+            "mediumName": "驱蚊/杀虫",
+            "smallList": [
+              {
+                "smallId": "93021001",
+                "smallName": "灭虫喷雾"
+              },
+              {
+                "smallId": "93021002",
+                "smallName": "蚊香盘香"
+              },
+              {
+                "smallId": "93021003",
+                "smallName": "电蚊片/器"
+              },
+              {
+                "smallId": "93021004",
+                "smallName": "电蚊液/器"
+              },
+              {
+                "smallId": "93021005",
+                "smallName": "粘鼠板"
+              },
+              {
+                "smallId": "93021006",
+                "smallName": "花露水"
+              },
+              {
+                "smallId": "93021007",
+                "smallName": "宝宝花露水/驱蚊"
+              },
+              {
+                "smallId": "93021008",
+                "smallName": "其它驱蚊诱捕用品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "931",
+        "bigName": "家庭用品",
+        "mediumList": [
+          {
+            "mediumId": "93101",
+            "mediumName": "锅具",
+            "smallList": [
+              {
+                "smallId": "93101001",
+                "smallName": "奶锅"
+              },
+              {
+                "smallId": "93101002",
+                "smallName": "炒/煎锅"
+              },
+              {
+                "smallId": "93101003",
+                "smallName": "汤锅"
+              },
+              {
+                "smallId": "93101004",
+                "smallName": "蒸锅"
+              },
+              {
+                "smallId": "93101005",
+                "smallName": "压力锅"
+              },
+              {
+                "smallId": "93101006",
+                "smallName": "砂锅煲/陶瓷煲/珐琅锅"
+              },
+              {
+                "smallId": "93101007",
+                "smallName": "其他锅具"
+              },
+              {
+                "smallId": "93101008",
+                "smallName": "锅盖/配件类"
+              },
+              {
+                "smallId": "93101009",
+                "smallName": "套装锅具"
+              }
+            ]
+          },
+          {
+            "mediumId": "93102",
+            "mediumName": "厨用工具",
+            "smallList": [
+              {
+                "smallId": "93102001",
+                "smallName": "铲子"
+              },
+              {
+                "smallId": "93102002",
+                "smallName": "网漏"
+              },
+              {
+                "smallId": "93102003",
+                "smallName": "汤勺"
+              },
+              {
+                "smallId": "93102004",
+                "smallName": "饭勺"
+              }
+            ]
+          },
+          {
+            "mediumId": "93103",
+            "mediumName": "厨用器皿",
+            "smallList": [
+              {
+                "smallId": "93103001",
+                "smallName": "油瓶/罐/壶"
+              },
+              {
+                "smallId": "93103002",
+                "smallName": "调味盒/罐"
+              },
+              {
+                "smallId": "93103003",
+                "smallName": "冰格/冰模"
+              },
+              {
+                "smallId": "93103004",
+                "smallName": "果盘/篮子"
+              },
+              {
+                "smallId": "93103005",
+                "smallName": "保鲜盒"
+              },
+              {
+                "smallId": "93103006",
+                "smallName": "木制盆"
+              },
+              {
+                "smallId": "93103007",
+                "smallName": "密器罐"
+              },
+              {
+                "smallId": "93103008",
+                "smallName": "米桶"
+              },
+              {
+                "smallId": "93103009",
+                "smallName": "托盘"
+              },
+              {
+                "smallId": "93103010",
+                "smallName": "其它厨用器皿"
+              }
+            ]
+          },
+          {
+            "mediumId": "93104",
+            "mediumName": "厨用刀具/粘板",
+            "smallList": [
+              {
+                "smallId": "93104001",
+                "smallName": "砍骨刀"
+              },
+              {
+                "smallId": "93104002",
+                "smallName": "切片刀"
+              },
+              {
+                "smallId": "93104003",
+                "smallName": "多用刀"
+              },
+              {
+                "smallId": "93104004",
+                "smallName": "水果刀"
+              },
+              {
+                "smallId": "93104005",
+                "smallName": "厨房剪刀"
+              },
+              {
+                "smallId": "93104006",
+                "smallName": "刀座"
+              },
+              {
+                "smallId": "93104007",
+                "smallName": "其他刀具"
+              },
+              {
+                "smallId": "93104008",
+                "smallName": "套装刀具"
+              },
+              {
+                "smallId": "93104009",
+                "smallName": "砧板"
+              }
+            ]
+          },
+          {
+            "mediumId": "93105",
+            "mediumName": "厨用小配件",
+            "smallList": [
+              {
+                "smallId": "93105001",
+                "smallName": "筛器/沥水篮"
+              },
+              {
+                "smallId": "93105002",
+                "smallName": "刮削器/刨刀"
+              },
+              {
+                "smallId": "93105003",
+                "smallName": "搅拌/打蛋器"
+              },
+              {
+                "smallId": "93105004",
+                "smallName": "磨刀器"
+              },
+              {
+                "smallId": "93105005",
+                "smallName": "食品夹"
+              },
+              {
+                "smallId": "93105006",
+                "smallName": "捣蒜器/蒜头夹"
+              },
+              {
+                "smallId": "93105007",
+                "smallName": "擀面棍"
+              },
+              {
+                "smallId": "93105008",
+                "smallName": "杯盖杯垫"
+              },
+              {
+                "smallId": "93105009",
+                "smallName": "启瓶器"
+              },
+              {
+                "smallId": "93105010",
+                "smallName": "酒塞"
+              },
+              {
+                "smallId": "93105011",
+                "smallName": "炸筷"
+              },
+              {
+                "smallId": "93105012",
+                "smallName": "蒸片/架"
+              },
+              {
+                "smallId": "93105013",
+                "smallName": "厨房置物/收纳架"
+              },
+              {
+                "smallId": "93105014",
+                "smallName": "其它厨用小配件"
+              }
+            ]
+          },
+          {
+            "mediumId": "93106",
+            "mediumName": "不锈钢餐具/木质餐具",
+            "smallList": [
+              {
+                "smallId": "93106001",
+                "smallName": "餐刀"
+              },
+              {
+                "smallId": "93106002",
+                "smallName": "餐叉"
+              },
+              {
+                "smallId": "93106003",
+                "smallName": "不锈钢匙"
+              },
+              {
+                "smallId": "93106004",
+                "smallName": "不锈钢碗/盆"
+              },
+              {
+                "smallId": "93106005",
+                "smallName": "筷子"
+              },
+              {
+                "smallId": "93106006",
+                "smallName": "餐具套装"
+              },
+              {
+                "smallId": "93106007",
+                "smallName": "饭盒"
+              },
+              {
+                "smallId": "93106008",
+                "smallName": "其他用餐工具"
+              }
+            ]
+          },
+          {
+            "mediumId": "93107",
+            "mediumName": "陶瓷/玻璃餐具",
+            "smallList": [
+              {
+                "smallId": "93107001",
+                "smallName": "瓷盘/碗/碟"
+              },
+              {
+                "smallId": "93107002",
+                "smallName": "瓷勺"
+              },
+              {
+                "smallId": "93107003",
+                "smallName": "瓷匙"
+              },
+              {
+                "smallId": "93107004",
+                "smallName": "瓷炖煲/罐"
+              },
+              {
+                "smallId": "93107005",
+                "smallName": "玻璃盘/碗类"
+              },
+              {
+                "smallId": "93107006",
+                "smallName": "密胺餐具类"
+              },
+              {
+                "smallId": "93107007",
+                "smallName": "其他瓷用品"
+              },
+              {
+                "smallId": "93107008",
+                "smallName": "餐盘碗勺套装"
+              }
+            ]
+          },
+          {
+            "mediumId": "93108",
+            "mediumName": "保温杯运动杯",
+            "smallList": [
+              {
+                "smallId": "93108001",
+                "smallName": "保温杯"
+              },
+              {
+                "smallId": "93108002",
+                "smallName": "焖烧桶"
+              },
+              {
+                "smallId": "93108003",
+                "smallName": "保温桶"
+              },
+              {
+                "smallId": "93108004",
+                "smallName": "暖水瓶"
+              },
+              {
+                "smallId": "93108005",
+                "smallName": "运动水壶"
+              },
+              {
+                "smallId": "93108006",
+                "smallName": "运动水杯"
+              }
+            ]
+          },
+          {
+            "mediumId": "93109",
+            "mediumName": "陶瓷玻璃杯具/制品",
+            "smallList": [
+              {
+                "smallId": "93109001",
+                "smallName": "瓷杯"
+              },
+              {
+                "smallId": "93109002",
+                "smallName": "咖啡杯壶"
+              },
+              {
+                "smallId": "93109003",
+                "smallName": "玻璃杯"
+              },
+              {
+                "smallId": "93109004",
+                "smallName": "高脚杯"
+              },
+              {
+                "smallId": "93109005",
+                "smallName": "白酒杯"
+              },
+              {
+                "smallId": "93109006",
+                "smallName": "其他器型酒具"
+              },
+              {
+                "smallId": "93109007",
+                "smallName": "分酒器"
+              },
+              {
+                "smallId": "93109008",
+                "smallName": "酒具套装"
+              },
+              {
+                "smallId": "93109009",
+                "smallName": "醒酒器"
+              },
+              {
+                "smallId": "93109010",
+                "smallName": "茶具（杯壶盘宠）"
+              },
+              {
+                "smallId": "93109011",
+                "smallName": "凉水壶"
+              },
+              {
+                "smallId": "93109012",
+                "smallName": "其他玻璃制品"
+              },
+              {
+                "smallId": "93109013",
+                "smallName": "烟缸"
+              },
+              {
+                "smallId": "93109014",
+                "smallName": "玻璃杯具套装"
+              }
+            ]
+          },
+          {
+            "mediumId": "93110",
+            "mediumName": "一次性餐盘碗/餐盒/套组",
+            "smallList": [
+              {
+                "smallId": "93110001",
+                "smallName": "一次性餐碗"
+              },
+              {
+                "smallId": "93110002",
+                "smallName": "一次性餐具套组"
+              },
+              {
+                "smallId": "93110003",
+                "smallName": "一次性餐盘"
+              },
+              {
+                "smallId": "93110004",
+                "smallName": "一次性保鲜盒/餐盒"
+              }
+            ]
+          },
+          {
+            "mediumId": "93111",
+            "mediumName": "一次性水杯",
+            "smallList": [
+              {
+                "smallId": "93111001",
+                "smallName": "一次性塑杯"
+              },
+              {
+                "smallId": "93111002",
+                "smallName": "一次性纸杯"
+              },
+              {
+                "smallId": "93111003",
+                "smallName": "一次性稻壳杯"
+              },
+              {
+                "smallId": "93111004",
+                "smallName": "一次性航空杯"
+              },
+              {
+                "smallId": "93111005",
+                "smallName": "其他一次性水杯"
+              }
+            ]
+          },
+          {
+            "mediumId": "93112",
+            "mediumName": "一次性餐用工具",
+            "smallList": [
+              {
+                "smallId": "93112001",
+                "smallName": "一次性筷子"
+              },
+              {
+                "smallId": "93112002",
+                "smallName": "一次性汤匙/勺"
+              },
+              {
+                "smallId": "93112003",
+                "smallName": "一次性叉子"
+              },
+              {
+                "smallId": "93112004",
+                "smallName": "一次性吸管"
+              },
+              {
+                "smallId": "93112005",
+                "smallName": "一次性手套"
+              },
+              {
+                "smallId": "93112006",
+                "smallName": "牙签"
+              },
+              {
+                "smallId": "93112007",
+                "smallName": "牙线"
+              },
+              {
+                "smallId": "93112008",
+                "smallName": "一次性桌布"
+              }
+            ]
+          },
+          {
+            "mediumId": "93113",
+            "mediumName": "一次性厨房用品",
+            "smallList": [
+              {
+                "smallId": "93113001",
+                "smallName": "铝箔/铝盒"
+              },
+              {
+                "smallId": "93113002",
+                "smallName": "炸锅纸"
+              },
+              {
+                "smallId": "93113003",
+                "smallName": "保鲜罩"
+              },
+              {
+                "smallId": "93113004",
+                "smallName": "保鲜膜/纸"
+              },
+              {
+                "smallId": "93113005",
+                "smallName": "保鲜袋"
+              },
+              {
+                "smallId": "93113006",
+                "smallName": "烹饪用纸"
+              },
+              {
+                "smallId": "93113007",
+                "smallName": "垃圾袋"
+              },
+              {
+                "smallId": "93113008",
+                "smallName": "一次性烹饪膜具"
+              },
+              {
+                "smallId": "93113009",
+                "smallName": "其它一次性厨房用品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93114",
+            "mediumName": "烧烤用具",
+            "smallList": [
+              {
+                "smallId": "93114001",
+                "smallName": "油刷/喷"
+              },
+              {
+                "smallId": "93114002",
+                "smallName": "烧烤签"
+              },
+              {
+                "smallId": "93114003",
+                "smallName": "其他烧烤配件"
+              },
+              {
+                "smallId": "93114004",
+                "smallName": "烧烤炉/架"
+              },
+              {
+                "smallId": "93114005",
+                "smallName": "烧烤网格"
+              }
+            ]
+          },
+          {
+            "mediumId": "93115",
+            "mediumName": "厨房清洁工具",
+            "smallList": [
+              {
+                "smallId": "93115001",
+                "smallName": "一次性清洁布"
+              },
+              {
+                "smallId": "93115002",
+                "smallName": "百洁布/海绵块"
+              },
+              {
+                "smallId": "93115003",
+                "smallName": "抹布清洁布"
+              },
+              {
+                "smallId": "93115004",
+                "smallName": "魔力擦"
+              },
+              {
+                "smallId": "93115005",
+                "smallName": "擦手巾"
+              },
+              {
+                "smallId": "93115006",
+                "smallName": "杯刷"
+              },
+              {
+                "smallId": "93115007",
+                "smallName": "钢丝球/刷"
+              },
+              {
+                "smallId": "93115008",
+                "smallName": "橡胶手套"
+              },
+              {
+                "smallId": "93115009",
+                "smallName": "微波手套"
+              },
+              {
+                "smallId": "93115010",
+                "smallName": "围裙袖套"
+              },
+              {
+                "smallId": "93115011",
+                "smallName": "食品罩/机套"
+              },
+              {
+                "smallId": "93115012",
+                "smallName": "其它厨房清洁配件"
+              }
+            ]
+          },
+          {
+            "mediumId": "93116",
+            "mediumName": "个人清洁/整理工具",
+            "smallList": [
+              {
+                "smallId": "93116001",
+                "smallName": "化妆工具"
+              },
+              {
+                "smallId": "93116002",
+                "smallName": "小镜子"
+              },
+              {
+                "smallId": "93116003",
+                "smallName": "普通发梳"
+              },
+              {
+                "smallId": "93116004",
+                "smallName": "按摩梳"
+              },
+              {
+                "smallId": "93116005",
+                "smallName": "指甲剪"
+              },
+              {
+                "smallId": "93116006",
+                "smallName": "其它美妆配件"
+              },
+              {
+                "smallId": "93116007",
+                "smallName": "发饰"
+              },
+              {
+                "smallId": "93116008",
+                "smallName": "发夹"
+              },
+              {
+                "smallId": "93116009",
+                "smallName": "浴球/条"
+              },
+              {
+                "smallId": "93116010",
+                "smallName": "针线盒"
+              },
+              {
+                "smallId": "93116011",
+                "smallName": "粘毛器"
+              },
+              {
+                "smallId": "93116012",
+                "smallName": "暖水袋"
+              },
+              {
+                "smallId": "93116013",
+                "smallName": "其他个人清洁工具"
+              },
+              {
+                "smallId": "93116014",
+                "smallName": "按摩工具"
+              },
+              {
+                "smallId": "93116015",
+                "smallName": "塑料口杯"
+              }
+            ]
+          },
+          {
+            "mediumId": "93117",
+            "mediumName": "一次性生活用品",
+            "smallList": [
+              {
+                "smallId": "93117001",
+                "smallName": "棉签"
+              },
+              {
+                "smallId": "93117002",
+                "smallName": "一次性浴巾"
+              },
+              {
+                "smallId": "93117003",
+                "smallName": "一次性鞋套"
+              },
+              {
+                "smallId": "93117004",
+                "smallName": "一次性床单"
+              },
+              {
+                "smallId": "93117005",
+                "smallName": "一次性毛巾"
+              },
+              {
+                "smallId": "93117006",
+                "smallName": "一次性压缩毛巾"
+              },
+              {
+                "smallId": "93117007",
+                "smallName": "一次性浴帽"
+              },
+              {
+                "smallId": "93117008",
+                "smallName": "一次性内裤"
+              },
+              {
+                "smallId": "93117009",
+                "smallName": "一次性马桶垫"
+              },
+              {
+                "smallId": "93117010",
+                "smallName": "其他一次性生活用品"
+              },
+              {
+                "smallId": "93117011",
+                "smallName": "一次性袜子"
+              }
+            ]
+          },
+          {
+            "mediumId": "93118",
+            "mediumName": "清洁工具",
+            "smallList": [
+              {
+                "smallId": "93118001",
+                "smallName": "室内扫帚"
+              },
+              {
+                "smallId": "93118002",
+                "smallName": "簸箕"
+              },
+              {
+                "smallId": "93118003",
+                "smallName": "地板刷/刮器"
+              },
+              {
+                "smallId": "93118004",
+                "smallName": "马桶吸"
+              },
+              {
+                "smallId": "93118005",
+                "smallName": "马桶刷"
+              },
+              {
+                "smallId": "93118006",
+                "smallName": "洗衣刷/鞋刷"
+              },
+              {
+                "smallId": "93118007",
+                "smallName": "皂盒"
+              },
+              {
+                "smallId": "93118008",
+                "smallName": "掸子"
+              },
+              {
+                "smallId": "93118009",
+                "smallName": "扫帚套装"
+              },
+              {
+                "smallId": "93118010",
+                "smallName": "胶棉拖把"
+              },
+              {
+                "smallId": "93118011",
+                "smallName": "尘推"
+              },
+              {
+                "smallId": "93118012",
+                "smallName": "简易拖把"
+              },
+              {
+                "smallId": "93118013",
+                "smallName": "拖把套装/配件"
+              }
+            ]
+          },
+          {
+            "mediumId": "93119",
+            "mediumName": "衣物晾晒收纳用品",
+            "smallList": [
+              {
+                "smallId": "93119001",
+                "smallName": "衣架"
+              },
+              {
+                "smallId": "93119002",
+                "smallName": "衣夹架"
+              },
+              {
+                "smallId": "93119003",
+                "smallName": "衣叉"
+              },
+              {
+                "smallId": "93119004",
+                "smallName": "儿童衣架"
+              },
+              {
+                "smallId": "93119005",
+                "smallName": "衣夹"
+              },
+              {
+                "smallId": "93119006",
+                "smallName": "晾衣绳"
+              },
+              {
+                "smallId": "93119007",
+                "smallName": "被夹"
+              },
+              {
+                "smallId": "93119008",
+                "smallName": "挂勾贴勾"
+              },
+              {
+                "smallId": "93119009",
+                "smallName": "洗衣收纳"
+              },
+              {
+                "smallId": "93119010",
+                "smallName": "其他收纳小物件"
+              }
+            ]
+          },
+          {
+            "mediumId": "93120",
+            "mediumName": "收纳整理/家具用品",
+            "smallList": [
+              {
+                "smallId": "93120001",
+                "smallName": "整理/收纳箱"
+              },
+              {
+                "smallId": "93120002",
+                "smallName": "收纳盒"
+              },
+              {
+                "smallId": "93120003",
+                "smallName": "整理柜/层架"
+              },
+              {
+                "smallId": "93120004",
+                "smallName": "收纳袋"
+              },
+              {
+                "smallId": "93120005",
+                "smallName": "垃圾桶"
+              },
+              {
+                "smallId": "93120006",
+                "smallName": "水桶"
+              },
+              {
+                "smallId": "93120007",
+                "smallName": "水盆"
+              },
+              {
+                "smallId": "93120008",
+                "smallName": "清洁桶"
+              },
+              {
+                "smallId": "93120009",
+                "smallName": "凳子/椅子"
+              },
+              {
+                "smallId": "93120010",
+                "smallName": "地垫"
+              },
+              {
+                "smallId": "93120011",
+                "smallName": "其他生活小配件"
+              }
+            ]
+          },
+          {
+            "mediumId": "93121",
+            "mediumName": "五金配件",
+            "smallList": [
+              {
+                "smallId": "93121001",
+                "smallName": "电池"
+              },
+              {
+                "smallId": "93121002",
+                "smallName": "打火机"
+              },
+              {
+                "smallId": "93121003",
+                "smallName": "灯具/灯泡"
+              },
+              {
+                "smallId": "93121004",
+                "smallName": "插线板"
+              },
+              {
+                "smallId": "93121005",
+                "smallName": "电器配件"
+              },
+              {
+                "smallId": "93121006",
+                "smallName": "五金小工具"
+              },
+              {
+                "smallId": "93121007",
+                "smallName": "工用胶带/胶水"
+              },
+              {
+                "smallId": "93121008",
+                "smallName": "管道/花洒"
+              },
+              {
+                "smallId": "93121009",
+                "smallName": "其它五金配件"
+              },
+              {
+                "smallId": "93121010",
+                "smallName": "汽配用品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93122",
+            "mediumName": "祭祀用品类",
+            "smallList": [
+              {
+                "smallId": "93122001",
+                "smallName": "祭祀金纸"
+              },
+              {
+                "smallId": "93122002",
+                "smallName": "祭祀香/烛"
+              },
+              {
+                "smallId": "93122003",
+                "smallName": "其他祭祀用品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93123",
+            "mediumName": "小家电",
+            "smallList": [
+              {
+                "smallId": "93123001",
+                "smallName": "电热水壶"
+              },
+              {
+                "smallId": "93123002",
+                "smallName": "电饭煲"
+              },
+              {
+                "smallId": "93123003",
+                "smallName": "空气炸锅"
+              },
+              {
+                "smallId": "93123004",
+                "smallName": "电压力锅"
+              },
+              {
+                "smallId": "93123005",
+                "smallName": "电火锅"
+              },
+              {
+                "smallId": "93123006",
+                "smallName": "电磁炉"
+              },
+              {
+                "smallId": "93123007",
+                "smallName": "电风扇"
+              },
+              {
+                "smallId": "93123008",
+                "smallName": "电吹风"
+              },
+              {
+                "smallId": "93123009",
+                "smallName": "其他电器"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "932",
+        "bigName": "家居用品",
+        "mediumList": [
+          {
+            "mediumId": "93201",
+            "mediumName": "毛巾布艺",
+            "smallList": [
+              {
+                "smallId": "93201001",
+                "smallName": "面巾"
+              },
+              {
+                "smallId": "93201002",
+                "smallName": "方巾"
+              },
+              {
+                "smallId": "93201003",
+                "smallName": "浴巾"
+              },
+              {
+                "smallId": "93201004",
+                "smallName": "童巾"
+              },
+              {
+                "smallId": "93201005",
+                "smallName": "发干帽"
+              },
+              {
+                "smallId": "93201006",
+                "smallName": "床上用品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93202",
+            "mediumName": "内裤/内衣",
+            "smallList": [
+              {
+                "smallId": "93202001",
+                "smallName": "男内裤"
+              },
+              {
+                "smallId": "93202002",
+                "smallName": "女内裤"
+              },
+              {
+                "smallId": "93202003",
+                "smallName": "儿童内裤"
+              },
+              {
+                "smallId": "93202004",
+                "smallName": "内衣睡衣"
+              }
+            ]
+          },
+          {
+            "mediumId": "93203",
+            "mediumName": "袜子等针织用品",
+            "smallList": [
+              {
+                "smallId": "93203001",
+                "smallName": "男袜"
+              },
+              {
+                "smallId": "93203002",
+                "smallName": "女袜"
+              },
+              {
+                "smallId": "93203003",
+                "smallName": "女连裤袜/桶袜"
+              },
+              {
+                "smallId": "93203004",
+                "smallName": "儿童袜"
+              },
+              {
+                "smallId": "93203005",
+                "smallName": "饰品/配件"
+              },
+              {
+                "smallId": "93203006",
+                "smallName": "防嗮袖套/手套"
+              }
+            ]
+          },
+          {
+            "mediumId": "93204",
+            "mediumName": "拖鞋",
+            "smallList": [
+              {
+                "smallId": "93204001",
+                "smallName": "男棉拖"
+              },
+              {
+                "smallId": "93204002",
+                "smallName": "女棉拖"
+              },
+              {
+                "smallId": "93204003",
+                "smallName": "童棉拖"
+              },
+              {
+                "smallId": "93204004",
+                "smallName": "男凉拖"
+              },
+              {
+                "smallId": "93204005",
+                "smallName": "女凉拖"
+              },
+              {
+                "smallId": "93204006",
+                "smallName": "童凉拖/四季拖"
+              },
+              {
+                "smallId": "93204007",
+                "smallName": "男四季拖"
+              },
+              {
+                "smallId": "93204008",
+                "smallName": "女四季拖"
+              },
+              {
+                "smallId": "93204009",
+                "smallName": "其他鞋类"
+              }
+            ]
+          },
+          {
+            "mediumId": "93205",
+            "mediumName": "雨具",
+            "smallList": [
+              {
+                "smallId": "93205001",
+                "smallName": "雨伞"
+              },
+              {
+                "smallId": "93205002",
+                "smallName": "雨衣及其它雨具"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "933",
+        "bigName": "文体",
+        "mediumList": [
+          {
+            "mediumId": "93301",
+            "mediumName": "文具办公",
+            "smallList": [
+              {
+                "smallId": "93301001",
+                "smallName": "办公整理"
+              },
+              {
+                "smallId": "93301002",
+                "smallName": "办公用纸/本"
+              },
+              {
+                "smallId": "93301003",
+                "smallName": "贺卡/红包"
+              },
+              {
+                "smallId": "93301004",
+                "smallName": "办公配件"
+              },
+              {
+                "smallId": "93301005",
+                "smallName": "笔记本/作业本"
+              },
+              {
+                "smallId": "93301006",
+                "smallName": "记号/白板/荧光笔"
+              },
+              {
+                "smallId": "93301007",
+                "smallName": "铅笔/自动笔/笔芯"
+              },
+              {
+                "smallId": "93301008",
+                "smallName": "中性笔/圆珠笔/笔芯"
+              },
+              {
+                "smallId": "93301009",
+                "smallName": "水彩笔"
+              },
+              {
+                "smallId": "93301010",
+                "smallName": "毛笔/钢笔"
+              },
+              {
+                "smallId": "93301011",
+                "smallName": "修正带/液"
+              },
+              {
+                "smallId": "93301012",
+                "smallName": "文具套装"
+              },
+              {
+                "smallId": "93301013",
+                "smallName": "橡皮擦"
+              },
+              {
+                "smallId": "93301014",
+                "smallName": "美工刀"
+              },
+              {
+                "smallId": "93301015",
+                "smallName": "削笔刀"
+              },
+              {
+                "smallId": "93301016",
+                "smallName": "办公/学生剪刀"
+              },
+              {
+                "smallId": "93301017",
+                "smallName": "尺子/圆规"
+              },
+              {
+                "smallId": "93301018",
+                "smallName": "墨水/印台/泥"
+              },
+              {
+                "smallId": "93301019",
+                "smallName": "计数/计算机"
+              },
+              {
+                "smallId": "93301020",
+                "smallName": "订书机/钉/回旋针"
+              },
+              {
+                "smallId": "93301021",
+                "smallName": "办公学习胶带/胶水"
+              },
+              {
+                "smallId": "93301022",
+                "smallName": "其他学习配件"
+              },
+              {
+                "smallId": "93301023",
+                "smallName": "书籍/图本"
+              },
+              {
+                "smallId": "93301024",
+                "smallName": "笔袋笔盒"
+              },
+              {
+                "smallId": "93301025",
+                "smallName": "美术画画"
+              },
+              {
+                "smallId": "93301026",
+                "smallName": "书包"
+              },
+              {
+                "smallId": "93301027",
+                "smallName": "节庆装饰品"
+              },
+              {
+                "smallId": "93301028",
+                "smallName": "行李箱/手提包"
+              },
+              {
+                "smallId": "93301029",
+                "smallName": "公文包背包"
+              },
+              {
+                "smallId": "93301030",
+                "smallName": "其他休闲包"
+              }
+            ]
+          },
+          {
+            "mediumId": "93302",
+            "mediumName": "体育用品",
+            "smallList": [
+              {
+                "smallId": "93302001",
+                "smallName": "网球用品"
+              },
+              {
+                "smallId": "93302002",
+                "smallName": "羽毛球用品"
+              },
+              {
+                "smallId": "93302003",
+                "smallName": "乒乓球用品"
+              },
+              {
+                "smallId": "93302004",
+                "smallName": "篮球"
+              },
+              {
+                "smallId": "93302005",
+                "smallName": "排球"
+              },
+              {
+                "smallId": "93302006",
+                "smallName": "足球"
+              },
+              {
+                "smallId": "93302007",
+                "smallName": "玩具球"
+              },
+              {
+                "smallId": "93302008",
+                "smallName": "球配件"
+              },
+              {
+                "smallId": "93302009",
+                "smallName": "滑板"
+              },
+              {
+                "smallId": "93302010",
+                "smallName": "运动护具类"
+              },
+              {
+                "smallId": "93302011",
+                "smallName": "跳绳"
+              },
+              {
+                "smallId": "93302012",
+                "smallName": "标盘/飞镖"
+              },
+              {
+                "smallId": "93302013",
+                "smallName": "游泳及潜水用品"
+              },
+              {
+                "smallId": "93302014",
+                "smallName": "其他运动用品"
+              }
+            ]
+          },
+          {
+            "mediumId": "93303",
+            "mediumName": "玩具",
+            "smallList": [
+              {
+                "smallId": "93303001",
+                "smallName": "手持小风扇"
+              },
+              {
+                "smallId": "93303002",
+                "smallName": "卡片"
+              },
+              {
+                "smallId": "93303003",
+                "smallName": "起泡胶/粘土"
+              },
+              {
+                "smallId": "93303004",
+                "smallName": "毛绒玩具"
+              },
+              {
+                "smallId": "93303005",
+                "smallName": "挂饰玩具"
+              },
+              {
+                "smallId": "93303006",
+                "smallName": "卡通贴纸类"
+              },
+              {
+                "smallId": "93303007",
+                "smallName": "枪类玩具"
+              },
+              {
+                "smallId": "93303008",
+                "smallName": "其他模型玩具"
+              },
+              {
+                "smallId": "93303009",
+                "smallName": "储钱罐"
+              },
+              {
+                "smallId": "93303010",
+                "smallName": "水晶泥/捏捏乐"
+              },
+              {
+                "smallId": "93303011",
+                "smallName": "解压玩具"
+              },
+              {
+                "smallId": "93303012",
+                "smallName": "沙滩/嬉水玩具"
+              },
+              {
+                "smallId": "93303013",
+                "smallName": "车类玩具"
+              },
+              {
+                "smallId": "93303014",
+                "smallName": "IP模型玩具（小型盲盒）"
+              },
+              {
+                "smallId": "93303015",
+                "smallName": "考古挖掘盲盒"
+              },
+              {
+                "smallId": "93303016",
+                "smallName": "女孩小型盲盒玩具"
+              },
+              {
+                "smallId": "93303017",
+                "smallName": "IP模型积木（中大）"
+              },
+              {
+                "smallId": "93303018",
+                "smallName": "益智/积木玩具"
+              },
+              {
+                "smallId": "93303019",
+                "smallName": "转转本"
+              },
+              {
+                "smallId": "93303020",
+                "smallName": "婴童益智/积木玩具"
+              },
+              {
+                "smallId": "93303021",
+                "smallName": "棋类玩具"
+              },
+              {
+                "smallId": "93303022",
+                "smallName": "女孩玩具"
+              },
+              {
+                "smallId": "93303023",
+                "smallName": "乐器玩具"
+              },
+              {
+                "smallId": "93303024",
+                "smallName": "其他玩具"
+              },
+              {
+                "smallId": "93303025",
+                "smallName": "宠物食品"
+              },
+              {
+                "smallId": "93303026",
+                "smallName": "宠物用品"
+              },
+              {
+                "smallId": "93303027",
+                "smallName": "婴幼玩具"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9920",
+        "bigName": "烟草",
+        "mediumList": [
+          {
+            "mediumId": "920",
+            "mediumName": "烟草",
+            "smallList": [
+              {
+                "smallId": "92001",
+                "smallName": "香烟"
+              },
+              {
+                "smallId": "92002",
+                "smallName": "电子烟及烟具类"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9921",
+        "bigName": "酒饮",
+        "mediumList": [
+          {
+            "mediumId": "921",
+            "mediumName": "酒饮",
+            "smallList": [
+              {
+                "smallId": "92101",
+                "smallName": "白酒"
+              },
+              {
+                "smallId": "92102",
+                "smallName": "黄酒保健酒米酒"
+              },
+              {
+                "smallId": "92103",
+                "smallName": "葡萄酒"
+              },
+              {
+                "smallId": "92104",
+                "smallName": "洋酒"
+              },
+              {
+                "smallId": "92105",
+                "smallName": "清酒果酒预调酒"
+              },
+              {
+                "smallId": "92106",
+                "smallName": "啤酒"
+              },
+              {
+                "smallId": "92110",
+                "smallName": "100%果蔬汁"
+              },
+              {
+                "smallId": "92111",
+                "smallName": "低浓度果汁饮料"
+              },
+              {
+                "smallId": "92112",
+                "smallName": "植物蛋白/含乳饮料"
+              },
+              {
+                "smallId": "92113",
+                "smallName": "点心罐头"
+              },
+              {
+                "smallId": "92114",
+                "smallName": "咖啡/奶茶"
+              },
+              {
+                "smallId": "92115",
+                "smallName": "茶饮料"
+              },
+              {
+                "smallId": "92116",
+                "smallName": "碳酸汽水"
+              },
+              {
+                "smallId": "92117",
+                "smallName": "气泡水苏打水"
+              },
+              {
+                "smallId": "92118",
+                "smallName": "饮用水"
+              },
+              {
+                "smallId": "92119",
+                "smallName": "运动功能饮料"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9922",
+        "bigName": "乳品",
+        "mediumList": [
+          {
+            "mediumId": "922",
+            "mediumName": "乳品",
+            "smallList": [
+              {
+                "smallId": "92201",
+                "smallName": "牛奶"
+              },
+              {
+                "smallId": "92202",
+                "smallName": "酸奶/乳酸饮品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9923",
+        "bigName": "散称零食",
+        "mediumList": [
+          {
+            "mediumId": "923",
+            "mediumName": "散称零食",
+            "smallList": [
+              {
+                "smallId": "92301",
+                "smallName": "散称糖类"
+              },
+              {
+                "smallId": "92302",
+                "smallName": "散称巧克力"
+              },
+              {
+                "smallId": "92303",
+                "smallName": "散称果冻甜品"
+              },
+              {
+                "smallId": "92304",
+                "smallName": "散称蜜饯"
+              },
+              {
+                "smallId": "92305",
+                "smallName": "散称坚果炒货"
+              },
+              {
+                "smallId": "92306",
+                "smallName": "散称肉制品"
+              },
+              {
+                "smallId": "92307",
+                "smallName": "散称豆制品"
+              },
+              {
+                "smallId": "92308",
+                "smallName": "散称饼干"
+              },
+              {
+                "smallId": "92309",
+                "smallName": "散称糕点"
+              },
+              {
+                "smallId": "92310",
+                "smallName": "散称膨化食品"
+              },
+              {
+                "smallId": "92311",
+                "smallName": "散称冲泡食品"
+              },
+              {
+                "smallId": "92312",
+                "smallName": "散称休闲冲泡饮品"
+              },
+              {
+                "smallId": "92313",
+                "smallName": "散称零食DIY"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9924",
+        "bigName": "休闲食品",
+        "mediumList": [
+          {
+            "mediumId": "924",
+            "mediumName": "休闲食品",
+            "smallList": [
+              {
+                "smallId": "92401",
+                "smallName": "糖果"
+              },
+              {
+                "smallId": "92402",
+                "smallName": "巧克力制品"
+              },
+              {
+                "smallId": "92403",
+                "smallName": "果冻/布丁"
+              },
+              {
+                "smallId": "92404",
+                "smallName": "蜜饯"
+              },
+              {
+                "smallId": "92405",
+                "smallName": "坚果炒货"
+              },
+              {
+                "smallId": "92406",
+                "smallName": "海苔"
+              },
+              {
+                "smallId": "92407",
+                "smallName": "肉类零食"
+              },
+              {
+                "smallId": "92408",
+                "smallName": "素类零食"
+              },
+              {
+                "smallId": "92409",
+                "smallName": "膨化食品"
+              },
+              {
+                "smallId": "92410",
+                "smallName": "饼干"
+              },
+              {
+                "smallId": "92411",
+                "smallName": "糕点"
+              },
+              {
+                "smallId": "92412",
+                "smallName": "地方特产专区"
+              },
+              {
+                "smallId": "92413",
+                "smallName": "节庆食品专区"
+              },
+              {
+                "smallId": "92420",
+                "smallName": "冲调"
+              },
+              {
+                "smallId": "92421",
+                "smallName": "奶粉"
+              },
+              {
+                "smallId": "92422",
+                "smallName": "保健食品"
+              },
+              {
+                "smallId": "92423",
+                "smallName": "冲泡茶"
+              },
+              {
+                "smallId": "92424",
+                "smallName": "冲泡咖啡"
+              },
+              {
+                "smallId": "92425",
+                "smallName": "冲泡饮品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9925",
+        "bigName": "副食调料",
+        "mediumList": [
+          {
+            "mediumId": "925",
+            "mediumName": "副食调料",
+            "smallList": [
+              {
+                "smallId": "92501",
+                "smallName": "烹饪油"
+              },
+              {
+                "smallId": "92502",
+                "smallName": "煮食面条"
+              },
+              {
+                "smallId": "92503",
+                "smallName": "南北干货-粉条/豆制品"
+              },
+              {
+                "smallId": "92504",
+                "smallName": "酱油/功能性烹调汁"
+              },
+              {
+                "smallId": "92505",
+                "smallName": "料酒/醋/调味油"
+              },
+              {
+                "smallId": "92506",
+                "smallName": "调味酱"
+              },
+              {
+                "smallId": "92507",
+                "smallName": "果酱/拌酱"
+              },
+              {
+                "smallId": "92508",
+                "smallName": "肉松"
+              },
+              {
+                "smallId": "92509",
+                "smallName": "火锅汤底汤料类"
+              },
+              {
+                "smallId": "92510",
+                "smallName": "烹调汤料"
+              },
+              {
+                "smallId": "92511",
+                "smallName": "烹调香辛料类"
+              },
+              {
+                "smallId": "92512",
+                "smallName": "调味料/特制菜调味粉"
+              },
+              {
+                "smallId": "92513",
+                "smallName": "糖盐味精"
+              },
+              {
+                "smallId": "92514",
+                "smallName": "调味酱佐餐酱佐餐罐头"
+              },
+              {
+                "smallId": "92515",
+                "smallName": "酱泡菜榨菜"
+              },
+              {
+                "smallId": "92516",
+                "smallName": "火腿肠/台式肠"
+              },
+              {
+                "smallId": "92517",
+                "smallName": "加工蛋"
+              },
+              {
+                "smallId": "92518",
+                "smallName": "方便食品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9926",
+        "bigName": "冷藏食品",
+        "mediumList": [
+          {
+            "mediumId": "926",
+            "mediumName": "冷藏食品",
+            "smallList": [
+              {
+                "smallId": "92601",
+                "smallName": "冷藏鲜奶"
+              },
+              {
+                "smallId": "92602",
+                "smallName": "冷藏酸奶"
+              },
+              {
+                "smallId": "92603",
+                "smallName": "冷藏饮品甜点"
+              },
+              {
+                "smallId": "92604",
+                "smallName": "冷藏乳制品"
+              },
+              {
+                "smallId": "92605",
+                "smallName": "冷藏糕点/蛋糕"
+              },
+              {
+                "smallId": "92606",
+                "smallName": "冷藏面制品"
+              },
+              {
+                "smallId": "92607",
+                "smallName": "冷藏豆制品"
+              },
+              {
+                "smallId": "92608",
+                "smallName": "冷藏加工蔬菜"
+              },
+              {
+                "smallId": "92609",
+                "smallName": "冷藏熟食肉制品"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9927",
+        "bigName": "冷冻食品",
+        "mediumList": [
+          {
+            "mediumId": "927",
+            "mediumName": "冷冻食品",
+            "smallList": [
+              {
+                "smallId": "92701",
+                "smallName": "冷冻丸子"
+              },
+              {
+                "smallId": "92702",
+                "smallName": "冷冻火锅食材"
+              },
+              {
+                "smallId": "92703",
+                "smallName": "冷冻调理"
+              },
+              {
+                "smallId": "92704",
+                "smallName": "冷冻油炸"
+              },
+              {
+                "smallId": "92705",
+                "smallName": "冷冻水饺"
+              },
+              {
+                "smallId": "92706",
+                "smallName": "冷冻汤圆"
+              },
+              {
+                "smallId": "92707",
+                "smallName": "冷冻面点"
+              },
+              {
+                "smallId": "92708",
+                "smallName": "冷冻包点"
+              },
+              {
+                "smallId": "92709",
+                "smallName": "冷冻烘焙"
+              },
+              {
+                "smallId": "92710",
+                "smallName": "冰品"
+              },
+              {
+                "smallId": "92711",
+                "smallName": "冷冻饮料"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9930",
+        "bigName": "日化用品",
+        "mediumList": [
+          {
+            "mediumId": "930",
+            "mediumName": "日化用品",
+            "smallList": [
+              {
+                "smallId": "93001",
+                "smallName": "洗发护发"
+              },
+              {
+                "smallId": "93002",
+                "smallName": "沐浴用品"
+              },
+              {
+                "smallId": "93003",
+                "smallName": "香皂类"
+              },
+              {
+                "smallId": "93004",
+                "smallName": "洗手液"
+              },
+              {
+                "smallId": "93005",
+                "smallName": "口腔护理"
+              },
+              {
+                "smallId": "93006",
+                "smallName": "膏霜类彩妆护肤品"
+              },
+              {
+                "smallId": "93007",
+                "smallName": "男士护理"
+              },
+              {
+                "smallId": "93008",
+                "smallName": "防护计生"
+              },
+              {
+                "smallId": "93009",
+                "smallName": "女性护理"
+              },
+              {
+                "smallId": "93010",
+                "smallName": "纸尿裤/护理垫"
+              },
+              {
+                "smallId": "93011",
+                "smallName": "婴童洗护用品"
+              },
+              {
+                "smallId": "93012",
+                "smallName": "卫生用纸"
+              },
+              {
+                "smallId": "93013",
+                "smallName": "湿巾/绵柔巾"
+              },
+              {
+                "smallId": "93014",
+                "smallName": "厨房纸巾"
+              },
+              {
+                "smallId": "93015",
+                "smallName": "洗衣/护理液"
+              },
+              {
+                "smallId": "93016",
+                "smallName": "洗衣（鞋）粉/皂"
+              },
+              {
+                "smallId": "93017",
+                "smallName": "洗洁精类"
+              },
+              {
+                "smallId": "93018",
+                "smallName": "家居皮革护理剂"
+              },
+              {
+                "smallId": "93019",
+                "smallName": "厨卫浴清洁剂"
+              },
+              {
+                "smallId": "93020",
+                "smallName": "空气清新"
+              },
+              {
+                "smallId": "93021",
+                "smallName": "驱蚊/杀虫"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9931",
+        "bigName": "家庭用品",
+        "mediumList": [
+          {
+            "mediumId": "931",
+            "mediumName": "家庭用品",
+            "smallList": [
+              {
+                "smallId": "93101",
+                "smallName": "锅具"
+              },
+              {
+                "smallId": "93102",
+                "smallName": "厨用工具"
+              },
+              {
+                "smallId": "93103",
+                "smallName": "厨用器皿"
+              },
+              {
+                "smallId": "93104",
+                "smallName": "厨用刀具/粘板"
+              },
+              {
+                "smallId": "93105",
+                "smallName": "厨用小配件"
+              },
+              {
+                "smallId": "93106",
+                "smallName": "不锈钢餐具/木质餐具"
+              },
+              {
+                "smallId": "93107",
+                "smallName": "陶瓷/玻璃餐具"
+              },
+              {
+                "smallId": "93108",
+                "smallName": "保温杯运动杯"
+              },
+              {
+                "smallId": "93109",
+                "smallName": "陶瓷玻璃杯具/制品"
+              },
+              {
+                "smallId": "93110",
+                "smallName": "一次性餐盘碗/餐盒/套组"
+              },
+              {
+                "smallId": "93111",
+                "smallName": "一次性水杯"
+              },
+              {
+                "smallId": "93112",
+                "smallName": "一次性餐用工具"
+              },
+              {
+                "smallId": "93113",
+                "smallName": "一次性厨房用品"
+              },
+              {
+                "smallId": "93114",
+                "smallName": "烧烤用具"
+              },
+              {
+                "smallId": "93115",
+                "smallName": "厨房清洁工具"
+              },
+              {
+                "smallId": "93116",
+                "smallName": "个人清洁/整理工具"
+              },
+              {
+                "smallId": "93117",
+                "smallName": "一次性生活用品"
+              },
+              {
+                "smallId": "93118",
+                "smallName": "清洁工具"
+              },
+              {
+                "smallId": "93119",
+                "smallName": "衣物晾晒收纳用品"
+              },
+              {
+                "smallId": "93120",
+                "smallName": "收纳整理/家具用品"
+              },
+              {
+                "smallId": "93121",
+                "smallName": "五金配件"
+              },
+              {
+                "smallId": "93122",
+                "smallName": "祭祀用品类"
+              },
+              {
+                "smallId": "93123",
+                "smallName": "小家电"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9932",
+        "bigName": "家居用品",
+        "mediumList": [
+          {
+            "mediumId": "932",
+            "mediumName": "家居用品",
+            "smallList": [
+              {
+                "smallId": "93201",
+                "smallName": "毛巾布艺"
+              },
+              {
+                "smallId": "93202",
+                "smallName": "内裤/内衣"
+              },
+              {
+                "smallId": "93203",
+                "smallName": "袜子等针织用品"
+              },
+              {
+                "smallId": "93204",
+                "smallName": "拖鞋"
+              },
+              {
+                "smallId": "93205",
+                "smallName": "雨具"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "bigId": "9933",
+        "bigName": "文体",
+        "mediumList": [
+          {
+            "mediumId": "933",
+            "mediumName": "文体",
+            "smallList": [
+              {
+                "smallId": "93301",
+                "smallName": "文具办公"
+              },
+              {
+                "smallId": "93302",
+                "smallName": "体育用品"
+              },
+              {
+                "smallId": "93303",
+                "smallName": "玩具"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
