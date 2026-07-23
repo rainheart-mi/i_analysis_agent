@@ -94,6 +94,7 @@ def execute_n8n_node(self, task_id: str, node_id: str, n8n_workflow_id: str, int
                 n8n_service = get_n8n_service(
                     environment.base_url,
                     environment.api_key,
+                    "production",
                     environment.username,
                     basic_password,
                 )

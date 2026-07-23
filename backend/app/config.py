@@ -5,16 +5,12 @@ from functools import lru_cache
 class Settings(BaseSettings):
     APP_NAME: str = "IERP AI Assistant"
     DEBUG: bool = True
-    ENV: str = "development"
 
     # Database - 使用完整 URL 格式
     DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/i_analysis_agent"
 
-    # JWT
+    # 密钥（用于 Fernet 加密 N8N 密码）
     SECRET_KEY: str = "ierp-ai-assistant-secret-key-change-in-production"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # Token 传输方式（对齐 Java 项目的 TokenProperties）
     # 读取顺序：JWT_HEADER_NAME header → JWT_COOKIE_NAME cookie → Authorization: Bearer

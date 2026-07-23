@@ -1,0 +1,31 @@
+{
+    "type": "page",
+    "title": "查询参数输入",
+    "body": [
+        {
+            "type": "form",
+            "mode": "horizontal",
+            "wrapWithPanel": false,
+            "debug": true,
+            "body": [
+                {
+                    "type": "input-text",
+                    "name": "period",
+                    "label": "月份",
+                    "placeholder": "多个月份用英文逗号分隔，例：202604,202605",
+                    "description": "支持多值英文逗号分隔格式"
+                },
+                {
+                    "type": "input-tree",
+                    "name": "category",
+                    "label": "分类编码",
+                    "source": "/api/v1/categories/tree",
+                    "multiple": true,
+                    "searchable": true,
+                    "deferApi": "/api/v1/categories/defer?value=${value}",
+                    "unfoldedLevel": 0
+                }
+            ]
+        }
+    ]
+}
