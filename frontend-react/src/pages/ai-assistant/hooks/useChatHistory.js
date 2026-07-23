@@ -84,6 +84,10 @@ export function useChatHistory() {
 
     let cancelled = false
     ;(async () => {
+      // ★ 同步标记 lastLoadedRef，防止 await 期间 effect 重跑导致重复请求
+      //   （useXChat 在 conversationKey 变化时会返回新的 setMessages / isRequesting 引用，
+      //    触发 effect deps 变化 → 在 fetch 完成前再次进入这个分支）
+      lastLoadedRef.current = activeId
       try {
         const data = await chatHistory(activeId)
         if (cancelled) return

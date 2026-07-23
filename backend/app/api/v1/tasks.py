@@ -733,7 +733,11 @@ async def trigger_post_action(
                 "node_id": node_id,
                 "node_exec_id": node_exec.id,
                 "mapping_id": mapping.id,
-                "stream_url": "/v1/price-band/analyze/stream",
+                "stream_url": (
+                    f"{cfg.get('api_path', '/v1/price-band/analyze')}/stream"
+                    if cfg.get("api_path", "").startswith("http")
+                    else f"{settings.AGENTSCOPE_URL}{cfg.get('api_path', '/v1/price-band/analyze')}/stream"
+                ),
                 "internal_token": settings.AGENTSCOPE_INTERNAL_TOKEN,
                 "body": payload,  # 前端直连 Java SSE 时需要 POST 的 body
             }
@@ -819,6 +823,55 @@ async def set_node_artifact(
             task_id, node_id, node_exec.status, task.status,
         )
         return {"ok": True}
+
+
+@router.get("/{task_id}/nodes/{node_id}/export-xlsx", status_code=status.HTTP_200_OK)
+async def export_node_xlsx(
+    task_id: str,
+    node_id: str,
+    db: AsyncSession = Depends(get_db),
+    ctx = Depends(get_current_user_tenant),
+):
+    """根据节点的 artifact_schema 和 artifact_data 生成 XLSX 文件并下载。"""
+    from app.services.artifact_exporter import generate_xlsx
+
+    result = await db.execute(
+        select(TaskInstance)
+        .where(TaskInstance.id == task_id, TaskInstance.tenant_id == ctx.tenant_id, TaskInstance.user_id == ctx.user_id)
+        .options(selectinload(TaskInstance.node_executions))
+    )
+    task = result.scalar_one_or_none()
+    if not task:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="任务不存在")
+
+    node_exec = next(
+        (n for n in task.node_executions if n.node_id == node_id),
+        None,
+    )
+    if not node_exec:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="节点执行记录不存在")
+
+    artifact_data = node_exec.artifact_data or {}
+    artifact_schema = node_exec.artifact_schema or {}
+
+    if not artifact_data:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="该节点没有数据")
+
+    try:
+        xlsx_buffer = generate_xlsx(artifact_data, artifact_schema)
+        from fastapi.responses import StreamingResponse
+
+        return StreamingResponse(
+            xlsx_buffer,
+            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            headers={
+                "Content-Disposition": f'attachment; filename="{node_exec.node_name or node_id}-export.xlsx"',
+                "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            },
+        )
+    except Exception as e:
+        logger.exception("[export_xlsx] failed: task_id=%s node_id=%s", task_id, node_id)
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"导出失败: {str(e)}")
 
 
 @router.delete("/{task_id}", status_code=status.HTTP_200_OK)

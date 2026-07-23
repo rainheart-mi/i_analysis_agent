@@ -10,20 +10,13 @@ import { useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
  *   requestAdaptor 必须放在 **第 4 个参数（envOptions）**，而不是 props。
  *   SDK 内部 O = __assign({...defaults}, envOptions) 构 env，props 不参与。
  *   SDK 源码 sdk.js:2741 的 k 函数读 r.requestAdaptor（r = envOptions）。
+ *
+ * 注：原版本会读取一个未定义的 token 变量，导致浏览器报错。
+ *   本项目后端不读 jwt header，直接 passthrough 即可。
  */
 const requestAdaptor = (api) => {
-  // 临时诊断日志：确认 requestAdaptor 真的被调用，并打印注入前的 headers
-  console.log('[AmISForm] requestAdaptor invoked', {
-    url: api?.url,
-    method: api?.method,
-    inHeaders: api?.headers,
-    tokenLen: token.length,
-  })
-  if (!token) return api
-  return {
-    ...api,
-    headers: { ...(api.headers || {}), jwt: token },
-  }
+  // passthrough：不修改 headers/cookie/auth，后端不需要 jwt
+  return api
 }
 
 // 递归为 schema 中的所有字段设置 readOnly

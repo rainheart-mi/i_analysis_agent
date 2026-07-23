@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { Button, Alert, Tag } from 'antd'
+import { Button, Alert, Tag, Tabs } from 'antd'
 import { ReloadOutlined } from '@ant-design/icons'
 import { useTaskStore } from '@/store/task'
 import AmISForm from './AmISForm'
@@ -343,6 +343,21 @@ function NodeContent() {
               }}>
                 输出
               </span>
+              {/* 导出 Excel：仅流结束后有数据时显示 */}
+              {currentNode?.artifact_data && !isLiveStreaming && Object.keys(currentNode.artifact_data).length > 0 && (
+                <a
+                  href={`/api/v1/tasks/${currentTask?.id}/nodes/${currentNodeId}/export-xlsx`}
+                  style={{
+                    marginLeft: 'auto',
+                    fontSize: 12,
+                    color: '#5C7CFF',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  导出 Excel
+                </a>
+              )}
             </div>
 
             {/* Live Streaming - 流式过程：实时渲染 store.artifact_schema（被 intermediate 事件逐步更新）
@@ -439,14 +454,46 @@ function NodeContent() {
                 </p>
               </div>
             )}
-            {/* 节点生成物（n8n 已完成 或 agent 流结束）：从 store 读 artifact_data + artifact_schema 渲染 */}
+            {/* 节点生成物（n8n 已完成 或 agent 流结束）：从 store 读 artifact_schema 渲染
+                四种 schema 形态：
+                  1. 单 page 对象（legacy / intermediate 阶段） → AmISForm，n8n 传 value，agent 不传
+                  2. [page]（单元素数组）→ 直接 AmISForm 渲染，避免单 tab UX 不自然
+                  3. [page1, page2, ...]（多元素数组）→ Tabs 包起来，每个 page 一个 tab
+                  4. 无 schema → 退化用 artifactData 当 schema
+                ★ value 行为差异：
+                  - n8n 的 schema 是表单页（type:"page" + body:[]），用 ${...} 模板引用 data → 必须传 value
+                  - agent 的 schema 是自包含 page（type:"page" + data:{}）→ 不能再传 value（避免 data 污染） */}
             {!isLiveStreaming && !isNodeRunning && hasN8nArtifact && (
               <div style={{ padding: 20 }}>
-                {effectiveSchema ? (
-                  <AmISForm schema={effectiveSchema} value={artifactData} readonly />
-                ) : (
-                  <AmISForm schema={artifactData} readonly />
-                )}
+                {(() => {
+                  const schema = currentNode?.artifact_schema
+                  if (Array.isArray(schema)) {
+                    if (schema.length === 0) return null
+                    if (schema.length === 1) {
+                      return <AmISForm key={schema[0]?.title || '0'} schema={schema[0]} readonly />
+                    }
+                    return (
+                      <Tabs
+                        items={schema.map((page, idx) => ({
+                          key: page.title || `tab-${idx}`,
+                          label: page.title || `Tab ${idx + 1}`,
+                          children: (
+                            <AmISForm key={page.title || idx} schema={page} readonly />
+                          ),
+                        }))}
+                      />
+                    )
+                  }
+                  return effectiveSchema ? (
+                    <AmISForm
+                      schema={effectiveSchema}
+                      value={isPostAction ? undefined : artifactData}
+                      readonly
+                    />
+                  ) : (
+                    <AmISForm schema={artifactData} readonly />
+                  )
+                })()}
               </div>
             )}
           </div>

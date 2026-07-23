@@ -67,10 +67,12 @@ export const useTaskStore = create((set, get) => ({
     const detail = await taskApi.getDetail(taskId)
     const innerTask = detail.task
     innerTask.node_executions = detail.nodes
-    set({ currentTask: innerTask })
-    if (!preserveNodeId && detail.nodes?.length > 0) {
-      set({ currentNodeId: detail.nodes[0].node_id })
-    }
+    set({
+      currentTask: innerTask,
+      ...(!preserveNodeId && detail.nodes?.length > 0
+        ? { currentNodeId: detail.nodes[0].node_id }
+        : {}),
+    })
     return innerTask
   },
 
@@ -362,10 +364,19 @@ export const useTaskStore = create((set, get) => ({
     // 当 status 更新时同步检查 task 顶层状态
     const allDone = updatedNodes.every(n => n.status === 'completed' || n.status === 'failed')
     const hasFailed = updatedNodes.some(n => n.status === 'failed')
+    const newTaskStatus = allDone ? (hasFailed ? 'failed' : 'completed') : state.currentTask.status
+    // ★ 同步更新 tasks 数组：让侧边栏的 status 跟 currentTask 保持一致
+    //   （polling 路径有同样的处理，streaming 路径补上，否则侧边栏在流结束后仍显示 "执行中"）
+    const shouldUpdateTaskList = newTaskStatus !== state.currentTask.status
     return {
+      ...(shouldUpdateTaskList && {
+        tasks: state.tasks.map(t =>
+          t.id === state.currentTask.id ? { ...t, status: newTaskStatus } : t
+        ),
+      }),
       currentTask: {
         ...state.currentTask,
-        status: allDone ? (hasFailed ? 'failed' : 'completed') : state.currentTask.status,
+        status: newTaskStatus,
         node_executions: updatedNodes,
       },
     }

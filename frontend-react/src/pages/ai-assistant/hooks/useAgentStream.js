@@ -67,9 +67,13 @@ export function useAgentStream() {
       // 流成功后同步前端 state：把 final.data 写入 currentNode
       if (result?.ok && result.snapshot?.data) {
         const finalData = result.snapshot.data
+        // ★ 从 finalData 里把 artifact_schemas 解构出去，避免 artifact_data 持有 schema
+        //   （自包含 page schema：value 里若含 artifact_schemas 字段，
+        //    AmISForm 会把 value.artifact_schemas 当 data 读取，错过 schema.data.categories → 空白渲染）
+        const { artifact_schemas, ...dataOnly } = finalData
         useTaskStore.getState().updateNodeArtifact(nodeId, {
-          artifact_data: finalData,
-          artifact_schema: finalData.artifact_schemas ?? null,
+          artifact_data: dataOnly,
+          artifact_schema: artifact_schemas ?? null,
           status: 'completed',
         })
       }
